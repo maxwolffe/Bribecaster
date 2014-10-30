@@ -1,0 +1,70 @@
+<html>
+<head>
+
+	<title>Form Entry Demo</title>
+
+	<style>
+	#myform{
+		width:300px;
+		margin: 0 auto;
+	}
+	label{
+		display:block;
+	}
+	input,textarea{
+		width:100%;
+	}
+	</style>
+
+	<link href='progression.css' rel='stylesheet' type='text/css'>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" src="progression.js"></script>
+
+	<script>
+	jQuery(document).ready(function($) {
+
+		$("#myform").progression({
+			tooltipWidth: '300',
+			tooltipPosition: 'right',
+			tooltipOffset: '100',
+			showProgressBar: true,
+			showHelper: true,
+			tooltipFontSize: '14',
+			tooltipFontColor: 'fff',
+			progressBarBackground: 'fff',
+			progressBarColor: 'a2cbfa',
+			tooltipBackgroundColor:'6EA5E1',
+			tooltipPadding: '20',
+			tooltipAnimate: true
+		});
+
+	});
+
+	</script>
+</head>
+
+<body>
+
+	<form id="myform">
+		<p>
+			<label for="">Name</label> 
+			<input data-progression="" type="text" data-helper="Name of visitor" name="name" value="" placeholder="" />
+		</p>
+
+		<p>
+			<label for="">Phone Number</label> 
+			<input data-progression="" type="text" data-helper="Phone number of visitor" name="name" value="" placeholder="" />
+		</p>
+
+		<p>
+			<label for="">Service</label> 
+			<input data-progression="" type="text" data-helper="Type of service requested by visitor" name="name" value="" placeholder="" />
+		</p>
+
+		<p>
+			<input type="submit" class="button" name="" value="Enter" placeholder="">
+		</p>
+	</form>
+
+</body>
+</html>
