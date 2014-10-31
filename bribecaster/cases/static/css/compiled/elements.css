@@ -382,6 +382,7 @@
 .ui-select {
   width: 137px;
   margin-left: 0px !important;
+  margin-bottom: 20px;
   vertical-align: middle;
   min-width: 100px;
   height: 25px;

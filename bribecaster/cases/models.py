@@ -13,6 +13,7 @@ class Case(models.Model):
     last_name = models.CharField(max_length = 40)
     phone_number = models.CharField(max_length = 20)
     service = models.CharField(max_length = 50)
+    aadhaar_number = models.BigIntegerField(max_length = 12)
     
     sms_selected = models.BooleanField()
     robo_call_selected = models.BooleanField()
