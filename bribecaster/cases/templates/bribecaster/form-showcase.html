@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="{% static 'css/compiled/form-showcase.css' %}" type="text/css" media="screen" />
 
     <!-- open sans font -->
-    <link href="{% static 'css/compiled/fonts.css' %" rel='stylesheet' type='text/css' />
+    <link href="{% static 'css/compiled/openSansFont.css' %}" rel='stylesheet' type='text/css' />
 
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -241,17 +241,8 @@
 
 	<!-- main container -->
     <div class="content">
-        <div class="col-md-4 column center">
-            <h1>New Form</h1>
-        </div>
-        <!-- settings changer -->
-        <div class="skins-nav">
-            <a href="#" class="skin first_nav selected">
-                <span class="icon"></span><span class="text">Default</span>
-            </a>
-            <a href="#" class="skin second_nav" data-file="css/compiled/skins/dark.css">
-                <span class="icon"></span><span class="text">Dark skin</span>
-            </a>
+        <div class="col-md-6 column center">
+            <h2>New Form</h2>
         </div>
         
         <div id="pad-wrapper" class="form-page">
@@ -285,19 +276,24 @@
                                 {{ form.phone_number }}
                             </div>   
                         </div>
-                        <div class="field-box">
+                       <!--  <div class="field-box">
                             <label>Service:</label>
                             <div class="col-md-7">
                                 {{ form.service }}
                             </div>   
-                        </div>
+                        </div> -->
                         <div class="field-box">
                             <label>Aadhaar Number:</label>
-                            <div class="col-md-7">
+                            <div class="col-md-7 column pull-left">
                                 {{ form.aadhaar_number }}
                             </div>   
                         </div>
-                        <input type="submit" value="Submit" class="btn-flat inverse" id="form-btn"/>
+                        <div class="field-box">
+                            <label>Date of Visit:</label>
+                            <div class="col-md-2 column pull-left">
+                                <input type="text" value="10/31/2014" class="form-control input-datepicker" />
+                            </div>
+                        </div>
                     </form>
                 </div> 
                 <div class="col-md-4 column pull-right">
@@ -331,6 +327,25 @@
                                 <option>Office 7</option>
                                 <option>Office 8</option>
                             </select>
+                        </div>
+                        <div class="field-box">
+                        <label>Service:</label>
+                        <div class="ui-select">
+                            <select>
+                                <option selected>Dropdown</option>
+                                <option>Service 1</option>
+                                <option>Service 2</option>
+                                <option>Service 3</option>
+                                <option>Service 4</option>
+                                <option>Service 5</option>
+                                <option>Service 6</option>
+                                <option>Service 7</option>
+                                <option>Service 8</option>
+                            </select>
+                        </div>
+                        <div> 
+                            <input type="submit" value="Submit" class="btn-flat inverse"/>
+                            <input type="reset" value="Reset" class="btn-flat inverse" id="reset-btn"/>
                         </div>
                     </form>
                 </div>

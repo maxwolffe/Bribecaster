@@ -36,11 +36,13 @@ class CaseForm(ModelForm):
         fields = '__all__'
         widgets = {
             'first_name': forms.TextInput(attrs={'class': 'form-control', 
-              'type': 'text'}),
+              'type': 'text','placeholder': 'Required'}),
             'last_name': forms.TextInput(attrs={'class': 'form-control', 
-              'type': 'text'}),
+              'type': 'text','placeholder': 'Required'}),
             'phone_number': forms.TextInput(attrs={'class': 'form-control', 
               'type': 'text'}),
             'service': forms.TextInput(attrs={'class': 'form-control', 
               'type': 'text'}),
+            'aadhaar_number': forms.TextInput(attrs={'class': 'form-control', 
+              'type': 'number'}),
         }
