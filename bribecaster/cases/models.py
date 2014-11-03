@@ -28,9 +28,13 @@ has_many citizens
 
 """
 class Region(models.Model):
+    region_name = models.CharField(max_length = 30)
     aggregate_cost_rating = models.IntegerField()
     aggregate_quality_rating = models.IntegerField()
     aggregate_speed_rating = models.IntegerField()
+
+    def __str__(self):
+        return self.region_name
 
 """ A Citizen Model representing citizens who visit the office
 
@@ -47,6 +51,9 @@ class Citizen(models.Model):
 
     region = models.ForeignKey(Region)
 
+    def __str__(self):
+        return self.first_name + " " + self.last_name + " : " + self.phone_number
+
 
 """ Represents an Office:
 Has many cases, users (employees)
@@ -55,17 +62,21 @@ Belongs to a region
 
 """
 class Office(models.Model):
+    office_name = models.CharField(max_length = 30, default = "default Office")
     address = models.CharField(max_length = 30)
     phone_number = models.CharField(max_length = 20)
     office_head = models.CharField(max_length = 30) # Should maybe be a user
     lat = models.FloatField()
     lon = models.FloatField()
 
-    speed_rating = models.IntegerField()
-    cost_rating = models.IntegerField()
-    quality_rating = models.IntegerField()
+    speed_rating = models.IntegerField(default = -1)
+    cost_rating = models.IntegerField(default = -1)
+    quality_rating = models.IntegerField(default = -1)
     
     region = models.ForeignKey(Region)
+
+    def __str__(self):
+        return self.office_name
 
 """ A User Model representing an employee of the government. 
 
@@ -76,6 +87,9 @@ class User(models.Model):
     employee_number = models.IntegerField()
 
     office = models.ForeignKey(Office)
+
+    def __str__(self):
+        return self.first_name + " " + self.last_name + " at " + self.office.office_name
 
 """ A Case Model containing the forms and followups from a particular citizen visit to an office.
 
@@ -107,14 +121,23 @@ class Case(models.Model):
 
 class OfficeVisit(models.Model):
     service_used = models.CharField(max_length = 1, choices = SERVICE_TYPE)
+    time_of_visit = models.DateTimeField(default = time.now())
 
     case = models.ForeignKey(Case)
     citizen = models.ForeignKey(Citizen)
 
+    def __str__(self):
+        return self.citizen.aadhaar_number + " : " + " Office Visit on " + self.time_of_visit 
+
+
 class RoboCallFeedback(models.Model):
     call_response = models.CharField(max_length=1, choices=RESPONSE_TYPE)
+    time_of_call = models.DateTimeField(default = time.now())
 
     case = models.ForeignKey(Case)
+
+    def __str__(self):
+        return "RoboCall"
 
 class SMSFeedback(models.Model):
     message_sent_time = models.DateTimeField()
@@ -123,6 +146,9 @@ class SMSFeedback(models.Model):
     sms_recieved_text = models.CharField(max_length = 280) #Can we get longer responses?
 
     case = models.ForeignKey(Case)
+
+    def __str__(self):
+        return "SMSFeedback"
 
 class CaseForm(ModelForm):
     class Meta: 
