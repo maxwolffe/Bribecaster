@@ -1,6 +1,7 @@
 from django.db import models
 from django.forms import ModelForm
 from django import forms
+from datetime import datetime
 
 SERVICE_TYPE = (
     ('0', 'fard'),
@@ -28,7 +29,7 @@ has_many citizens
 
 """
 class Region(models.Model):
-    region_name = models.CharField(max_length = 30)
+    region_name = models.CharField(max_length = 30, default = "Unnamed")
     aggregate_cost_rating = models.IntegerField()
     aggregate_quality_rating = models.IntegerField()
     aggregate_speed_rating = models.IntegerField()
@@ -48,6 +49,8 @@ class Citizen(models.Model):
     phone_number = models.CharField(max_length = 20)
     address = models.CharField(max_length = 30)
     city = models.CharField(max_length = 30)
+    aadhaar_number = models.BigIntegerField(max_length = 12, default = -1)
+
 
     region = models.ForeignKey(Region)
 
@@ -121,7 +124,7 @@ class Case(models.Model):
 
 class OfficeVisit(models.Model):
     service_used = models.CharField(max_length = 1, choices = SERVICE_TYPE)
-    time_of_visit = models.DateTimeField(default = time.now())
+    time_of_visit = models.DateTimeField(default = datetime.now())
 
     case = models.ForeignKey(Case)
     citizen = models.ForeignKey(Citizen)
@@ -132,7 +135,7 @@ class OfficeVisit(models.Model):
 
 class RoboCallFeedback(models.Model):
     call_response = models.CharField(max_length=1, choices=RESPONSE_TYPE)
-    time_of_call = models.DateTimeField(default = time.now())
+    time_of_call = models.DateTimeField(default = datetime.now())
 
     case = models.ForeignKey(Case)
 
