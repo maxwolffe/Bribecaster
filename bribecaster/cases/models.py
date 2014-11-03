@@ -2,6 +2,81 @@ from django.db import models
 from django.forms import ModelForm
 from django import forms
 
+SERVICE_TYPE = (
+    ('0', 'fard'),
+    ('1', 'domicile'),
+    ('2', 'marriage'),
+    ('3', 'divorce'),
+)
+
+RESPONSE_TYPE = (
+    ('0', 'picked-up'),
+    ('1', 'busy'),
+    ('2', 'voicemail'),
+    ('3', 'not-a-number'),
+)
+
+DEFAULT = 1
+
+""" Model Representing a region
+aggregate_speed_rating - int
+aggregate_quality_rating - int
+aggregate_cost_rating - int 
+
+has_many offices
+has_many citizens
+
+"""
+class Region(models.Model):
+    aggregate_cost_rating = models.IntegerField()
+    aggregate_quality_rating = models.IntegerField()
+    aggregate_speed_rating = models.IntegerField()
+
+""" A Citizen Model representing citizens who visit the office
+
+has_many cases
+belong_to region
+
+"""
+class Citizen(models.Model):
+    first_name = models.CharField(max_length = 40)
+    last_name = models.CharField(max_length = 40)
+    phone_number = models.CharField(max_length = 20)
+    address = models.CharField(max_length = 30)
+    city = models.CharField(max_length = 30)
+
+    region = models.ForeignKey(Region)
+
+
+""" Represents an Office:
+Has many cases, users (employees)
+Belongs to a region
+
+
+"""
+class Office(models.Model):
+    address = models.CharField(max_length = 30)
+    phone_number = models.CharField(max_length = 20)
+    office_head = models.CharField(max_length = 30) # Should maybe be a user
+    lat = models.FloatField()
+    lon = models.FloatField()
+
+    speed_rating = models.IntegerField()
+    cost_rating = models.IntegerField()
+    quality_rating = models.IntegerField()
+    
+    region = models.ForeignKey(Region)
+
+""" A User Model representing an employee of the government. 
+
+"""
+class User(models.Model):
+    first_name = models.CharField(max_length = 40)
+    last_name = models.CharField(max_length = 40)
+    employee_number = models.IntegerField()
+
+    office = models.ForeignKey(Office)
+
 """ A Case Model containing the forms and followups from a particular citizen visit to an office.
 
 belongs to a user
@@ -13,7 +88,7 @@ class Case(models.Model):
     last_name = models.CharField(max_length = 40)
     phone_number = models.CharField(max_length = 20)
     service = models.CharField(max_length = 50)
-    aadhaar_number = models.BigIntegerField(max_length = 12)
+    aadhaar_number = models.BigIntegerField(max_length = 12, default = 0)
     
     sms_selected = models.BooleanField()
     robo_call_selected = models.BooleanField()
@@ -23,12 +98,31 @@ class Case(models.Model):
     # robo_response = models.ForeignKey(RoboResponse)
     # call_response = models.ManyToManyField(CallResponse)
 
-    # citizen = models.ForeignKey(Citizen)
-    # office = models.ForeignKey(Office)
-    # user = models.ManyToMany(User)
+    citizen = models.ForeignKey(Citizen, default = DEFAULT)
+    office = models.ForeignKey(Office, default = DEFAULT)
+    user = models.ManyToManyField(User, default = DEFAULT)
 
     def __str__(self):              # __unicode__ on Python 2
         return self.first_name + " " + self.last_name + ";" + self.phone_number + ";" + self.service
+
+class OfficeVisit(models.Model):
+    service_used = models.CharField(max_length = 1, choices = SERVICE_TYPE)
+
+    case = models.ForeignKey(Case)
+    citizen = models.ForeignKey(Citizen)
+
+class RoboCallFeedback(models.Model):
+    call_response = models.CharField(max_length=1, choices=RESPONSE_TYPE)
+
+    case = models.ForeignKey(Case)
+
+class SMSFeedback(models.Model):
+    message_sent_time = models.DateTimeField()
+    message_recieved_time = models.DateTimeField()
+    sms_sent_text = models.CharField(max_length = 140)
+    sms_recieved_text = models.CharField(max_length = 280) #Can we get longer responses?
+
+    case = models.ForeignKey(Case)
 
 class CaseForm(ModelForm):
     class Meta: 
@@ -46,3 +140,4 @@ class CaseForm(ModelForm):
             'aadhaar_number': forms.TextInput(attrs={'class': 'form-control', 
               'type': 'number'}),
         }
+
