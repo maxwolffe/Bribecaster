@@ -117,7 +117,7 @@ class Case(models.Model):
 
     citizen = models.ForeignKey(Citizen, default = DEFAULT)
     office = models.ForeignKey(Office, default = DEFAULT)
-    user = models.ManyToManyField(User, default = DEFAULT)
+    user = models.ManyToManyField(User, default = [DEFAULT])
 
     def __str__(self):              # __unicode__ on Python 2
         return self.first_name + " " + self.last_name + ";" + self.phone_number + ";" + self.service
@@ -130,7 +130,7 @@ class OfficeVisit(models.Model):
     citizen = models.ForeignKey(Citizen)
 
     def __str__(self):
-        return self.citizen.aadhaar_number + " : " + " Office Visit on " + self.time_of_visit 
+        return str(self.citizen.aadhaar_number) + " : " + " Office Visit on " + str(self.time_of_visit)
 
 
 class RoboCallFeedback(models.Model):
@@ -153,6 +153,7 @@ class SMSFeedback(models.Model):
     def __str__(self):
         return "SMSFeedback"
 
+"""
 class CaseForm(ModelForm):
     class Meta: 
         model = Case 
@@ -169,4 +170,5 @@ class CaseForm(ModelForm):
             'aadhaar_number': forms.TextInput(attrs={'class': 'form-control', 
               'type': 'number'}),
         }
+"""
 
