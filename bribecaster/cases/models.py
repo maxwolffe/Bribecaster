@@ -116,7 +116,7 @@ class Case(models.Model):
     # call_response = models.ManyToManyField(CallResponse)
 
     def __str__(self):              # __unicode__ on Python 2
-        return self.first_name + " " + self.last_name + ";" + self.phone_number + ";" + self.service
+        return self.citizen.first_name + " " + self.citizen.last_name + ";" + self.citizen.phone_number 
 
 class OfficeVisit(models.Model):
     service_used = models.CharField(max_length = 1, choices = SERVICE_TYPE)
