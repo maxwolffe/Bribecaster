@@ -87,6 +87,7 @@ class Office(models.Model):
 class User(models.Model):
     first_name = models.CharField(max_length = 40)
     last_name = models.CharField(max_length = 40)
+    role = models.CharField(max_length = 30, default = "Unassigned") #we can probably make this a drop down later. (data input, manager, etc)
     employee_number = models.IntegerField()
 
     office = models.ForeignKey(Office)
@@ -101,11 +102,10 @@ belongs to an office
 """
 class Case(models.Model):
     #customer_information
-    first_name = models.CharField(max_length = 30)
-    last_name = models.CharField(max_length = 40)
-    phone_number = models.CharField(max_length = 20)
-    service = models.CharField(max_length = 50)
-    aadhaar_number = models.BigIntegerField(max_length = 12, default = 0)
+
+    citizen = models.ForeignKey(Citizen, default = DEFAULT)
+    office = models.ForeignKey(Office, default = DEFAULT)
+    user = models.ManyToManyField(User, default = [DEFAULT])
     
     sms_selected = models.BooleanField()
     robo_call_selected = models.BooleanField()
@@ -114,10 +114,6 @@ class Case(models.Model):
     # sms_response = models.ManyToManyField(SMSResponse)
     # robo_response = models.ForeignKey(RoboResponse)
     # call_response = models.ManyToManyField(CallResponse)
-
-    citizen = models.ForeignKey(Citizen, default = DEFAULT)
-    office = models.ForeignKey(Office, default = DEFAULT)
-    user = models.ManyToManyField(User, default = [DEFAULT])
 
     def __str__(self):              # __unicode__ on Python 2
         return self.first_name + " " + self.last_name + ";" + self.phone_number + ";" + self.service
