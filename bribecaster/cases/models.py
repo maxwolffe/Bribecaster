@@ -149,7 +149,7 @@ class SMSFeedback(models.Model):
     def __str__(self):
         return "SMSFeedback"
 
-"""
+
 class CaseForm(ModelForm):
     class Meta: 
         model = Case 
@@ -166,5 +166,5 @@ class CaseForm(ModelForm):
             'aadhaar_number': forms.TextInput(attrs={'class': 'form-control', 
               'type': 'number'}),
         }
-"""
+
 

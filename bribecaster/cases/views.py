@@ -11,16 +11,16 @@ def form(request):
     if request.method == 'POST':
         pass
         # create a form instance and populate it with data from the request:
-        #form = CaseForm(request.POST)
+        form = CaseForm(request.POST)
         # check whether it's valid:
-        #if form.is_valid():
-            #form.save()
+        if form.is_valid():
+            form.save()
             # process the data in form.cleaned_data as required
             # ...
             # redirect to a new URL:
-            #return HttpResponseRedirect('bribecaster/form-showcase.html')
+            return HttpResponseRedirect('bribecaster/form-showcase.html')
 
     # if a GET (or any other method) we'll create a blank form
-    #else:
-        #form = CaseForm()
+    else:
+        form = CaseForm()
     return render(request, 'bribecaster/form-showcase.html', {'form': form})
