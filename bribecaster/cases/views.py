@@ -1,13 +1,12 @@
 from django.shortcuts import render_to_response, render
 from django.template.context import RequestContext
-#from models import CaseForm
+from models import CaseForm
 from django.http import HttpResponseRedirect
 
 def index(request):
     return render_to_response('bribecaster/index.html', context_instance=RequestContext(request))
 
 def form(request):
-    return
     if request.method == 'POST':
         pass
         # create a form instance and populate it with data from the request:
