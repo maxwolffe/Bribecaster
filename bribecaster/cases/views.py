@@ -8,6 +8,7 @@ def index(request):
 
 def form(request):
     if request.method == 'POST':
+        pass
         # create a form instance and populate it with data from the request:
         form = CaseForm(request.POST)
         # check whether it's valid:
