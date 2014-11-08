@@ -1,6 +1,6 @@
 from django.shortcuts import render_to_response, render
 from django.template.context import RequestContext
-from models import CaseForm
+from models import CaseForm, OBCFormForm
 from django.http import HttpResponseRedirect
 
 def index(request):
@@ -8,6 +8,7 @@ def index(request):
 
 def form(request):
     if request.method == 'POST':
+        pass
         # create a form instance and populate it with data from the request:
         form = CaseForm(request.POST)
         # check whether it's valid:
@@ -23,6 +24,17 @@ def form(request):
         form = CaseForm()
     return render(request, 'bribecaster/form-showcase.html', {'form': form})
 
+<<<<<<< HEAD
 def table(request):
     return render_to_response('bribecaster/data-table.html', context_instance=RequestContext(request))
 
+=======
+def obc_form(request):
+    if request.method == "POST":
+        # handle the forms
+    if request.method == "GET":
+        print("request.get")
+        obc_form = OBCFormForm()
+        context = {'form': obc_form}
+        return render(request, 'case/OBC_form.html', context)
+>>>>>>> max/add-forms-new
