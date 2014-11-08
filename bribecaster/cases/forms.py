@@ -7,7 +7,10 @@ class CitizenForm(ModelForm):
     model = Citizen
     exclude = ('region')
 
-class 
+class OBCFormForm(ModelForm):
+  class Meta:
+    model = OBCForm
+    exclude = ('citizen', 'office_visit')
 
 
 class CaseForm(ModelForm):
