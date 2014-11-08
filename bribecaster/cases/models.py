@@ -151,12 +151,16 @@ class SMSFeedback(models.Model):
     def __str__(self):
         return "SMSFeedback"
 
-class OBCForm(models.Model):
+class Form(models.Model):
+    office_visit = models.ForeignKey(OfficeVisit)
+    citizen = models.ForeignKey(Citizen)
+
+class OBCForm(Form):
     religion = models.CharField(max_length = 40)
     caste = models.CharField(max_length = 40)
     sub_caste = models.CharField(max_length = 40)
     issued_in_past = models.BooleanField()
-    education_certification_contains_caste = model.BooleanField()
+    education_certification_contains_caste = models.BooleanField()
     caste_serial_number = models.CharField(max_length = 40)
     name_of_father = models.CharField(max_length = 40, default = 'NA')
     name_of_mother = models.CharField(max_length = 40, default = 'NA')
@@ -194,21 +198,5 @@ class OBCForm(models.Model):
     ration_card_number = models.CharField(max_length = 40, default = 'NA')
     final_notes = models.CharField(max_length = 180, default = 'NA')
 
-class CaseForm(ModelForm):
-    class Meta: 
-        model = Case 
-        fields = '__all__'
-        widgets = {
-            'first_name': forms.TextInput(attrs={'class': 'form-control', 
-              'type': 'text','placeholder': 'Required'}),
-            'last_name': forms.TextInput(attrs={'class': 'form-control', 
-              'type': 'text','placeholder': 'Required'}),
-            'phone_number': forms.TextInput(attrs={'class': 'form-control', 
-              'type': 'text'}),
-            'service': forms.TextInput(attrs={'class': 'form-control', 
-              'type': 'text'}),
-            'aadhaar_number': forms.TextInput(attrs={'class': 'form-control', 
-              'type': 'number'}),
-        }
 
 
