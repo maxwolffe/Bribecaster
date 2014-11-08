@@ -249,104 +249,13 @@
             <div class="row form-wrapper">
                 <!-- left column -->
                 <div class="col-md-8 column">
-                    <form action={% url 'cases:submit-OBC-form' question.id %} method="post">
-                       <!--  <div class="field-box">
-
-                            <label>Normal input:</label>
-                            <div class="col-md-7">
-                                <input class="form-control" type="text" />
-                            </div>                            
-                        </div> -->
+                    <form action={% url 'cases:submit_OBC_form' form.id %} method="post">
+                       <ul>
                         {% csrf_token %}
-                        <div class="field-box">
-                            <label>First Name:</label>
-                            <div class="col-md-7">
-                                {{ form.first_name }}
-                            </div>   
-                        </div>
-                        <div class="field-box">
-                            <label>Last Name:</label>
-                            <div class="col-md-7">
-                                {{ form.last_name }}
-                            </div>   
-                        </div>
-                        <div class="field-box">
-                            <label>Gender:</label>
-                            <div class="col-md-7">
-                                {{ form.last_name }}
-                            </div>   
-                        </div>
-                        <div class="field-box">
-                            <label>Phone Number:</label>
-                            <div class="col-md-7">
-                                {{ form.phone_number }}
-                            </div>   
-                        </div>
-                       <!--  <div class="field-box">
-                            <label>Service:</label>
-                            <div class="col-md-7">
-                                {{ form.service }}
-                            </div>   
-                        </div> -->
-                        <div class="field-box">
-                            <label>Aadhaar Number:</label>
-                            <div class="col-md-7 column pull-left">
-                                {{ form.aadhaar_number }}
-                            </div>   
-                        </div>
-                        <div class="field-box">
-                            <label>Date of Visit:</label>
-                            <div class="col-md-2 column pull-left">
-                                <input type="text" value="10/31/2014" class="form-control input-datepicker" />
-                            </div>
-                        </div>
-                </div> 
-                <div class="col-md-4 column pull-right">
-                        <div class="field-box">
-                        <label>District:</label>
-                        <div class="ui-select">
-                            <select>
-                                <option selected>Dropdown</option>
-                                <option>District 1</option>
-                                <option>District 2</option>
-                                <option>District 3</option>
-                                <option>District 4</option>
-                                <option>District 5</option>
-                                <option>District 6</option>
-                                <option>District 7</option>
-                                <option>District 8</option>
-                            </select>
-                        </div>
-                        <div class="field-box">
-                        <label>Office:</label>
-                        <div class="ui-select">
-                            <select>
-                                <option selected>Dropdown</option>
-                                <option>Office 1</option>
-                                <option>Office 2</option>
-                                <option>Office 3</option>
-                                <option>Office 4</option>
-                                <option>Office 5</option>
-                                <option>Office 6</option>
-                                <option>Office 7</option>
-                                <option>Office 8</option>
-                            </select>
-                        </div>
-                        <div class="field-box">
-                        <label>Service:</label>
-                        <div class="ui-select">
-                            <select>
-                                <option selected>Dropdown</option>
-                                <option>Service 1</option>
-                                <option>Service 2</option>
-                                <option>Service 3</option>
-                                <option>Service 4</option>
-                                <option>Service 5</option>
-                                <option>Service 6</option>
-                                <option>Service 7</option>
-                                <option>Service 8</option>
-                            </select>
-                        </div>
+                        {% for field in form %}
+                        {{ field }}
+                        {% endfor %}
+                        </ul>
                         <div> 
                             <input type="submit" value="Submit" class="btn-flat inverse"/>
                             <input type="reset" value="Reset" class="btn-flat inverse" id="reset-btn"/>

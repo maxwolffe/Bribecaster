@@ -1,6 +1,6 @@
 from django.shortcuts import render_to_response, render
 from django.template.context import RequestContext
-from models import CaseForm, 
+from models import CaseForm, OBCFormForm
 from django.http import HttpResponseRedirect
 
 def index(request):
@@ -27,3 +27,8 @@ def form(request):
 def obc_form(request):
     if request.method == "POST":
         # handle the forms
+    if request.method == "GET":
+        print("request.get")
+        obc_form = OBCFormForm()
+        context = {'form': obc_form}
+        return render(request, 'case/OBC_form.html', context)

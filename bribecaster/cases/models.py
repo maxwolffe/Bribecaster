@@ -155,7 +155,7 @@ class Form(models.Model):
     office_visit = models.ForeignKey(OfficeVisit)
     citizen = models.ForeignKey(Citizen)
 
-class OBCForm(Form):
+class OBCFormResponse(Form):
     religion = models.CharField(max_length = 40)
     caste = models.CharField(max_length = 40)
     sub_caste = models.CharField(max_length = 40)
@@ -197,6 +197,7 @@ class OBCForm(Form):
     purpose_of_certificate = models.CharField(max_length = 180, default = 'NA')
     ration_card_number = models.CharField(max_length = 40, default = 'NA')
     final_notes = models.CharField(max_length = 180, default = 'NA')
+
 
 
 

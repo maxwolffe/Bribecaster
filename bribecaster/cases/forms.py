@@ -9,7 +9,7 @@ class CitizenForm(ModelForm):
 
 class OBCFormForm(ModelForm):
   class Meta:
-    model = OBCForm
+    model = OBCFormResponse
     exclude = ('citizen', 'office_visit')
 
 
