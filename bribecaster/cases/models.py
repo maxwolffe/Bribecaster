@@ -47,6 +47,8 @@ class Citizen(models.Model):
     first_name = models.CharField(max_length = 40)
     last_name = models.CharField(max_length = 40)
     phone_number = models.CharField(max_length = 20)
+    gender = models.CharField(max_length = 20, default = "unkown")
+    age = models.IntegerField(default = -1)
     address = models.CharField(max_length = 30)
     city = models.CharField(max_length = 30)
     aadhaar_number = models.BigIntegerField(max_length = 12, default = -1)
@@ -149,6 +151,48 @@ class SMSFeedback(models.Model):
     def __str__(self):
         return "SMSFeedback"
 
+class OBCForm(models.Model):
+    religion = models.CharField(max_length = 40)
+    caste = models.CharField(max_length = 40)
+    sub_caste = models.CharField(max_length = 40)
+    issued_in_past = models.BooleanField()
+    education_certification_contains_caste = model.BooleanField()
+    caste_serial_number = models.CharField(max_length = 40)
+    name_of_father = models.CharField(max_length = 40, default = 'NA')
+    name_of_mother = models.CharField(max_length = 40, default = 'NA')
+    name_of_husband = models.CharField(max_length = 40, default = 'NA')
+
+    # Information about Husband/Father 
+    male_status = models.CharField(max_length = 180, default = 'NA')
+
+    # information about Mother/wife
+    female_status = models.CharField(max_length = 180, default = 'NA')
+
+    # Information about Employment with International Orgs
+    org_status = models.CharField(max_length = 180, default = 'NA')
+
+    # Death details
+    death_details = models.CharField(max_length = 180, default = 'NA')
+
+    # public service details
+    public_service_details = models.CharField(max_length = 180, default = 'NA')
+
+    # Property Holding information
+    land_holding = models.CharField(max_length = 40, default = 'NA')
+    land_location = models.CharField(max_length = 40, default = 'NA')
+    other_land_information = models.CharField(max_length = 180, default = 'NA')
+
+    # Plantation Information
+    plantation_information = models.CharField(max_length = 180, default = 'NA')
+
+    # Income / Wealth Information
+    annual_income = models.IntegerField()
+    tax_paid = models.BooleanField()
+
+    # Final Information
+    purpose_of_certificate = models.CharField(max_length = 180, default = 'NA')
+    ration_card_number = models.CharField(max_length = 40, default = 'NA')
+    final_notes = models.CharField(max_length = 180, default = 'NA')
 
 class CaseForm(ModelForm):
     class Meta: 
