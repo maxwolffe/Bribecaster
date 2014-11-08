@@ -22,3 +22,7 @@ def form(request):
     else:
         form = CaseForm()
     return render(request, 'bribecaster/form-showcase.html', {'form': form})
+
+def table(request):
+    return render_to_response('bribecaster/data-table.html', context_instance=RequestContext(request))
+
