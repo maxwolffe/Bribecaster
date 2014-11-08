@@ -172,13 +172,13 @@
             </li>
             <li>
                 <a href="http://localhost:8000/data-table.html">
-                    <i class="icon-edit"></i>
+                    <i class="icon-hdd"></i>
                     <span>Data Tables</span>
                 </a>
             </li>                 
             <li>
                 <a class="dropdown-toggle" href="#">
-                    <i class="icon-edit"></i>
+                    <i class="icon-map-marker"></i>
                     <span>Data Maps</span>
                     <i class="icon-chevron-down"></i>
                 </a>
@@ -223,7 +223,7 @@
             </li>
             <li>
                 <a class="dropdown-toggle" href="#">
-                    <i class="icon-edit"></i>
+                    <i class="icon-signal"></i>
                     <span>Statistics By Region</span>
                     <i class="icon-chevron-down"></i>
                 </a>
@@ -247,10 +247,7 @@
 
 	<!-- main container -->
     <div class="content">
-        <div class="col-md-6 column center">
-            <h2>New Form</h2>
-        </div>
-        
+        <h2 class="text-center">New Form</h2>
         <div id="pad-wrapper" class="form-page">
             <div class="row form-wrapper">
                 <!-- left column -->
@@ -372,15 +369,6 @@
     <!-- call this page plugins -->
     <script type="text/javascript">
         $(function () {
-
-            // add uniform plugin styles to html elements
-            $("input:checkbox, input:radio").uniform();
-
-            // select2 plugin for select elements
-            $(".select2").select2({
-                placeholder: "Select a State"
-            });
-
             // datepicker plugin
             $('.input-datepicker').datepicker().on('changeDate', function (ev) {
                 $(this).datepicker('hide');
