@@ -51,7 +51,7 @@ def user_lookup(request):
 
 def obc_form(request, citizen_id):
     if request.method == "POST":
-        return HttpResponseRedirect('bribecaster/form-showcase.html')
+        return HttpResponseRedirect(reverse('table'))
         pass
         # handle the forms
         return 

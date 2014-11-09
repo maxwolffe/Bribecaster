@@ -252,7 +252,7 @@
                     <div>
                     {{citizen.first_name}} {{citizen.last_name}}
                     </div>
-                    <form action="." method="post">
+                    <form action={% url "obc_form" citizen.id%} method="post">
                         {% csrf_token %}
                         {% for field in form %}
                         <div style="height:39px;">
