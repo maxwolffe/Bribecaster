@@ -1,6 +1,7 @@
 from django.shortcuts import render_to_response, render
 from django.template.context import RequestContext
-from forms import CaseForm, OBCFormForm
+from models import Citizen, OBCFormResponse
+from forms import CaseForm, OBCFormForm, CitizenForm
 from django.http import HttpResponseRedirect
 
 def index(request):
@@ -23,6 +24,16 @@ def form(request):
     else:
         form = CaseForm()
     return render(request, 'bribecaster/form-showcase.html', {'form': form})
+
+def user_lookup(request):
+    if request.method == "POST":
+        user = Citizen.first()
+        return HttpResponseRedirect(reverse('cases:obc_form', args=(user.id,)))
+    elif request.method == "GET":
+        citizen_form = CitizenForm()
+        context = {"form": citizen_form}
+        return render(request, 'bribecaster/user_form.html', context)
+
 
 def obc_form(request):
     if request.method == "POST":
