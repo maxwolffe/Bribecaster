@@ -1,7 +1,11 @@
 from django.shortcuts import render_to_response, render
 from django.template.context import RequestContext
+<<<<<<< HEAD
 from models import Citizen, OBCFormResponse
 from forms import CaseForm, OBCFormForm, CitizenForm
+=======
+from models import Form, OBCFormResponse
+>>>>>>> 2431b53459ad5b948390dcdc32271a5adbcaaefe
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 
@@ -12,7 +16,7 @@ def form(request):
     if request.method == 'POST':
         pass
         # create a form instance and populate it with data from the request:
-        form = CaseForm(request.POST)
+        form = Form(request.POST)
         # check whether it's valid:
         if form.is_valid():
             form.save()
@@ -23,8 +27,11 @@ def form(request):
 
     # if a GET (or any other method) we'll create a blank form
     else:
-        form = CaseForm()
+        form = Form()
     return render(request, 'bribecaster/form-showcase.html', {'form': form})
+
+def table(request):
+    return render_to_response('bribecaster/data-table.html', context_instance=RequestContext(request))
 
 def user_lookup(request):
     if request.method == "POST":
@@ -51,8 +58,10 @@ def obc_form(request, citizen_id):
         return HttpResponseRedirect('bribecaster/form-showcase.html')
         pass
         # handle the forms
+        return 
     if request.method == "GET":
         citizen = Citizen.objects.get(pk=citizen_id)
         obc_form = OBCFormForm()
         context = {'form': obc_form, 'citizen': citizen}
         return render(request, 'bribecaster/OBC_form.html', context)
+

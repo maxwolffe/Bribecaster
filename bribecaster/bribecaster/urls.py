@@ -11,6 +11,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^form-showcase.html/', views.form, name='form'),
     url(r'^index.html/', views.index, name='index'),
+    url(r'^data-table.html/', views.table, name='table'),
     url(r'^$', views.index, name='index'),
     url(r'^cases/new_form/$', views.user_lookup, name='new_form'),
     url(r'^cases/obc_form/(?P<citizen_id>\d+)$', views.obc_form, name='obc_form')
