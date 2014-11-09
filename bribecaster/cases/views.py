@@ -29,8 +29,15 @@ def user_lookup(request):
     if request.method == "POST":
         user = Citizen()
         citizen_form_response = CitizenForm(request.POST, instance=user)
-        citizen_form_response.save()
-        return HttpResponseRedirect(reverse('obc_form', args=(user.id,)))
+        if citizen_form_response.is_valid():
+            citizen_form_response.save()
+            return HttpResponseRedirect(reverse('obc_form', args=(user.id,)))
+        else:
+            error_string = ""
+            for error in citizen_form_response.errors:
+                error_string += error + " "
+            return HttpResponseRedirect(error_string)
+
 
     elif request.method == "GET":
         citizen_form = CitizenForm()

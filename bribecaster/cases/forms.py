@@ -5,7 +5,6 @@ from django.forms import ModelForm
 class CitizenForm(ModelForm):
   class Meta:
     model = Citizen
-    exclude = ('region',)
 
 class OBCFormForm(ModelForm):
   class Meta:
