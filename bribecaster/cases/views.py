@@ -52,6 +52,7 @@ def obc_form(request, citizen_id):
         pass
         # handle the forms
     if request.method == "GET":
+        citizen = Citizen.objects.get(pk=citizen_id)
         obc_form = OBCFormForm()
-        context = {'form': obc_form}
+        context = {'form': obc_form, 'citizen': citizen}
         return render(request, 'bribecaster/OBC_form.html', context)
