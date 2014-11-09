@@ -3,6 +3,7 @@ from django.template.context import RequestContext
 from models import Citizen, OBCFormResponse
 from forms import CaseForm, OBCFormForm, CitizenForm
 from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
 
 def index(request):
     return render_to_response('bribecaster/index.html', context_instance=RequestContext(request))
@@ -31,7 +32,7 @@ def user_lookup(request):
         citizen_form_response = CitizenForm(request.POST, instance=user)
         if citizen_form_response.is_valid():
             citizen_form_response.save()
-            return HttpResponseRedirect(reverse('obc_form', args=(user.id,)))
+            return HttpResponseRedirect(reverse('obc_form', kwargs={"citizen_id":user.id}))
         else:
             error_string = ""
             for error in citizen_form_response.errors:
@@ -45,7 +46,7 @@ def user_lookup(request):
         return render(request, 'bribecaster/user_form.html', context)
 
 
-def obc_form(request):
+def obc_form(request, citizen_id):
     if request.method == "POST":
         return HttpResponseRedirect('bribecaster/form-showcase.html')
         pass
