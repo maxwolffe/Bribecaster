@@ -34,6 +34,13 @@ def user_lookup(request):
         user = Citizen()
         citizen_form_response = CitizenForm(request.POST, instance=user)
         if citizen_form_response.is_valid():
+            possible_user = None
+            try:
+                possible_user = Citizen.objects.get(aadhaar_number = citizen_form_response.cleaned_data['aadhaar_number'])
+            except Exception as django_api_error:
+                pass
+            if possible_user:
+                return HttpResponseRedirect(reverse('obc_form', kwargs={"citizen_id":possible_user.id}))
             citizen_form_response.save()
             return HttpResponseRedirect(reverse('obc_form', kwargs={"citizen_id":user.id}))
         else:
