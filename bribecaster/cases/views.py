@@ -27,8 +27,11 @@ def form(request):
 
 def user_lookup(request):
     if request.method == "POST":
-        user = Citizen.first()
-        return HttpResponseRedirect(reverse('cases:obc_form', args=(user.id,)))
+        user = Citizen()
+        citizen_form_response = CitizenForm(request.POST, instance=user)
+        citizen_form_response.save()
+        return HttpResponseRedirect(reverse('obc_form', args=(user.id,)))
+
     elif request.method == "GET":
         citizen_form = CitizenForm()
         context = {"form": citizen_form}
@@ -41,7 +44,6 @@ def obc_form(request):
         pass
         # handle the forms
     if request.method == "GET":
-        print("request.get")
         obc_form = OBCFormForm()
         context = {'form': obc_form}
         return render(request, 'bribecaster/OBC_form.html', context)
