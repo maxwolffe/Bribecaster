@@ -1,11 +1,7 @@
 from django.shortcuts import render_to_response, render
 from django.template.context import RequestContext
-<<<<<<< HEAD
 from models import Citizen, OBCFormResponse
 from forms import CaseForm, OBCFormForm, CitizenForm
-=======
-from models import Form, OBCFormResponse
->>>>>>> 2431b53459ad5b948390dcdc32271a5adbcaaefe
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 
