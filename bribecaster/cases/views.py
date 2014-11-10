@@ -1,11 +1,7 @@
 from django.shortcuts import render_to_response, render
 from django.template.context import RequestContext
-<<<<<<< HEAD
-from models import Form, OBCFormResponse, Case, OfficeVisit, SMSFeedback
-=======
-from models import Citizen, OBCFormResponse, Case, Office
+from models import Citizen, OBCFormResponse, Case, Office, OfficeVisit
 from forms import CaseForm, OBCFormForm, CitizenForm
->>>>>>> b5c507237c991d2490fbedbe5cbd49e98be5dc2d
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 
@@ -37,9 +33,9 @@ def detail(request, case_id):
             'case': case, 
             'citizen': case.citizen, 
             'office': case.office,
-            'visit': OfficeVisit.objects.get(case=case_id, citizen=case.citizen),
-            'sms': SMSFeedback.objects.get(case=case_id) if (case.sms_selected) else None,
-            'robo': RoboCallFeedback.objects.get(case=case_id) if (case.sms_selected and case.robo_call_selected) else None})
+            'visit': case.officevisit_set.all(),
+            'sms': case.smsfeedback_set.all(),
+            'robo': case.robocallfeedback_set.all()})
     
 
 def table(request):

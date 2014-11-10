@@ -261,7 +261,7 @@
         </tr>
         {% for case in cases %}
         <tr> 
-            <td><a href="{% url 'table' %}" type="button" class="btn-flat inverse"></a></td>
+            <td><a href="{% url 'detail' case.id %}" type="button" class="btn-flat inverse"></a></td>
             <td>{{case.citizen.first_name}}</td> 
             <td>{{case.citizen.last_name}}</td> 
             <td>{{case.id}}</td> 
