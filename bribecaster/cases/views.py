@@ -1,6 +1,6 @@
 from django.shortcuts import render_to_response, render
 from django.template.context import RequestContext
-from models import Form, OBCFormResponse
+from models import Form, OBCFormResponse, Case
 from django.http import HttpResponseRedirect
 
 def index(request):
@@ -23,6 +23,11 @@ def form(request):
     else:
         form = Form()
     return render(request, 'bribecaster/form-showcase.html', {'form': form})
+
+def detail(request, case_id):
+    if request.method == "GET":
+        return render(request, 'bribecaster/userdetail.html', {'case_id': case_id, 'case': Case.objects.get(pk=1)})
+    
 
 def table(request):
     return render_to_response('bribecaster/data-table.html', context_instance=RequestContext(request))
