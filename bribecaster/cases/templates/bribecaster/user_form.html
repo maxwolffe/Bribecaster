@@ -249,10 +249,7 @@
             <div class="row form-wrapper">
                 <!-- left column -->
                 <div class="col-md-8 column">
-                    <div>
-                    {{citizen.first_name}} {{citizen.last_name}}
-                    </div>
-                    <form action={% url "obc_form" citizen.id%} method="post">
+                    <form action="." method="post">
                         {% csrf_token %}
                         {% for field in form %}
                         <div style="height:39px;">
