@@ -258,40 +258,21 @@
             <td>Robo Call Made</td> 
             <td>SMS Followup Made</td> 
             <td>Followup Call Made</td> 
-        <tr>
-            <td><button type="button" class="btn-flat inverse"></button></td>
-            <td>John</td> 
-            <td>Doe</td>
-            <td>1</td> 
-            <td>Office 1</td> 
-            <td>11/7/2014</td> 
-            <td>Yes</td> 
-            <td>No</td> 
-            <td>No</td> 
         </tr>
-        <tr>
-            <td><button type="button" class="btn-flat inverse"></button></td>
-            <td>John</td> 
-            <td>Doe</td>
-            <td>1</td> 
-            <td>Office 1</td> 
-            <td>11/7/2014</td> 
-            <td>Yes</td> 
-            <td>No</td> 
-            <td>No</td> 
+        {% for case in cases %}
+        <tr> 
+            <td><a href="{% url 'table' %}" type="button" class="btn-flat inverse"></a></td>
+            <td>{{case.citizen.first_name}}</td> 
+            <td>{{case.citizen.last_name}}</td> 
+            <td>{{case.id}}</td> 
+            <td>{{case.office.office_name}}</td> 
+            <td>Date</td> 
+            <td>{{case.sms_selected}}</td> 
+            <td>{{case.robo_call_selected}}</td> 
+            <td>{{case.follow_up_selected}}</td> 
         </tr>
-        <tr>
-            <td><button type="button" class="btn-flat inverse"></button></td>
-            <td>John</td> 
-            <td>Doe</td>
-            <td>1</td> 
-            <td>Office 1</td> 
-            <td>11/7/2014</td> 
-            <td>Yes</td> 
-            <td>No</td> 
-            <td>No</td> 
-        </tr>
-        </table>
+        {% endfor %}
+        </tbale
     </div>
     <!-- end main container -->
 
