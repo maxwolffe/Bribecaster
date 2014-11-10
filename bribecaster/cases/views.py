@@ -28,7 +28,7 @@ def form(request):
 
 def table(request):
     if request.method == "GET":
-        context = {"cases", Case.objects.all()}
+        context = {"cases": Case.objects.all()}
         return render_to_response('bribecaster/data-table.html', context)
 
 def user_lookup(request):
