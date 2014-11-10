@@ -74,6 +74,14 @@ class Office(models.Model):
     speed_rating = models.IntegerField(default = -1)
     cost_rating = models.IntegerField(default = -1)
     quality_rating = models.IntegerField(default = -1)
+
+    @staticmethod
+    def first():
+        qs = Office.objects.all()
+        r = list(qs[:1])
+        if r:
+            return r[0]
+        return None
     
     def __str__(self):
         return self.office_name
@@ -88,6 +96,14 @@ class User(models.Model):
     employee_number = models.IntegerField()
 
     office = models.ForeignKey(Office)
+
+    @staticmethod
+    def first():
+        qs = User.objects.all()
+        r = list(qs[:1])
+        if r:
+            return r[0]
+        return None
 
     def __str__(self):
         return self.first_name + " " + self.last_name + " at " + self.office.office_name

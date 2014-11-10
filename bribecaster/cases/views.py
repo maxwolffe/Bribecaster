@@ -1,6 +1,6 @@
 from django.shortcuts import render_to_response, render
 from django.template.context import RequestContext
-from models import Citizen, OBCFormResponse
+from models import Citizen, OBCFormResponse, Case, Office
 from forms import CaseForm, OBCFormForm, CitizenForm
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
@@ -27,7 +27,9 @@ def form(request):
     return render(request, 'bribecaster/form-showcase.html', {'form': form})
 
 def table(request):
-    return render_to_response('bribecaster/data-table.html', context_instance=RequestContext(request))
+    if request.method == "GET":
+        context = {"cases", Case.objects.all()}
+        return render_to_response('bribecaster/data-table.html', context)
 
 def user_lookup(request):
     if request.method == "POST":
@@ -43,6 +45,7 @@ def user_lookup(request):
                 return HttpResponseRedirect(reverse('obc_form', kwargs={"citizen_id":possible_user.id}))
             citizen_form_response.save()
             return HttpResponseRedirect(reverse('obc_form', kwargs={"citizen_id":user.id}))
+
         else:
             error_string = ""
             for error in citizen_form_response.errors:
@@ -58,10 +61,19 @@ def user_lookup(request):
 
 def obc_form(request, citizen_id):
     if request.method == "POST":
+        citizen = Citizen.objects.get(pk = citizen_id)
+        case = Case()
+        case.citizen = citizen
+        case.office = Office.first()
+        case.sms_selected = False
+        case.robo_call_selected = False
+        case.follow_up_selected = False
+        case.save()
         return HttpResponseRedirect(reverse('table'))
         pass
         # handle the forms
         return 
+
     if request.method == "GET":
         citizen = Citizen.objects.get(pk=citizen_id)
         obc_form = OBCFormForm()

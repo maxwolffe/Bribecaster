@@ -258,6 +258,7 @@
             <td>Robo Call Made</td> 
             <td>SMS Followup Made</td> 
             <td>Followup Call Made</td> 
+        </tr>
         <tr>
             <td><button type="button" class="btn-flat inverse"></button></td>
             <td>John</td> 
@@ -269,6 +270,20 @@
             <td>No</td> 
             <td>No</td> 
         </tr>
+        {% for case in cases %}
+            {{case}}
+            <tr> 
+                <td>Detail View</td>
+                <td>{{case.citizen.first_name}}</td> 
+                <td>{{case.citizen.last_name}}</td> 
+                <td>{{case.id}}</td> 
+                <td>Office</td> 
+                <td>Date</td> 
+                <td>Robo Call Made</td> 
+                <td>SMS Followup Made</td> 
+                <td>Followup Call Made</td> 
+            </tr>
+        {% endfor %}
         <tr>
             <td><button type="button" class="btn-flat inverse"></button></td>
             <td>John</td> 
