@@ -19,23 +19,23 @@ RESPONSE_TYPE = (
 
 DEFAULT = 1
 
-""" Model Representing a region
-aggregate_speed_rating - int
-aggregate_quality_rating - int
-aggregate_cost_rating - int 
+# """ Model Representing a region
+# aggregate_speed_rating - int
+# aggregate_quality_rating - int
+# aggregate_cost_rating - int 
 
-has_many offices
-has_many citizens
+# has_many offices
+# has_many citizens
 
-"""
-class Region(models.Model):
-    region_name = models.CharField(max_length = 30, default = "Unnamed")
-    aggregate_cost_rating = models.IntegerField()
-    aggregate_quality_rating = models.IntegerField()
-    aggregate_speed_rating = models.IntegerField()
+# """
+# class Region(models.Model):
+#     region_name = models.CharField(max_length = 30, default = "Unnamed")
+#     aggregate_cost_rating = models.IntegerField()
+#     aggregate_quality_rating = models.IntegerField()
+#     aggregate_speed_rating = models.IntegerField()
 
-    def __str__(self):
-        return self.region_name
+#     def __str__(self):
+#         return self.region_name
 
 """ A Citizen Model representing citizens who visit the office
 
@@ -52,9 +52,6 @@ class Citizen(models.Model):
     address = models.CharField(max_length = 30)
     city = models.CharField(max_length = 30)
     aadhaar_number = models.BigIntegerField(max_length = 12, default = -1)
-
-
-    region = models.ForeignKey(Region)
 
     def __str__(self):
         return self.first_name + " " + self.last_name + " : " + self.phone_number
@@ -77,9 +74,15 @@ class Office(models.Model):
     speed_rating = models.IntegerField(default = -1)
     cost_rating = models.IntegerField(default = -1)
     quality_rating = models.IntegerField(default = -1)
-    
-    region = models.ForeignKey(Region)
 
+    @staticmethod
+    def first():
+        qs = Office.objects.all()
+        r = list(qs[:1])
+        if r:
+            return r[0]
+        return None
+    
     def __str__(self):
         return self.office_name
 
@@ -93,6 +96,14 @@ class User(models.Model):
     employee_number = models.IntegerField()
 
     office = models.ForeignKey(Office)
+
+    @staticmethod
+    def first():
+        qs = User.objects.all()
+        r = list(qs[:1])
+        if r:
+            return r[0]
+        return None
 
     def __str__(self):
         return self.first_name + " " + self.last_name + " at " + self.office.office_name

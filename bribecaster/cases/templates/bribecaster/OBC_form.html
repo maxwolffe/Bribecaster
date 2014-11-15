@@ -249,16 +249,18 @@
             <div class="row form-wrapper">
                 <!-- left column -->
                 <div class="col-md-8 column">
-                    <form action={% url 'cases:submit_OBC_form' form.id %} method="post">
-                       <ul>
+                    <div>
+                    {{citizen.first_name}} {{citizen.last_name}}
+                    </div>
+                    <form action={% url "obc_form" citizen.id%} method="post">
                         {% csrf_token %}
                         {% for field in form %}
-                        {{ field }}
+                        <div style="height:39px;">
+                        {{field.label_tag}} {{ field }}
+                        </div>
                         {% endfor %}
-                        </ul>
                         <div> 
                             <input type="submit" value="Submit" class="btn-flat inverse"/>
-                            <input type="reset" value="Reset" class="btn-flat inverse" id="reset-btn"/>
                         </div>
                     </form>
                 </div>
