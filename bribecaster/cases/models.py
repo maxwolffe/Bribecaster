@@ -17,6 +17,12 @@ RESPONSE_TYPE = (
     ('3', 'not-a-number'),
 )
 
+GENDER = (
+    ('0', 'Male'),
+    ('1', 'Female'),
+    ('2', 'Decline to respond')
+    )
+
 DEFAULT = 1
 
 # """ Model Representing a region

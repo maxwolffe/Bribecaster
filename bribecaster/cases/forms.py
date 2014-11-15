@@ -1,7 +1,8 @@
-from models import Citizen, User, Case, OBCFormResponse, Case, Office
+from models import Citizen, User, Case, OBCFormResponse, Case, Office, GENDER
 from django.forms import ModelForm
 from django.forms import Form
 from django import forms
+
 
 
 
@@ -20,8 +21,7 @@ class CitizenForm(ModelForm):
 		'type': 'number'}),
 		'age': forms.TextInput(attrs={'class': 'form-control', 
 		'type': 'number','placeholder': 'Required'}),
-		'gender': forms.TextInput(attrs={'class': 'form-control', 
-		'type': 'select','placeholder': 'Required'}),
+		'gender': forms.RadioSelect(choices = GENDER),
 		'address': forms.TextInput(attrs={'class': 'form-control', 
 		'type': 'text','placeholder': 'Required'}),
 		'city': forms.TextInput(attrs={'class': 'form-control', 
@@ -35,8 +35,8 @@ class OBCFormForm(ModelForm):
     exclude = ('citizen', 'office_visit')
 
 class AadhaarLookup(Form):
-	aadhaar_number = forms.IntegerField(label='Aadhaar Number')
-
+	aadhaar_number = forms.IntegerField(widget = forms.TextInput(attrs={'class': 'form-control', 
+		'type': 'text','placeholder': 'Aadhaar Number'}), label='Aadhaar Number')
 
 class CaseForm(ModelForm):
   pass

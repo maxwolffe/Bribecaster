@@ -263,14 +263,36 @@
                     </div>                     
                     <form action={% url "obc_form" %} method="post">
                         {% csrf_token %}
-                        {{% for field in citizen_form %}
-                            <div>
-                            {{field.label}} : {{field}}  
-                            </div>                     
-                        {% endfor %}
+                        {% if citizen == None %}
+                            {% for field in citizen_form %}
+                                <div class="field-box">
+                                    {{field.label}} : {{field}}  
+                                </div>                     
+                            {% endfor %}
+                        {% endif %}
+                        {% if citizen != None %}
+                            <div class="field-box">
+                                First Name: {{citizen.first_name}}           
+                            </div>    
+                            <div class="field-box">
+                                First Name: {{citizen.last_name}}           
+                            </div>   
+                            <div class="field-box">
+                                First Name: {{citizen.aadhar_number}}           
+                            </div>   
+                            <div class="field-box">
+                                First Name: {{citizen.first_name}}           
+                            </div>   
+                            <div class="field-box">
+                                First Name: {{citizen.first_name}}           
+                            </div>   
+                            <div class="field-box">
+                                First Name: {{citizen.first_name}}           
+                            </div>                    
+                        {% endif %}
 
                         {% for field in obc_form %}
-                            <div>
+                            <div class="field-box">
                             {{field.label}} : {{field}} 
                             </div>
                         {% endfor %}

@@ -103,14 +103,22 @@ def obc_form(request, citizen_id=None):
         aadhaar_form = AadhaarLookup()
         citizen_form = CitizenForm()
         if citizen_id != None:
-            citizen = Citizen.objects.get(pk=citizen_id)
-            context = {'obc_form': obc_form, 'citizen': citizen, 'aadhaar_form': aadhaar_form, 'citizen_form':citizen_form}
-            return render(request, 'bribecaster/OBC_form.html', context)
+            try:
+                citizen = Citizen.objects.get(pk=citizen_id)
+                context = {'obc_form': obc_form, 'citizen': citizen, 'aadhaar_form': aadhaar_form, 'citizen_form':citizen_form}
+                return render(request, 'bribecaster/OBC_form.html', context)
+            except Exception as e:
+                pass
         citizen = None
         context = {'obc_form': obc_form, 'citizen': citizen, 'aadhaar_form': aadhaar_form, 'citizen_form':citizen_form}
         return render(request, 'bribecaster/OBC_form.html', context)
 
 def aadhaar_lookup(request):
+    if request.method == "GET":
+        aadhaar_lookup = AadhaarLookup()
+        context = {'aadhaar_form': aadhaar_lookup}
+        return render(request, 'bribecaster/aadhaar_lookup.html', context)
+
     if request.method == "POST":
         aadhaar_lookup_response = AadhaarLookup(request.POST)
         if aadhaar_lookup_response.is_valid():
