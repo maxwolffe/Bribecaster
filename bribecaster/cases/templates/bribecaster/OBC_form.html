@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load dajaxice_templatetags %}
 <html>
 <head>
 	<title>Bribecaster</title>
@@ -30,7 +31,9 @@
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <script src="{% static '/static/dajax/jquery.dajax.core.js' %}"></script>
     <script src="{% static 'js/lookup.js' %}"></script>
+    {% dajaxice_js_import %}
     </head>
 <body>
 

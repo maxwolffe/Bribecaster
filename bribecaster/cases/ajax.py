@@ -4,5 +4,6 @@ from dajaxice.decorators import dajaxice_register
 
 @dajaxice_register
 def lookup(request, text):
-	dajax.assign('#a_result','value',str(text))
-    return dajax.json()
+	dajax = Dajax()
+	dajax.assign('#a_result','value', str(text))
+	return dajax.json()
