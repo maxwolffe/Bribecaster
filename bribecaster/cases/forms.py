@@ -18,6 +18,14 @@ class CitizenForm(ModelForm):
 		'type': 'text'}),
 		'aadhaar_number': forms.TextInput(attrs={'class': 'form-control', 
 		'type': 'number'}),
+		'age': forms.TextInput(attrs={'class': 'form-control', 
+		'type': 'number','placeholder': 'Required'}),
+		'gender': forms.TextInput(attrs={'class': 'form-control', 
+		'type': 'select','placeholder': 'Required'}),
+		'address': forms.TextInput(attrs={'class': 'form-control', 
+		'type': 'text','placeholder': 'Required'}),
+		'city': forms.TextInput(attrs={'class': 'form-control', 
+		'type': 'text','placeholder': 'Required'}),
     }
 
 
