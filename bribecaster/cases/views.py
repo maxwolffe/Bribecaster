@@ -4,6 +4,7 @@ from models import Citizen, OBCFormResponse, Case, Office
 from forms import CaseForm, OBCFormForm, CitizenForm
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
+import json
 
 def index(request):
     return render_to_response('bribecaster/index.html', context_instance=RequestContext(request))
@@ -28,7 +29,21 @@ def form(request):
 
 def table(request):
     if request.method == "GET":
-        context = {"cases": Case.objects.all()}
+        data = [];
+        uniqueCounter = 0
+        for case in Case.objects.all():
+            temp = [] 
+            temp.append(case.citizen.first_name)
+            temp.append(case.citizen.last_name)
+            temp.append(case.id)
+            temp.append(case.office.office_name)
+            temp.append("<input id=" + "'sms" + str(uniqueCounter) + "' type='checkbox' value='False'>")
+            temp.append("<input id=" + "'robo" + str(uniqueCounter) + "' type='checkbox' value='False'>")
+            temp.append("<input id=" + "'followup" + str(uniqueCounter) + "' type='checkbox' value='False'>")
+            temp.append("<a type='button' class='btn-flat inverse'></a>")
+            data.append(temp)
+            uniqueCounter += 1
+        context = {"cases": data, "length": len(data)}
         return render_to_response('bribecaster/data-table.html', context)
 
 def user_lookup(request):

@@ -79,7 +79,7 @@
   margin-left: 0px;
 }
 
-table {
+#t01 {
     width:90%;
     margin:auto;
     margin-top: 10px;
@@ -102,6 +102,8 @@ table#t01 th  {
     background-color: black;
     color: white;
 }
+
+
 
 /*Responsive*/
 @media (max-width: 767px) {
