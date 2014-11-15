@@ -1,7 +1,7 @@
 from django.shortcuts import render_to_response, render
 from django.template.context import RequestContext
 from models import Citizen, OBCFormResponse, Case, Office, OfficeVisit
-from forms import CaseForm, OBCFormForm, CitizenForm
+from forms import CaseForm, OBCFormForm, CitizenForm, AadhaarLookup
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 
@@ -85,7 +85,7 @@ def user_lookup(request):
         return render(request, 'bribecaster/user_form.html', context)
 
 
-def obc_form(request, citizen_id):
+def obc_form(request, citizen_id=None):
     if request.method == "POST":
         citizen = Citizen.objects.get(pk = citizen_id)
         case = Case()
@@ -99,8 +99,30 @@ def obc_form(request, citizen_id):
 
 
     if request.method == "GET":
-        citizen = Citizen.objects.get(pk=citizen_id)
         obc_form = OBCFormForm()
-        context = {'form': obc_form, 'citizen': citizen}
+        aadhaar_form = AadhaarLookup()
+        citizen_form = CitizenForm()
+        if citizen_id != None:
+            citizen = Citizen.objects.get(pk=citizen_id)
+            context = {'obc_form': obc_form, 'citizen': citizen, 'aadhaar_form': aadhaar_form, 'citizen_form':citizen_form}
+            return render(request, 'bribecaster/OBC_form.html', context)
+        citizen = None
+        context = {'obc_form': obc_form, 'citizen': citizen, 'aadhaar_form': aadhaar_form, 'citizen_form':citizen_form}
         return render(request, 'bribecaster/OBC_form.html', context)
+
+def aadhaar_lookup(request):
+    if request.method == "POST":
+        aadhaar_lookup_response = AadhaarLookup(request.POST)
+        if aadhaar_lookup_response.is_valid():
+            try:
+                user = Citizen.objects.get(aadhaar_number = aadhaar_lookup_response.cleaned_data['aadhaar_number'])
+                return HttpResponseRedirect(reverse('obc_form', kwargs={"citizen_id":user.id}))
+            except Exception as e :
+                return HttpResponseRedirect(reverse('obc_form'))
+        return HttpResponseRedirect(reverse('obc_form'))
+
+
+
+
+
 

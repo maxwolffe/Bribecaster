@@ -242,28 +242,37 @@
 	<!-- main container -->
     <div class="content">
         <div class="col-md-6 column center">
-            <h2>New Form</h2>
+            <h2>OBC Form</h2>
         </div>
-
-        <div id="pad-wrapper" class="form-page">
-        <input type="text" id="aadhar_input">
-        <input type="text" value="" id="a_result">
-        <input type="button" value="Lookup!" onclick="look_up();">
-        </div> 
         
         <div id="pad-wrapper" class="form-page">
             <div class="row form-wrapper">
                 <!-- left column -->
                 <div class="col-md-8 column">
-                    <div>
-                    {{citizen.first_name}} {{citizen.last_name}}
-                    </div>
-                    <form action={% url "obc_form" citizen.id%} method="post">
+                    <div id="pad-wrapper" class="form-page">
+                        <form action={% url "aadhaar_lookup"%} method="post">
+                            {% csrf_token %}
+                            {% for field in aadhaar_form %}
+                                <label>{{field.label_tag}}</label>
+                                <div class="col-md-7">
+                                    {{ field }}
+                                </div>  
+                            {% endfor %} 
+                        <input type="submit" value="Lookup!" class="btn-flat inverse">
+                        </form>
+                    </div>                     
+                    <form action={% url "obc_form" %} method="post">
                         {% csrf_token %}
-                        {% for field in form %}
-                        <div style="height:39px;">
-                        {{field.label_tag}} {{ field }}
-                        </div>
+                        {{% for field in citizen_form %}
+                            <div>
+                            {{field.label}} : {{field}}  
+                            </div>                     
+                        {% endfor %}
+
+                        {% for field in obc_form %}
+                            <div>
+                            {{field.label}} : {{field}} 
+                            </div>
                         {% endfor %}
                         <div> 
                             <input type="submit" value="Submit" class="btn-flat inverse"/>
