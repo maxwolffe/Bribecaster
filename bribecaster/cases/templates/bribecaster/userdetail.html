@@ -247,32 +247,73 @@
 
     <!-- main container -->
     <div class="content">
-        <table id="t01">
-        <tr> 
-            <td>Detail View</td>
-            <td>First Name</td> 
-            <td>Last Name</td> 
-            <td>Case Number</td> 
-            <td>Office</td> 
-            <td>Date</td> 
-            <td>Robo Call Made</td> 
-            <td>SMS Followup Made</td> 
-            <td>Followup Call Made</td> 
-        </tr>
-        {% for case in cases %}
-        <tr> 
-            <td><a href="{% url 'detail' case.id %}" type="button" class="btn-flat inverse"></a></td>
-            <td>{{case.citizen.first_name}}</td> 
-            <td>{{case.citizen.last_name}}</td> 
-            <td>{{case.id}}</td> 
-            <td>{{case.office.office_name}}</td> 
-            <td>Date</td> 
-            <td>{{case.sms_selected}}</td> 
-            <td>{{case.robo_call_selected}}</td> 
-            <td>{{case.follow_up_selected}}</td> 
-        </tr>
-        {% endfor %}
-        </tbale
+    	<h2> Detail View for Case {{ case_id }} </h2>
+    	<h3> Citizen Information </h3>
+        <table>
+	        <tr> 
+	            <td>First Name</td> 
+	            <td>Last Name</td>
+				<td> Phone Number </td>
+				<td> Gender </td>
+				<td> Age </td>
+				<td> Address </td>
+				<td> City </td>
+				<td> Aadhaar Number </td>
+	        <tr>
+	            <td> {{ citizen.first_name }} </td> 
+	            <td> {{ citizen.last_name }} </td>
+	            <td> {{ citizen.phone_number }} </td> 
+	            <td> {{ citizen.gender }} </td> 
+	            <td> {{ citizen.age }} </td> 
+	            <td> {{ citizen.address }} </td> 
+	            <td> {{ citizen.city }} </td> 
+	            <td> {{ citizen.aadhaar_number }} </td> 
+	        </tr>
+        </table>
+        <h3> Office Information </h3>
+        <table>
+	        <tr> 
+	            <td> Office Name </td>
+				<td> Address </td>
+				<td> Phone Number </td>
+				<td> Office Head </td>
+				<td> Latitude </td>
+				<td> Longitude </td>
+				<td> Speed Rating </td>
+				<td> Cost Rating </td>
+				<td> Quality Rating </td>
+				<td> Region </td>
+	        <tr>
+				<td> {{ office.office_name }} </td>
+				<td> {{ office.address }} </td>
+				<td> {{ office.phone_number }} </td>
+				<td> {{ office.office_head }} </td>
+				<td> {{ office.lat }} </td>
+				<td> {{ office.lon }} </td>
+				<td> {{ office.speed_rating }} </td>
+				<td> {{ office.cost_rating }} </td>
+				<td> {{ office.quality_rating }} </td>
+				<td> {{ office.region }} </td>
+	        </tr>
+        </table>
+        <h3> Office Visit </h3>
+        <table>
+	        <tr> 
+				<td> Service Used </td>
+				<td> Time of Visit </td>
+	        <tr>
+				<td> {{ visit.service_used }} </td>
+				<td> {{ visit.time_of_visit }} </td>
+	        </tr>
+        </table>
+        <h3> SMS </h3>
+        {% if sms %}
+        <table>	     
+        	{{ sms }}
+        </table>
+        {% else %}
+        SMS not selected
+        {% endif %}
     </div>
     <!-- end main container -->
 

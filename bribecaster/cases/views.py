@@ -1,6 +1,6 @@
 from django.shortcuts import render_to_response, render
 from django.template.context import RequestContext
-from models import Citizen, OBCFormResponse, Case, Office
+from models import Citizen, OBCFormResponse, Case, Office, OfficeVisit
 from forms import CaseForm, OBCFormForm, CitizenForm
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
@@ -25,6 +25,18 @@ def form(request):
     else:
         form = Form()
     return render(request, 'bribecaster/form-showcase.html', {'form': form})
+
+def detail(request, case_id):
+    if request.method == "GET":
+        case = Case.objects.get(pk=case_id)
+        return render(request, 'bribecaster/userdetail.html', {'case_id': case_id, 
+            'case': case, 
+            'citizen': case.citizen, 
+            'office': case.office,
+            'visit': case.officevisit_set.all(),
+            'sms': case.smsfeedback_set.all(),
+            'robo': case.robocallfeedback_set.all()})
+    
 
 def table(request):
     if request.method == "GET":
