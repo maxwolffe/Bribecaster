@@ -43,6 +43,21 @@ def table(request):
         context = {"cases": Case.objects.all()}
         return render_to_response('bribecaster/data-table.html', context)
 
+def SMSOnlyTable(request):
+    if request.method == "GET":
+        context = {"cases": Case.objects.filter(sms_selected = True)}
+        return render_to_response('bribecaster/data-table.html', context)
+
+def RobocallOnlyTable(request):
+    if request.method == "GET":
+        context = {"cases": Case.objects.filter(robo_call_selected = True)}
+        return render_to_response('bribecaster/data-table.html', context)
+
+def FollowUpCallOnlyTable(request):
+    if request.method == "GET":
+        context = {"cases": Case.objects.filter(sms_selected = True)}
+        return render_to_response('bribecaster/data-table.html', context)
+
 def user_lookup(request):
     if request.method == "POST":
         user = Citizen()
@@ -59,10 +74,9 @@ def user_lookup(request):
             return HttpResponseRedirect(reverse('obc_form', kwargs={"citizen_id":user.id}))
 
         else:
-            error_string = ""
-            for error in citizen_form_response.errors:
-                error_string += error + " "
-            return HttpResponseRedirect(error_string)
+            citizen_form = CitizenForm()
+            context = {"form": citizen_form}
+            return render(request, 'bribecaster/user_form.html', context)
 
 
     elif request.method == "GET":
@@ -82,9 +96,7 @@ def obc_form(request, citizen_id):
         case.follow_up_selected = False
         case.save()
         return HttpResponseRedirect(reverse('table'))
-        pass
-        # handle the forms
-        return 
+
 
     if request.method == "GET":
         citizen = Citizen.objects.get(pk=citizen_id)

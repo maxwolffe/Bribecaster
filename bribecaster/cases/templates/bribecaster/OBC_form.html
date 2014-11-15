@@ -30,7 +30,8 @@
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-</head>
+    <script src="{% static 'js/lookup.js' %}"></script>
+    </head>
 <body>
 
     <!-- navbar -->
@@ -244,6 +245,12 @@
         <div class="col-md-6 column center">
             <h2>New Form</h2>
         </div>
+
+        <div id="pad-wrapper" class="form-page">
+        <input type="text" id="aadhar_input">
+        <input type="text" value="" id="a_result">
+        <input type="button" value="Lookup!" onclick="look_up();">
+        </div> 
         
         <div id="pad-wrapper" class="form-page">
             <div class="row form-wrapper">
