@@ -28,8 +28,8 @@ CASTE = (
 )
 
 BOOLEAN = (
-	('0', 'TRUE')
-	('1', 'FALSE')
+	('0', "Yes"),
+	('1', "No")
 )
 
 DESIGNATIONS = (
@@ -72,41 +72,44 @@ class OBCFormForm(ModelForm):
      "caste_serial_number": "Caste Serial Number",
      "name_of_father": "Name of Father",
      "name_of_mother": "Name of Mother",
+     "name_of_husband": "Name of Husband",
      "male_consititutional_posts": "Male Constitutional Posts",
      "male_designation": "Male Designation",
      "male_scale_of_pay": "Male Scale of Pay",
-     "male_start_of_appointment": "Male Start of Appointment",
-	 "male_end_of_appointment": "Male End of Appointment",
+     "male_date_of_start": "Male Start of Appointment",
+	 "male_date_of_finish": "Male End of Appointment",
 	 "female_consititutional_posts": "Female Constitutional Posts",
      "female_designation": "Female Designation",
      "female_scale_of_pay": "Female Scale of Pay",
-     "female_start_of_appointment": "Female Start of Appointment",
-	 "female_end_of_appointment": "Female End of Appointment"
+     "female_date_of_start": "Female Start of Appointment",
+	 "female_date_of_finish": "Female End of Appointment"
      }
     widgets = {
-     "religion": forms.Select(choice = RELGIONS), 
-     "caste": forms.Select(choice = CASTE), 
-     "sub_caste": forms.Select(choice = CASTE),
-     "education_certification_contains_caste": forms.Select(choice = BOOLEAN),
-     "education_certification_contains_caste": forms.Select(choice = BOOLEAN),
+     "religion": forms.Select(choices = RELGIONS), 
+     "caste": forms.Select(choices = CASTE), 
+     "sub_caste": forms.Select(choices = CASTE),
+     "education_certification_contains_caste": forms.Select(choices = BOOLEAN),
+     "issued_in_past": forms.Select(choices = BOOLEAN),
      "caste_serial_number": forms.TextInput(attrs={'class': 'form-control', 
 			'type': 'text', 'placeholder': 'Required'}),
      "name_of_father": forms.TextInput(attrs={'class': 'form-control', 
 			'type': 'text', 'placeholder': 'Required'}),
-     "name_of_father": forms.TextInput(attrs={'class': 'form-control', 
+     "name_of_mother": forms.TextInput(attrs={'class': 'form-control', 
+			'type': 'text', 'placeholder': 'Required'}),
+     "name_of_husband": forms.TextInput(attrs={'class': 'form-control', 
 			'type': 'text', 'placeholder': 'Required'}),
      "male_consititutional_posts": forms.TextInput(attrs={'class': 'form-control', 
 			'type': 'text', 'placeholder': 'Required'}),
      "female_consititutional_posts": forms.TextInput(attrs={'class': 'form-control', 
 			'type': 'text', 'placeholder': 'Required'}),
-     "male_designation": forms.Select(choice = DESIGNATIONS),
-     "female_designation": forms.Select(choice = DESIGNATIONS),
-     "male_scale_of_pay": forms.Select(choice = PAY_SCALE),
-     "female_scale_of_pay": forms.Select(choice = PAY_SCALE),
-     "male_start_of_appointment": SelectDateWidget(),
-     "female_start_of_appointment": SelectDateWidget(),
-     "male_end_of_appointment": SelectDateWidget(),
-     "female_end_of_appointment": SelectDateWidget()
+     "male_designation": forms.Select(choices = DESIGNATIONS),
+     "female_designation": forms.Select(choices = DESIGNATIONS),
+     "male_scale_of_pay": forms.Select(choices = PAY_SCALE),
+     "female_scale_of_pay": forms.Select(choices = PAY_SCALE),
+     "male_date_of_start": SelectDateWidget(),
+     "female_date_of_start": SelectDateWidget(),
+     "male_date_of_finish": SelectDateWidget(),
+     "female_date_of_finish": SelectDateWidget()
      }
 
   #    "caste": "Caste",
