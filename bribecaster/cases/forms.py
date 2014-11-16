@@ -19,6 +19,23 @@ PAY_SCALE = (
     ('4', 'Pay Scale 4')
 )
 
+CASTE = (
+	('0', 'Caste 1'),
+    ('1', 'Caste 2'),
+    ('2', 'Caste 3'),
+    ('3', 'Caste 4'),
+    ('4', 'Caste 5')
+)
+
+BOOLEAN = (
+	('0', 'TRUE')
+	('1', 'FALSE')
+)
+
+DESIGNATIONS = (
+	('0', 'Designation 1'),
+	('1', 'Designation 2')
+)
 
 class CitizenForm(ModelForm):
   class Meta:
@@ -67,8 +84,31 @@ class OBCFormForm(ModelForm):
 	 "female_end_of_appointment": "Female End of Appointment"
      }
     widgets = {
-     "religion": forms.TextInput(attrs={'class': 'form-control', 
-			'type': 'text'})}
+     "religion": forms.Select(choice = RELGIONS), 
+     "caste": forms.Select(choice = CASTE), 
+     "sub_caste": forms.Select(choice = CASTE),
+     "education_certification_contains_caste": forms.Select(choice = BOOLEAN),
+     "education_certification_contains_caste": forms.Select(choice = BOOLEAN),
+     "caste_serial_number": forms.TextInput(attrs={'class': 'form-control', 
+			'type': 'text', 'placeholder': 'Required'}),
+     "name_of_father": forms.TextInput(attrs={'class': 'form-control', 
+			'type': 'text', 'placeholder': 'Required'}),
+     "name_of_father": forms.TextInput(attrs={'class': 'form-control', 
+			'type': 'text', 'placeholder': 'Required'}),
+     "male_consititutional_posts": forms.TextInput(attrs={'class': 'form-control', 
+			'type': 'text', 'placeholder': 'Required'}),
+     "female_consititutional_posts": forms.TextInput(attrs={'class': 'form-control', 
+			'type': 'text', 'placeholder': 'Required'}),
+     "male_designation": forms.Select(choice = DESIGNATIONS),
+     "female_designation": forms.Select(choice = DESIGNATIONS),
+     "male_scale_of_pay": forms.Select(choice = PAY_SCALE),
+     "female_scale_of_pay": forms.Select(choice = PAY_SCALE),
+     "male_start_of_appointment": SelectDateWidget(),
+     "female_start_of_appointment": SelectDateWidget(),
+     "male_end_of_appointment": SelectDateWidget(),
+     "female_end_of_appointment": SelectDateWidget()
+     }
+
   #    "caste": "Caste",
   #    "sub_caste": "Sub Caste",
   #    "issued_in_past": "Issued In Past?" ,
