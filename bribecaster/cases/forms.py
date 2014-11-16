@@ -62,7 +62,7 @@ class CitizenForm(ModelForm):
 class OBCFormForm(ModelForm):
   class Meta:
     model = OBCFormResponse
-    exclude = ('citizen', 'office_visit')
+    exclude = ('citizen', 'office_visit', 'name_of_husband')
     labels ={
      "religion": "Religion",
      "caste": "Caste",
@@ -72,13 +72,12 @@ class OBCFormForm(ModelForm):
      "caste_serial_number": "Caste Serial Number",
      "name_of_father": "Name of Father",
      "name_of_mother": "Name of Mother",
-     "name_of_husband": "Name of Husband",
-     "male_consititutional_posts": "Male Constitutional Posts",
+     "male_constitutional_posts": "Male Constitutional Posts",
      "male_designation": "Male Designation",
      "male_scale_of_pay": "Male Scale of Pay",
      "male_date_of_start": "Male Start of Appointment",
 	 "male_date_of_finish": "Male End of Appointment",
-	 "female_consititutional_posts": "Female Constitutional Posts",
+	 "female_constitutional_posts": "Female Constitutional Posts",
      "female_designation": "Female Designation",
      "female_scale_of_pay": "Female Scale of Pay",
      "female_date_of_start": "Female Start of Appointment",
@@ -96,11 +95,9 @@ class OBCFormForm(ModelForm):
 			'type': 'text', 'placeholder': 'Required'}),
      "name_of_mother": forms.TextInput(attrs={'class': 'form-control', 
 			'type': 'text', 'placeholder': 'Required'}),
-     "name_of_husband": forms.TextInput(attrs={'class': 'form-control', 
+     "male_constitutional_posts": forms.TextInput(attrs={'class': 'form-control', 
 			'type': 'text', 'placeholder': 'Required'}),
-     "male_consititutional_posts": forms.TextInput(attrs={'class': 'form-control', 
-			'type': 'text', 'placeholder': 'Required'}),
-     "female_consititutional_posts": forms.TextInput(attrs={'class': 'form-control', 
+     "female_constitutional_posts": forms.TextInput(attrs={'class': 'form-control', 
 			'type': 'text', 'placeholder': 'Required'}),
      "male_designation": forms.Select(choices = DESIGNATIONS),
      "female_designation": forms.Select(choices = DESIGNATIONS),

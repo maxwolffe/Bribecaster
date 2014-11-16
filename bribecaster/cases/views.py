@@ -87,15 +87,43 @@ def user_lookup(request):
 
 def obc_form(request, citizen_id=None, aadhaar_number=None):
     if request.method == "POST":
-        citizen = Citizen.objects.get(pk = citizen_id)
-        case = Case()
-        case.citizen = citizen
-        case.office = Office.first()
-        case.sms_selected = False
-        case.robo_call_selected = False
-        case.follow_up_selected = False
-        case.save()
-        return HttpResponseRedirect(reverse('table'))
+        obc_form_response = OBCFormResponse()
+        obc_form = OBCFormForm(request.POST, instance=obc_form_response)
+        if obc_form.is_valid():
+            case = Case()
+            case.office = Office.first()
+            case.sms_selected = False
+            case.robo_call_selected = False
+            case.follow_up_selected = False
+            
+            office_visit = OfficeVisit()
+
+            if citizen_id != None:
+                citizen = Citizen.objects.get(pk = citizen_id)
+                case.citizen = citizen
+                case.save()
+
+                office_visit.citizen = citizen
+                office_visit.case = case
+                office_visit.save()
+            else:
+                user = Citizen()
+                citizen = CitizenForm(request.POST, instance=user)
+                if citizen.is_valid():
+                    citizen = citizen.save()
+                    case.citizen = citizen
+                    case.save()
+
+                    office_visit.citizen = citizen
+                    office_visit.case = case
+
+                    office_visit.save()
+
+            obc_form = obc_form.save(commit=False)
+            obc_form.citizen = citizen
+            obc_form.office_visit = office_visit
+            obc_form.save() 
+        return HttpResponseRedirect(reverse('aadhaar_lookup'))
 
 
     if request.method == "GET":

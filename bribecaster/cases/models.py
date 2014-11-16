@@ -149,7 +149,7 @@ class OfficeVisit(models.Model):
 
 
 class RoboCallFeedback(models.Model):
-    call_response = models.CharField(max_length=1, choices=RESPONSE_TYPE)
+    call_response = models.CharField(max_length=40, default='OBC Certificate')
     time_of_call = models.DateTimeField(default = datetime.now())
 
     case = models.ForeignKey(Case)
@@ -181,17 +181,17 @@ class OBCFormResponse(Form):
     caste_serial_number = models.CharField(max_length = 40)
     name_of_father = models.CharField(max_length = 40)
     name_of_mother = models.CharField(max_length = 40)
-    name_of_husband = models.CharField(max_length = 40)
+    name_of_husband = models.CharField(max_length = 40, default = 'NA')
 
     # Information about Husband/Father 
-    male_consititutional_posts = models.CharField(max_length = 60)
+    male_constitutional_posts = models.CharField(max_length = 60)
     male_designation = models.CharField(max_length = 60)
     male_scale_of_pay= models.CharField(max_length = 60)
     male_date_of_start = models.DateField()
     male_date_of_finish = models.DateField()
 
     # information about Mother/wife
-    female_consititutional_posts = models.CharField(max_length = 60)
+    female_constitutional_posts = models.CharField(max_length = 60)
     female_designation = models.CharField(max_length = 60)
     female_scale_of_pay= models.CharField(max_length = 60)
     female_date_of_start = models.DateField()
