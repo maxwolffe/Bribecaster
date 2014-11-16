@@ -44,7 +44,7 @@ def table(request):
             data.append(temp)
             uniqueCounter += 1
         context = {"cases": data, "length": len(data)}
-        return render_to_response('bribecaster/data-table.html', context)
+        return render_to_response('bribecaster/datatables.html', context)
 
 def user_lookup(request):
     if request.method == "POST":
