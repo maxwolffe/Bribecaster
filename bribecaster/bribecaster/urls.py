@@ -23,9 +23,9 @@ urlpatterns = patterns('',
     url(r'^data-table/(?P<case_id>\d+)/$', views.detail, name='detail'),
     url(r'^$', views.index, name='index'),
     url(r'^cases/new_form/aadhaar_lookup$', views.aadhaar_lookup, name='aadhaar_lookup'),
-    url(r'^cases/obc_form/(?P<citizen_id>\d+)$', views.obc_form, name='obc_form'),
+    url(r'^cases/obc_form/ci-(?P<citizen_id>\d+)$', views.obc_form, name='obc_form_ci'),
+    url(r'^cases/obc_form/an-(?P<aadhaar_number>\d+)$', views.obc_form, name='obc_form_an'),
     url(r'^cases/obc_form/$', views.obc_form, name='obc_form')
-
 )
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

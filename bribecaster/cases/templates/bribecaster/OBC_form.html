@@ -253,6 +253,7 @@
                         <form action={% url "obc_form" %} method="post">
                             {% csrf_token %}
                             {% if citizen == None %}
+                                <h3> Citizen Input </h3>
                                 {% for field in citizen_form %}
                                     <div class="field-box">
                                         {{field.label}} : {{field}}  
@@ -260,25 +261,34 @@
                                 {% endfor %}
                             {% endif %}
                             {% if citizen != None %}
+                                <h1> Citizen Information </h1>
+                                <div class="field-box">
+                                    Aadhar Number: {{citizen.aadhaar_number}}           
+                                </div>  
                                 <div class="field-box">
                                     First Name: {{citizen.first_name}}           
                                 </div>    
                                 <div class="field-box">
-                                    First Name: {{citizen.last_name}}           
+                                    Last Name: {{citizen.last_name}}           
+                                </div>  
+                                <div class="field-box">
+                                    Gender: {{citizen.gender}}           
+                                </div> 
+                                <div class="field-box">
+                                    Phone Number: {{citizen.phone_number}}           
+                                </div> 
+                                <div class="field-box">
+                                    Address: {{citizen.first_name}}           
                                 </div>   
                                 <div class="field-box">
-                                    First Name: {{citizen.aadhar_number}}           
+                                    City: {{citizen.city}}           
                                 </div>   
                                 <div class="field-box">
-                                    First Name: {{citizen.first_name}}           
-                                </div>   
-                                <div class="field-box">
-                                    First Name: {{citizen.first_name}}           
-                                </div>   
-                                <div class="field-box">
-                                    First Name: {{citizen.first_name}}           
-                                </div>                    
+                                    Age: {{citizen.date_of_birth}}           
+                                </div>                      
                             {% endif %}
+
+                            <h3> OBC Form </h3>
 
                             {% for field in obc_form %}
                                 <div class="field-box">

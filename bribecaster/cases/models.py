@@ -53,8 +53,8 @@ class Citizen(models.Model):
     first_name = models.CharField(max_length = 40)
     last_name = models.CharField(max_length = 40)
     phone_number = models.CharField(max_length = 20)
-    gender = models.CharField(max_length = 20, default = "unkown")
-    age = models.IntegerField(default = -1)
+    gender = models.CharField(max_length = 20, choices=GENDER)
+    date_of_birth = models.DateField()
     address = models.CharField(max_length = 30)
     city = models.CharField(max_length = 30)
     aadhaar_number = models.BigIntegerField(max_length = 12, default = -1)
@@ -179,41 +179,49 @@ class OBCFormResponse(Form):
     issued_in_past = models.BooleanField()
     education_certification_contains_caste = models.BooleanField()
     caste_serial_number = models.CharField(max_length = 40)
-    name_of_father = models.CharField(max_length = 40, default = 'NA')
-    name_of_mother = models.CharField(max_length = 40, default = 'NA')
-    name_of_husband = models.CharField(max_length = 40, default = 'NA')
+    name_of_father = models.CharField(max_length = 40)
+    name_of_mother = models.CharField(max_length = 40)
+    name_of_husband = models.CharField(max_length = 40)
 
     # Information about Husband/Father 
-    male_status = models.CharField(max_length = 180, default = 'NA')
+    male_consititutional_posts = models.CharField(max_length = 60)
+    male_designation = models.CharField(max_length = 60)
+    male_scale_of_pay= models.CharField(max_length = 60)
+    male_date_of_start = models.DateField()
+    male_date_of_finish = models.DateField()
 
     # information about Mother/wife
-    female_status = models.CharField(max_length = 180, default = 'NA')
+    female_consititutional_posts = models.CharField(max_length = 60)
+    female_designation = models.CharField(max_length = 60)
+    female_scale_of_pay= models.CharField(max_length = 60)
+    female_date_of_start = models.DateField()
+    female_date_of_finish = models.DateField()
 
     # Information about Employment with International Orgs
-    org_status = models.CharField(max_length = 180, default = 'NA')
+    #org_status = models.CharField(max_length = 180, default = 'NA')
 
     # Death details
-    death_details = models.CharField(max_length = 180, default = 'NA')
+    #death_details = models.CharField(max_length = 180, default = 'NA')
 
     # public service details
-    public_service_details = models.CharField(max_length = 180, default = 'NA')
+    #public_service_details = models.CharField(max_length = 180, default = 'NA')
 
     # Property Holding information
-    land_holding = models.CharField(max_length = 40, default = 'NA')
-    land_location = models.CharField(max_length = 40, default = 'NA')
-    other_land_information = models.CharField(max_length = 180, default = 'NA')
+    #land_holding = models.CharField(max_length = 40, default = 'NA')
+    #land_location = models.CharField(max_length = 40, default = 'NA')
+    #other_land_information = models.CharField(max_length = 180, default = 'NA')
 
     # Plantation Information
-    plantation_information = models.CharField(max_length = 180, default = 'NA')
+    #plantation_information = models.CharField(max_length = 180, default = 'NA')
 
     # Income / Wealth Information
-    annual_income = models.IntegerField()
-    tax_paid = models.BooleanField()
+    #annual_income = models.IntegerField()
+    #tax_paid = models.BooleanField()
 
     # Final Information
-    purpose_of_certificate = models.CharField(max_length = 180, default = 'NA')
-    ration_card_number = models.CharField(max_length = 40, default = 'NA')
-    final_notes = models.CharField(max_length = 180, default = 'NA')
+    #purpose_of_certificate = models.CharField(max_length = 180, default = 'NA')
+    #ration_card_number = models.CharField(max_length = 40, default = 'NA')
+    #final_notes = models.CharField(max_length = 180, default = 'NA')
 
 
 

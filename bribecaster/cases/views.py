@@ -85,7 +85,7 @@ def user_lookup(request):
         return render(request, 'bribecaster/user_form.html', context)
 
 
-def obc_form(request, citizen_id=None):
+def obc_form(request, citizen_id=None, aadhaar_number=None):
     if request.method == "POST":
         citizen = Citizen.objects.get(pk = citizen_id)
         case = Case()
@@ -100,7 +100,7 @@ def obc_form(request, citizen_id=None):
 
     if request.method == "GET":
         obc_form = OBCFormForm()
-        citizen_form = CitizenForm()
+        citizen_form = CitizenForm(initial={'aadhaar_number': aadhaar_number})
         if citizen_id != None:
             try:
                 citizen = Citizen.objects.get(pk=citizen_id)
@@ -122,11 +122,12 @@ def aadhaar_lookup(request):
         aadhaar_lookup_response = AadhaarLookup(request.POST)
         if aadhaar_lookup_response.is_valid():
             try:
-                citizen = Citizen.objects.get(aadhaar_number = aadhaar_lookup_response.cleaned_data['aadhaar_number'])
-                return HttpResponseRedirect(reverse('obc_form', kwargs={"citizen_id":citizen.id}))
+                form_aadhaar_number = aadhaar_lookup_response.cleaned_data['aadhaar_number']
+                citizen = Citizen.objects.get(aadhaar_number = form_aadhaar_number)
+                return HttpResponseRedirect(reverse('obc_form_ci', kwargs={"citizen_id":citizen.id}))
             except Exception as e :
-                return HttpResponseRedirect(reverse('obc_form'))
-        return HttpResponseRedirect(reverse('obc_form'))
+                return HttpResponseRedirect(reverse('obc_form_an', kwargs={"aadhaar_number":form_aadhaar_number}))
+        return HttpResponseRedirect(reverse('aadhaar_lookup'))
 
 
 
