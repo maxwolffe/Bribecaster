@@ -440,6 +440,9 @@
 													<th class="hasinput" style="width:16%">
 														<input type="text" class="form-control" placeholder="Filter Followup" />
 													</th>
+													<th class="hasinput" style="width:16%">
+														
+													</th>
 												</tr>
 									            <tr>
 								                    <th data-class="expand">First Name</th>
@@ -449,11 +452,12 @@
 								                    <th data-hide="phone">SMS</th>
 								                    <th data-hide="phone,tablet">Robocall</th>
 								                    <th data-hide="phone,tablet">Followup</th>
+								                    <th data-hide="phone,tablet">Detail View</th>
 									            </tr>
 									        </thead>
 				
 									        <tbody>
-									            {% for firstname,lastname,caseID,office,sms,robocall,followup,detail in cases %}
+									        {% for firstname,lastname,caseID,office,sms,robocall,followup,detail in cases %}
 					                        <tr> 
 					                            <td>{{firstname}}</td> 
 					                            <td>{{lastname}}</td> 
@@ -463,7 +467,7 @@
 					                            <td><div class='text-center'>{% autoescape off %}{{sms}}{% endautoescape %}</td></div> 
 					                            <td><div class='text-center'>{% autoescape off %}{{robocall}}{% endautoescape %}</td></div> 
 					                            <td><div class='text-center'>{% autoescape off %}{{followup}}{% endautoescape %}</td></div> 
-					                            <!-- <td><div class='text-center'>{% autoescape off %}{{detail}}{% endautoescape %}</td></div>  -->
+					                            <td><div class='text-center'>{% autoescape off %}{{detail}}{% endautoescape %}</td></div>
 					                        </tr>
 					                        {% endfor %}
 									        </tbody>
@@ -490,7 +494,91 @@
 				
 				</section>
 				<!-- end widget grid -->
-
+				{% for firstname,lastname,caseID,office,sms,robocall,followup,detail,citizen,office,visit,smsfeed,robofeed in cases %}
+				<div class="modal fade" id="{{caseID}}" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+					<div class="modal-dialog" style="width: 80%;">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+									×
+								</button>
+								<h4 class="modal-title">
+									Detail View for Case {{caseID}}
+								</h4>
+							</div>
+							<div class="modal-body ">
+								
+						    	<h3 class='text-center'> Citizen Information </h3>
+						        <table class="table table-striped table-bordered">
+							        <tr> 
+							            <td>First Name</td> 
+							            <td>Last Name</td>
+										<td> Phone Number </td>
+										<td> Gender </td>
+										<td> Age </td>
+										<td> Address </td>
+										<td> City </td>
+										<td> Aadhaar Number </td>
+							        <tr>
+							            <td> {{ citizen.first_name }} </td> 
+							            <td> {{ citizen.last_name }} </td>
+							            <td> {{ citizen.phone_number }} </td> 
+							            <td> {{ citizen.gender }} </td> 
+							            <td> {{ citizen.age }} </td> 
+							            <td> {{ citizen.address }} </td> 
+							            <td> {{ citizen.city }} </td> 
+							            <td> {{ citizen.aadhaar_number }} </td> 
+							        </tr>
+						        </table>
+						        <h3 class='text-center'> Office Information </h3>
+						        <table class="table table-striped table-bordered">
+							        <tr> 
+							            <td> Office Name </td>
+										<td> Address </td>
+										<td> Phone Number </td>
+										<td> Office Head </td>
+										<td> Latitude </td>
+										<td> Longitude </td>
+										<td> Speed Rating </td>
+										<td> Cost Rating </td>
+										<td> Quality Rating </td>
+										<td> Region </td>
+							        <tr>
+										<td> {{ office.office_name }} </td>
+										<td> {{ office.address }} </td>
+										<td> {{ office.phone_number }} </td>
+										<td> {{ office.office_head }} </td>
+										<td> {{ office.lat }} </td>
+										<td> {{ office.lon }} </td>
+										<td> {{ office.speed_rating }} </td>
+										<td> {{ office.cost_rating }} </td>
+										<td> {{ office.quality_rating }} </td>
+										<td> {{ office.region }} </td>
+							        </tr>
+						        </table class="table table-striped table-bordered">
+						        <h3 class='text-center'> Office Visit </h3>
+						        <table class="table table-striped table-bordered">
+							        <tr> 
+										<td> Service Used </td>
+										<td> Time of Visit </td>
+							        <tr>
+										<td> {{ visit.service_used }} </td>
+										<td> {{ visit.time_of_visit }} </td>
+							        </tr>
+						        </table>
+						        <h3> SMS </h3>
+						        {% if smsfeed %}
+						        <table class="table table-striped table-bordered">	     
+						        	{{ smsfeed }}
+						        </table>
+						        {% else %}
+						        SMS not selected
+						        {% endif %}
+							</div>
+						</div><!-- /.modal-content -->
+					</div><!-- /.modal-dialog -->
+				</div>
+				{% endfor %}
 			</div>
 			<!-- END MAIN CONTENT -->
 
