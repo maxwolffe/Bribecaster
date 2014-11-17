@@ -241,63 +241,24 @@
 
 	<!-- main container -->
     <div class="content">
-        <div class="col-md-6 column center">
-            <h2>OBC Form</h2>
+        <div class="col-md-6 column center" style="margin: 0 auto; text-align: center; float: center;">
+            <h2>Aadhaar Lookup</h2>
         </div>
         
         <div id="pad-wrapper" class="form-page">
             <div class="row form-wrapper">
                 <!-- left column -->
-                <div class="col-md-8 column">
-                    <div id="pad-wrapper" class="form-page">                    
-                        <form action="" method="post">
+                <div class="col-md-8 column" style = "margin: auto; float: center;">
+                    <div id="pad-wrapper" class="form-page" style='text-align: center;'>
+                        <form action={% url "aadhaar_lookup"%} method="post">
                             {% csrf_token %}
-                            {% if citizen == None %}
-                                <h3> Citizen Input </h3>
-                                {% for field in citizen_form %}
-                                    <div class="field-box">
-                                        {{field.label}} : {{field}}  
-                                    </div>                     
-                                {% endfor %}
-                            {% endif %}
-                            {% if citizen != None %}
-                                <h1> Citizen Information </h1>
-                                <div class="field-box">
-                                    Aadhar Number: {{citizen.aadhaar_number}}           
-                                </div>  
-                                <div class="field-box">
-                                    First Name: {{citizen.first_name}}           
-                                </div>    
-                                <div class="field-box">
-                                    Last Name: {{citizen.last_name}}           
-                                </div>  
-                                <div class="field-box">
-                                    Gender: {{citizen.gender}}           
-                                </div> 
-                                <div class="field-box">
-                                    Phone Number: {{citizen.phone_number}}           
-                                </div> 
-                                <div class="field-box">
-                                    Address: {{citizen.first_name}}           
-                                </div>   
-                                <div class="field-box">
-                                    City: {{citizen.city}}           
-                                </div>   
-                                <div class="field-box">
-                                    Age: {{citizen.date_of_birth}}           
-                                </div>                      
-                            {% endif %}
-
-                            <h3> OBC Form </h3>
-
-                            {% for field in obc_form %}
-                                <div class="field-box">
-                                {{field.label}} : {{field}} 
+                            <div style="display: inline-block">
+                                <div style="display: inline-block">
+                                {{ aadhaar_form.aadhaar_number }}
                                 </div>
-                            {% endfor %}
-                            <div> 
-                                <input type="submit" value="Submit" class="btn-flat inverse"/>
+                                <input type="submit" value="Lookup!" style="display: inline-block" class="btn-flat inverse">
                             </div>
+                        </form>
                     </form>
                 </div>
             </div>
