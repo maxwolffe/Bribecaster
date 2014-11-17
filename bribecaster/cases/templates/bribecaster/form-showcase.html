@@ -30,7 +30,7 @@
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    </head>
+</head>
 <body>
 
     <!-- navbar -->
@@ -164,16 +164,18 @@
     <!-- sidebar -->
     <div id="sidebar-nav">
         <ul id="dashboard-menu">
-            <li class="active">
-                <div class="pointer">
-                    <div class="arrow"></div>
-                    <div class="arrow_border"></div>
-                </div>
-                <a href="index.html">
+            <li >
+                <a href="http://localhost:8000/">
                     <i class="icon-home"></i>
                     <span>Home</span>
                 </a>
-            </li>            
+            </li>
+            <li>
+                <a href="http://localhost:8000/data-table">
+                    <i class="icon-edit"></i>
+                    <span>Data Tables</span>
+                </a>
+            </li>                 
             <li>
                 <a class="dropdown-toggle" href="#">
                     <i class="icon-edit"></i>
@@ -205,7 +207,11 @@
                     <li><a href="user-profile.html">User profiles</a></li>
                 </ul>
             </li>
-            <li>
+            <li class="active">
+                <div class="pointer">
+                    <div class="arrow"></div>
+                    <div class="arrow_border"></div>
+                </div>
                 <a class="dropdown-toggle" href="#">
                     <i class="icon-edit"></i>
                     <span>Forms</span>
@@ -242,62 +248,111 @@
 	<!-- main container -->
     <div class="content">
         <div class="col-md-6 column center">
-            <h2>OBC Form</h2>
+            <h2>New Form</h2>
         </div>
         
         <div id="pad-wrapper" class="form-page">
             <div class="row form-wrapper">
                 <!-- left column -->
                 <div class="col-md-8 column">
-                    <div id="pad-wrapper" class="form-page">                    
-                        <form action="" method="post">
-                            {% csrf_token %}
-                            {% if citizen == None %}
-                                <h3> Citizen Input </h3>
-                                {% for field in citizen_form %}
-                                    <div class="field-box">
-                                        {{field.label}} : {{field}}  
-                                    </div>                     
-                                {% endfor %}
-                            {% endif %}
-                            {% if citizen != None %}
-                                <h1> Citizen Information </h1>
-                                <div class="field-box">
-                                    Aadhar Number: {{citizen.aadhaar_number}}           
-                                </div>  
-                                <div class="field-box">
-                                    First Name: {{citizen.first_name}}           
-                                </div>    
-                                <div class="field-box">
-                                    Last Name: {{citizen.last_name}}           
-                                </div>  
-                                <div class="field-box">
-                                    Gender: {{citizen.gender}}           
-                                </div> 
-                                <div class="field-box">
-                                    Phone Number: {{citizen.phone_number}}           
-                                </div> 
-                                <div class="field-box">
-                                    Address: {{citizen.first_name}}           
-                                </div>   
-                                <div class="field-box">
-                                    City: {{citizen.city}}           
-                                </div>   
-                                <div class="field-box">
-                                    Age: {{citizen.date_of_birth}}           
-                                </div>                      
-                            {% endif %}
+                    <form action='form-showcase.html' method="post">
+                       <!--  <div class="field-box">
 
-                            <h3> OBC Form </h3>
-
-                            {% for field in obc_form %}
-                                <div class="field-box">
-                                {{field.label}} : {{field}} 
-                                </div>
-                            {% endfor %}
-                            <div> 
-                                <input type="submit" value="Submit" class="btn-flat inverse"/>
+                            <label>Normal input:</label>
+                            <div class="col-md-7">
+                                <input class="form-control" type="text" />
+                            </div>                            
+                        </div> -->
+                        {% csrf_token %}
+                        <div class="field-box">
+                            <label>First Name:</label>
+                            <div class="col-md-7">
+                                {{ form.first_name }}
+                            </div>   
+                        </div>
+                        <div class="field-box">
+                            <label>Last Name:</label>
+                            <div class="col-md-7">
+                                {{ form.last_name }}
+                            </div>   
+                        </div>
+                        <div class="field-box">
+                            <label>Phone Number:</label>
+                            <div class="col-md-7">
+                                {{ form.phone_number }}
+                            </div>   
+                        </div>
+                       <!--  <div class="field-box">
+                            <label>Service:</label>
+                            <div class="col-md-7">
+                                {{ form.service }}
+                            </div>   
+                        </div> -->
+                        <div class="field-box">
+                            <label>Aadhaar Number:</label>
+                            <div class="col-md-7 column pull-left">
+                                {{ form.aadhaar_number }}
+                            </div>   
+                        </div>
+                        <div class="field-box">
+                            <label>Date of Visit:</label>
+                            <div class="col-md-2 column pull-left">
+                                <input type="text" value="10/31/2014" class="form-control input-datepicker" />
                             </div>
+                        </div>
+                    </form>
+                </div> 
+                <div class="col-md-4 column pull-right">
+                    <form>
+                        <div class="field-box">
+                        <label>District:</label>
+                        <div class="ui-select">
+                            <select>
+                                <option selected>Dropdown</option>
+                                <option>District 1</option>
+                                <option>District 2</option>
+                                <option>District 3</option>
+                                <option>District 4</option>
+                                <option>District 5</option>
+                                <option>District 6</option>
+                                <option>District 7</option>
+                                <option>District 8</option>
+                            </select>
+                        </div>
+                        <div class="field-box">
+                        <label>Office:</label>
+                        <div class="ui-select">
+                            <select>
+                                <option selected>Dropdown</option>
+                                <option>Office 1</option>
+                                <option>Office 2</option>
+                                <option>Office 3</option>
+                                <option>Office 4</option>
+                                <option>Office 5</option>
+                                <option>Office 6</option>
+                                <option>Office 7</option>
+                                <option>Office 8</option>
+                            </select>
+                        </div>
+                        <div class="field-box">
+                        <label>Service:</label>
+                        <div class="ui-select">
+                            <select>
+                                <option selected>Dropdown</option>
+                                <option>Service 1</option>
+                                <option>Service 2</option>
+                                <option>Service 3</option>
+                                <option>Service 4</option>
+                                <option>Service 5</option>
+                                <option>Service 6</option>
+                                <option>Service 7</option>
+                                <option>Service 8</option>
+                            </select>
+                        </div>
+                        <div> 
+                            <input type="submit" value="Submit" class="btn-flat inverse"/>
+                            <input type="reset" value="Reset" class="btn-flat inverse" id="reset-btn"/>
+                        </div>
                     </form>
                 </div>
             </div>
