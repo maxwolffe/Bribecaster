@@ -52,7 +52,12 @@ def table(request):
             temp.append("<input id=" + "'sms" + str(uniqueCounter) + "' type='checkbox' value='False'>")
             temp.append("<input id=" + "'robo" + str(uniqueCounter) + "' type='checkbox' value='False'>")
             temp.append("<input id=" + "'followup" + str(uniqueCounter) + "' type='checkbox' value='False'>")
-            temp.append("<a type='button' class='btn-flat inverse'></a>")
+            temp.append("<a data-toggle='modal' href=" + "'#" + str(case.id) + "' class='btn btn-primary btn-sm'></a>")
+            temp.append(case.citizen)
+            temp.append(case.office)
+            temp.append(case.officevisit_set.all())
+            temp.append(case.smsfeedback_set.all())
+            temp.append(case.robocallfeedback_set.all())
             data.append(temp)
             uniqueCounter += 1
         context = {"cases": data, "length": len(data)}
