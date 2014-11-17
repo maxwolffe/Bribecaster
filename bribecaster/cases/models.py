@@ -57,7 +57,7 @@ class Citizen(models.Model):
     city = models.CharField(max_length = 30)
     aadhaar_number = models.BigIntegerField(max_length = 12, default = -1)
     gender = models.CharField(max_length = 20, choices=GENDER)
-    date_of_birth = models.DateField()
+    date_of_birth = models.CharField(max_length = 20)
 
     def __str__(self):
         return self.first_name + " " + self.last_name + " : " + self.phone_number
@@ -187,15 +187,15 @@ class OBCFormResponse(Form):
     male_constitutional_posts = models.CharField(max_length = 60)
     male_designation = models.CharField(max_length = 60)
     male_scale_of_pay= models.CharField(max_length = 60)
-    male_date_of_start = models.DateField()
-    male_date_of_finish = models.DateField()
+    male_date_of_start = models.CharField(max_length = 60)
+    male_date_of_finish = models.CharField(max_length = 60)
 
     # information about Mother/wife
     female_constitutional_posts = models.CharField(max_length = 60)
     female_designation = models.CharField(max_length = 60)
     female_scale_of_pay= models.CharField(max_length = 60)
-    female_date_of_start = models.DateField()
-    female_date_of_finish = models.DateField()
+    female_date_of_start = models.CharField(max_length = 60)
+    female_date_of_finish = models.CharField(max_length = 60)
 
     # Information about Employment with International Orgs
     #org_status = models.CharField(max_length = 180, default = 'NA')
