@@ -50,12 +50,12 @@ class CitizenForm(ModelForm):
 			'type': 'text', 'placeholder': 'Required'}),
 		'aadhaar_number': forms.TextInput(attrs={'class': 'form-control', 
 			'type': 'number', 'placeholder': 'Required'}),
-		'date_of_birth': SelectDateWidget(),
-		'gender': forms.Select(choices = GENDER),
 		'address': forms.TextInput(attrs={'class': 'form-control', 
 			'type': 'text','placeholder': 'Required'}),
 		'city': forms.TextInput(attrs={'class': 'form-control', 
 			'type': 'text','placeholder': 'Required'}),
+    'date_of_birth': forms.DateInput(attrs = { 'type': 'date' }),
+    'gender': forms.Select(choices = GENDER),
     }
 
 
@@ -63,7 +63,7 @@ class OBCFormForm(ModelForm):
   class Meta:
     model = OBCFormResponse
     exclude = ('citizen', 'office_visit', 'name_of_husband')
-    labels ={
+    labels = {
      "religion": "Religion",
      "caste": "Caste",
      "sub_caste": "Sub Caste",
@@ -103,10 +103,10 @@ class OBCFormForm(ModelForm):
      "female_designation": forms.Select(choices = DESIGNATIONS),
      "male_scale_of_pay": forms.Select(choices = PAY_SCALE),
      "female_scale_of_pay": forms.Select(choices = PAY_SCALE),
-     "male_date_of_start": SelectDateWidget(),
-     "female_date_of_start": SelectDateWidget(),
-     "male_date_of_finish": SelectDateWidget(),
-     "female_date_of_finish": SelectDateWidget()
+     "male_date_of_start": forms.DateInput(attrs = { 'type': 'date' }),
+     "female_date_of_start": forms.DateInput(attrs = { 'type': 'date' }),
+     "male_date_of_finish": forms.DateInput(attrs = { 'type': 'date' }),
+     "female_date_of_finish": forms.DateInput(attrs = { 'type': 'date' }),
      }
 
   #    "caste": "Caste",
@@ -129,7 +129,7 @@ class OBCFormForm(ModelForm):
   #    }
 
 class AadhaarLookup(Form):
-	aadhaar_number = forms.IntegerField(widget = forms.TextInput(attrs={'class': 'form-control', 
+	aadhaar_number = forms.IntegerField(widget = forms.TextInput(attrs={'class': 'input-lg', 
 		'type': 'text','placeholder': 'Aadhaar Number'}), label='Aadhaar Number')
 
 class CaseForm(ModelForm):

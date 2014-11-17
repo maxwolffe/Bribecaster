@@ -53,11 +53,11 @@ class Citizen(models.Model):
     first_name = models.CharField(max_length = 40)
     last_name = models.CharField(max_length = 40)
     phone_number = models.CharField(max_length = 20)
-    gender = models.CharField(max_length = 20, choices=GENDER)
-    date_of_birth = models.DateField()
     address = models.CharField(max_length = 30)
     city = models.CharField(max_length = 30)
     aadhaar_number = models.BigIntegerField(max_length = 12, default = -1)
+    gender = models.CharField(max_length = 20, choices=GENDER)
+    date_of_birth = models.DateField()
 
     def __str__(self):
         return self.first_name + " " + self.last_name + " : " + self.phone_number

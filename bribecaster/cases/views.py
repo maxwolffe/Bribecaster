@@ -1,7 +1,7 @@
 from django.shortcuts import render_to_response, render
 from django.template.context import RequestContext
 from models import Citizen, OBCFormResponse, Case, Office, OfficeVisit
-from forms import CaseForm, OBCFormForm, CitizenForm, AadhaarLookup
+from forms import CaseForm, OBCFormForm, CitizenForm, AadhaarLookup, Form
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 import json
@@ -144,15 +144,17 @@ def obc_form(request, citizen_id=None, aadhaar_number=None):
     if request.method == "GET":
         obc_form = OBCFormForm()
         citizen_form = CitizenForm(initial={'aadhaar_number': aadhaar_number})
+        inputFilter = ["Caste Serial Number", "Name of Father", "Name of Mother", "Male Constitutional Posts",
+            "Female Constitutional Posts","Male Start of Appointment", "Male End of Appointment","Female Start of Appointment", "Female End of Appointment"]
         if citizen_id != None:
             try:
                 citizen = Citizen.objects.get(pk=citizen_id)
-                context = {'obc_form': obc_form, 'citizen': citizen, 'citizen_form':citizen_form}
+                context = {'obc_form': obc_form, 'citizen': citizen, 'citizen_form':citizen_form, 'inputFilter': inputFilter}
                 return render(request, 'bribecaster/OBC_form.html', context)
             except Exception as e:
                 pass
         citizen = None
-        context = {'obc_form': obc_form, 'citizen': citizen, 'citizen_form':citizen_form}
+        context = {'obc_form': obc_form, 'citizen': citizen, 'citizen_form':citizen_form, 'inputFilter': inputFilter}
         return render(request, 'bribecaster/OBC_form.html', context)
 
 def aadhaar_lookup(request):

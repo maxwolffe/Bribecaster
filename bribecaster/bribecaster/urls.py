@@ -17,14 +17,10 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^form-showcase.html/', views.form, name='form'),
     url(r'^index.html/', views.index, name='index'),
-<<<<<<< HEAD
-    url(r'^datatables.html/', views.table, name='table'),
-=======
-    url(r'^data-table/$', views.table, name='table'),
+    url(r'^datatables.html/$', views.table, name='table'),
     url(r'^data-table/sms-only$', views.SMSOnlyTable, name='smstable'),
     url(r'^data-table/robo-only$', views.RobocallOnlyTable, name='robotable'),
     url(r'^data-table/(?P<case_id>\d+)/$', views.detail, name='detail'),
->>>>>>> origin/max/different-form-flow
     url(r'^$', views.index, name='index'),
     url(r'^cases/new_form/aadhaar_lookup/$', views.aadhaar_lookup, name='aadhaar_lookup'),
     url(r'^cases/obc_form/ci-(?P<citizen_id>\d+)$', views.obc_form, name='obc_form_ci'),
