@@ -109,6 +109,7 @@ def obc_form(request, citizen_id=None, aadhaar_number=None):
     if request.method == "POST":
         obc_form_response = OBCFormResponse()
         obc_form = OBCFormForm(request.POST, instance=obc_form_response)
+        
         if obc_form.is_valid():
             case = Case()
             case.office = Office.first()

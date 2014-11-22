@@ -160,8 +160,9 @@ class RoboCallFeedback(models.Model):
 class SMSFeedback(models.Model):
     message_sent_time = models.DateTimeField()
     message_recieved_time = models.DateTimeField()
-    sms_sent_text = models.CharField(max_length = 140)
+    sms_sent_text = models.CharField(max_length = 140, default = "Sent SMS")
     sms_recieved_text = models.CharField(max_length = 280) #Can we get longer responses?
+    sms_sentiment = models.IntegerField(default = -1)
 
     case = models.ForeignKey(Case)
 
