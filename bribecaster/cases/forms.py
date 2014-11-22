@@ -1,5 +1,4 @@
-from models import Citizen, User, Case, OBCFormResponse, Case, Office, GENDER
-from django.forms.extras.widgets import SelectDateWidget
+from models import Citizen, User, Case, OBCFormResponse, Office, GENDER
 from django.forms import ModelForm
 from django.forms import Form
 from django import forms
@@ -90,7 +89,7 @@ class OBCFormForm(ModelForm):
      "education_certification_contains_caste": forms.Select(choices = BOOLEAN),
      "issued_in_past": forms.Select(choices = BOOLEAN),
      "caste_serial_number": forms.TextInput(attrs={'class': 'form-control', 
-			'type': 'text', 'placeholder': 'Required'}),
+			'type': 'number', 'placeholder': 'Required'}),
      "name_of_father": forms.TextInput(attrs={'class': 'form-control', 
 			'type': 'text', 'placeholder': 'Required'}),
      "name_of_mother": forms.TextInput(attrs={'class': 'form-control', 
