@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import datetime
+import random
 
 SERVICE_TYPE = (
     ('0', 'fard'),

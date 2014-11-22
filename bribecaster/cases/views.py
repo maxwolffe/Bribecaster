@@ -1,9 +1,10 @@
 from django.shortcuts import render_to_response, render
 from django.template.context import RequestContext
-from models import Citizen, OBCFormResponse, Case, Office, OfficeVisit
+from models import Citizen, OBCFormResponse, Case, Office, OfficeVisit, SMSFeedback
 from forms import CaseForm, OBCFormForm, CitizenForm, AadhaarLookup, Form
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
+from random import random
 
 def index(request):
     return render_to_response('bribecaster/index.html', context_instance=RequestContext(request))
@@ -182,6 +183,15 @@ def aadhaar_lookup(request):
             except Exception as e :
                 return HttpResponseRedirect(reverse('obc_form_an', kwargs={"aadhaar_number":form_aadhaar_number}))
         return HttpResponseRedirect(reverse('aadhaar_lookup'))
+
+def chart(request, office=None):
+    if request.method == "GET":
+        if office == None:
+            # default behavior is to send back data on all offices
+        else:
+            #if an office is specified return json for for that particular office
+
+        #json should be of the form {"office": office_name, "sentiments" {1: count, 2:count, 3:count, 4:count, 5:count}}
 
 
 
