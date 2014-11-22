@@ -4,7 +4,6 @@ from models import Citizen, OBCFormResponse, Case, Office, OfficeVisit
 from forms import CaseForm, OBCFormForm, CitizenForm, AadhaarLookup, Form
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
-import json
 
 def index(request):
     return render_to_response('bribecaster/index.html', context_instance=RequestContext(request))
@@ -66,17 +65,17 @@ def table(request):
 def SMSOnlyTable(request):
     if request.method == "GET":
         context = {"cases": Case.objects.filter(sms_selected = True)}
-        return render_to_response('bribecaster/data-table.html', context)
+        return render_to_response('bribecaster/datatables.html', context)
 
 def RobocallOnlyTable(request):
     if request.method == "GET":
         context = {"cases": Case.objects.filter(robo_call_selected = True)}
-        return render_to_response('bribecaster/data-table.html', context)
+        return render_to_response('bribecaster/datatables.html', context)
 
 def FollowUpCallOnlyTable(request):
     if request.method == "GET":
         context = {"cases": Case.objects.filter(sms_selected = True)}
-        return render_to_response('bribecaster/data-table.html', context)
+        return render_to_response('bribecaster/datatables.html', context)
 
 def user_lookup(request):
     if request.method == "POST":

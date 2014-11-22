@@ -10,3 +10,7 @@ lib
 lib64
 *.pyc
 *.pyo
+
+*.pyc
+
+*.sqlite3
