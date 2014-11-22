@@ -160,8 +160,16 @@ class SMSFeedback(models.Model):
     message_recieved_time = models.DateTimeField()
     sms_sent_text = models.CharField(max_length = 140)
     sms_recieved_text = models.CharField(max_length = 280) #Can we get longer responses?
+    sms_sentiment = models.IntegerField()
 
     case = models.ForeignKey(Case)
+
+    @classmethod
+    def create(cls, recieved_text):
+        feedback = cls(message_sent_time=datetime.now(), message_recieved_time=datetime.now(), 
+            sms_sent_text="This is the SMS we sent!", sms_recieved_text=recieved_text, 
+            sms_sentiment=random.choice([1,2,3,4,5]))
+        return feedback
 
     def __str__(self):
         return "SMSFeedback"

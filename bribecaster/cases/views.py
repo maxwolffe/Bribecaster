@@ -111,9 +111,11 @@ def obc_form(request, citizen_id=None, aadhaar_number=None):
         if obc_form.is_valid():
             case = Case()
             case.office = Office.first()
-            case.sms_selected = False
+            case.sms_selected = True
             case.robo_call_selected = False
             case.follow_up_selected = False
+
+            sms_feedback = SMSFeedback().create("I am well satisfied")
             
             office_visit = OfficeVisit()
 
@@ -137,6 +139,9 @@ def obc_form(request, citizen_id=None, aadhaar_number=None):
                     office_visit.case = case
 
                     office_visit.save()
+
+            sms_feedback.case = case
+            sms_feedback.save()
 
             obc_form = obc_form.save(commit=False)
             obc_form.citizen = citizen
