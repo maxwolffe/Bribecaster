@@ -198,8 +198,6 @@
 					<span> <a href="javascript:void(0);" data-action="launchFullscreen" title="Full Screen"><i class="fa fa-arrows-alt"></i></a> </span>
 				</div>
 				<!-- end fullscreen button -->
-				
-				<!-- end voice command -->
 
 				<!-- multiple lang dropdown : find all flags in the flags page -->
 				<ul class="header-dropdown-list hidden-xs">
@@ -276,12 +274,12 @@
 					<li>
 						<a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">Data Charts</span></a>
 						<ul>
-							<li>
+							<li class="active">
 								<a href="http://localhost:8000/charts/pieCharts.html">Pie Charts</a>
 							</li>
 						</ul>
 					</li>
-					<li >
+					<li>
 						<a href="#"><i class="fa fa-lg fa-fw fa-table"></i> <span class="menu-item-parent">Tables</span></a>
 						<ul>
 							<li>
@@ -292,7 +290,7 @@
 							</li>
 						</ul>
 					</li>
-					<li class="active">
+					<li>
 						<a href="#"><i class="fa fa-lg fa-fw fa-pencil-square-o"></i> <span class="menu-item-parent">Forms</span></a>
 						<ul>
 							<li>
@@ -300,7 +298,6 @@
 							</li>
 						</ul>
 					</li>
-					
 				</ul>
 			</nav>
 			<span class="minifyme" data-action="minifyMenu"> 
@@ -324,7 +321,7 @@
 
 				<!-- breadcrumb -->
 				<ol class="breadcrumb">
-					<li>Home</li><li>Forms</li><li>OBC Form</li>
+					<li>Home</li><li>Data Charts</li><li>Pie Charts</li>
 				</ol>
 				<!-- end breadcrumb -->
 
@@ -342,227 +339,95 @@
 			</div>
 			<!-- END RIBBON -->
 
-			<!-- MAIN CONTENT -->
 			<div id="content">
 
-
-			<div class="row">
-				<div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
-					<h1 class="page-title txt-color-blueDark">
-						
-						<!-- PAGE HEADER -->
-						<i class="fa-fw fa fa-pencil-square-o"></i> 
-							Forms
-						<span>>  
-							OBC Form
-						</span>
-					</h1>
-				</div>
-				
-			</div>
-
-			<!-- widget grid -->
-			<section id="widget-grid" class="">
-
-
-				<!-- START ROW -->
-
 				<div class="row">
-
-					<!-- NEW COL START -->
-					<article class="text-center">
-						
-						<!-- Widget ID (each widget will need unique ID)-->
-						<div class="jarviswidget" id="wid-id-4" data-widget-editbutton="false" data-widget-custombutton="false">
-							<!-- widget options:
-								usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
-								
-								data-widget-colorbutton="false"	
-								data-widget-editbutton="false"
-								data-widget-togglebutton="false"
-								data-widget-deletebutton="false"
-								data-widget-fullscreenbutton="false"
-								data-widget-custombutton="false"
-								data-widget-collapsed="true" 
-								data-widget-sortable="false"
-								
-							-->
-							<header>
-								<span class="widget-icon"> <i class="fa fa-edit"></i> </span>	
-							</header>
-
-							<!-- widget div-->
-							<div>
-								
-								<!-- widget edit box -->
-								<div class="jarviswidget-editbox">
-									<!-- This area used as dropdown edit box -->
-									
-								</div>
-								<!-- end widget edit box -->
-								
-								<!-- widget content -->
-								<div class="widget-body no-padding">
-									
-									<form id="smart-form-register" action="." method="post" class="smart-form form-inline">
-										<header>
-											OBC Registration Form
-										</header>
-			                            <fieldset>
-			                                <h3 class='top'> Citizen Input </h3>
-			    							{% csrf_token %}
-			                                {% if citizen == None %}
-			                                    {% for field in citizen_form %}
-			                                        {% if field.label == 'Gender' %}
-			                                        <section class="col col-6">
-			                                            <label class="select">
-			                                                <div class="field-box">
-			                                                    <div class='pull-left'>{{field.label}} :</div>
-			                                                    {{field}}
-			                                                </div>
-			                                            <i class='down'></i>   
-			                                            </label>
-			                                        </section>
-			                                        {% elif field.label == 'Date of birth' %}
-			                                        <section class="col col-6">
-			                                            <label class="input">
-			                                                <div class='pull-left'>{{field.label}} :</div>
-			                                                {{field}}
-			                                            </label>
-			                                        </section>
-			                                        {% else %} 
-			                                        <section class="col col-6">
-			                                            <label class="input">
-			                                                <div class="field-box">
-			                                                    <div class='pull-left'>{{field.label}} :</div>
-			                                                    {{field}}  
-			                                                </div>
-			                                            </label>
-			                                        </section>
-			                                        {% endif %}             
-			                                    {% endfor %}
-			                                {% endif %}
-			                                {% if citizen != None %}
-			                                    <h1> Citizen Information </h1>
-			                                    <section class="col col-6">
-			                                        <label class="input">
-			                                            <div class="field-box">
-			                                                Aadhar Number: {{citizen.aadhaar_number}}           
-			                                            </div>
-			                                        </label>
-			                                    </section>  
-			                                    <section class="col col-6">
-			                                        <label class="input">
-			                                            <div class="field-box">
-			                                                First Name: {{citizen.first_name}}           
-			                                            </div>
-			                                        </label>
-			                                    </section>  
-			                                    <section class="col col-6">
-			                                        <label class="input">    
-			                                            <div class="field-box">
-			                                                Last Name: {{citizen.last_name}}           
-			                                            </div>
-			                                        </label>
-			                                    </section>  
-			                                    <section class="col col-6">
-			                                        <label class="input">  
-			                                            <div class="field-box">
-			                                                Gender: {{citizen.gender}}           
-			                                            </div>
-			                                        </label>
-			                                    </section>   
-			                                    <section class="col col-6">
-			                                        <label class="input">
-			                                            <div class="field-box">
-			                                                Phone Number: {{citizen.phone_number}}           
-			                                            </div>
-			                                        </label>
-			                                    </section>  
-			                                    <section class="col col-6"> 
-			                                        <label class="input">
-			                                            <div class="field-box">
-			                                                Address: {{citizen.first_name}}           
-			                                            </div>
-			                                        </label> 
-			                                    </section>  
-			                                    <section class="col col-6"> 
-			                                        <label class="input"> 
-			                                            <div class="field-box">
-			                                                City: {{citizen.city}}           
-			                                            </div>
-			                                        </label>
-			                                    </section>     
-			                                    <section class="col col-6">
-			                                        <label class="input">
-			                                            <div class="field-box">
-			                                                Age: {{citizen.date_of_birth}}           
-			                                            </div>
-			                                        </label>  
-			                                    </section>                      
-			                                {% endif %}
-			                            </fieldset>
-
-			                            <fieldset>
-			                                <h3 class='top'> OBC Form </h3>
-
-			                                {% for field in obc_form %}
-			                                    <section class="col col-6">
-			                                        {% if field.label in inputFilter %}
-			                                        <label class="input"> 
-			                                            <div class='pull-left'>{{field.label}} :</div>
-			                                                    {{field}}  
-			                                        {% else %} 
-			                                        <label class="select"> 
-			                                            <div class='pull-left'>{{field.label}} :</div>
-			                                                    {{field}}
-			                                            <i class='down'></i>  
-			                                        {% endif %}
-			                                        </label>  
-			                                    </section>  
-			                                {% endfor %}
-			                            </fieldset>
-			    							<footer>
-			    								<button type="submit" class="btn btn-primary">
-			    									Validate Form
-			    								</button>
-			    							</footer>
-									</form>						
-									
-								</div>
-								<!-- end widget content -->
-								
-							</div>
-							<!-- end widget div -->
+					<div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+						<h1 class="page-title txt-color-blueDark">
 							
-						</div>
-						<!-- end widget -->			
-
-
-					</article>
-					<!-- END COL -->		
-
+							<!-- PAGE HEADER -->
+							<i class="fa-fw fa fa-pencil-square-o"></i> 
+								Data Charts
+							<span>>  
+								Pie Charts
+							</span>
+						</h1>
+					</div>
+				
 				</div>
+		        
+		        
+		       <!-- Widget ID (each widget will need unique ID)-->
+				<div class="jarviswidget" id="wid-id-6" data-widget-colorbutton="false" data-widget-fullscreenbutton="false" data-widget-editbutton="false" data-widget-sortable="false">
+					<!-- widget options:
+						usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+						
+						data-widget-colorbutton="false"	
+						data-widget-editbutton="false"
+						data-widget-togglebutton="false"
+						data-widget-deletebutton="false"
+						data-widget-fullscreenbutton="false"
+						data-widget-custombutton="false"
+						data-widget-collapsed="true" 
+						data-widget-sortable="false"
+						
+					-->
+					<header>
 
-				<!-- END ROW -->
+						<h2>SMS Pie Chart</h2>				
+						
+					</header>
 
-			</section>
-			<!-- end widget grid -->
+					<!-- widget div-->
+					<div>
+						
+						<!-- widget edit box -->
+						<div class="jarviswidget-editbox">
+							<!-- This area used as dropdown edit box -->
+						</div>
+						<!-- end widget edit box -->
+						
+						<!-- widget content -->
+						<div class="widget-body">
+							<form id="smart-form-register" action="." method="post" class="smart-form form-inline">
+								<section class="col col-6">
+									<label class="select">Select View:
+										<select>
+											<option>All Offices</option>
+											<option>Individual Offices</option>
+										</select>
+									<i class='down'></i>   
+									</label>
+								</section>
+								<section class="col col-6">
+									<label class="select">Select Office: 
+										<select>
+											<option>Office 1</option>
+											<option>Office 2</option>
+											<option>Office 3</option>
+											<option>Office 4</option>
+										</select>
+									<i class='down'></i>   
+									</label>
+								</section>
+							</form>
+							<!-- this is what the user will see -->
+							<canvas class="spacer" id="pieChart" height="120"></canvas>
+	
+						</div>
+						<!-- end widget content -->
+						
+					</div>
+					<!-- end widget div -->
+					
+				</div>
+				<!-- end widget -->
+						
 
 			</div>
-			<!-- END MAIN CONTENT -->
-
-		</div>
 		<!-- END MAIN PANEL -->
 
 		<!-- PAGE FOOTER -->
-		<div class="page-footer">
-			<div class="row">
-				<div class="col-xs-12 col-sm-6">
-					<span class="txt-color-white">Bribecaster © 2014-2015</span>
-				</div>
-			</div>
-		</div>
 		<!-- END PAGE FOOTER -->
 
 		<!-- SHORTCUT AREA : With large tiles (activated via clicking user name tag)
@@ -670,6 +535,97 @@
 		<script src="{% static 'js/smart-chat-ui/smart.chat.manager.min.js' %}"></script>
 
 		<!-- PAGE RELATED PLUGIN(S) -->
+		<script src="{% static 'js/plugin/chartjs/chart.min.js' %}"></script>
+
+		<script type="text/javascript">
+
+			$(document).ready(function() {
+			 	
+				/* DO NOT REMOVE : GLOBAL FUNCTIONS!
+				 *
+				 * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
+				 *
+				 * // activate tooltips
+				 * $("[rel=tooltip]").tooltip();
+				 *
+				 * // activate popovers
+				 * $("[rel=popover]").popover();
+				 *
+				 * // activate popovers with hover states
+				 * $("[rel=popover-hover]").popover({ trigger: "hover" });
+				 *
+				 * // activate inline charts
+				 * runAllCharts();
+				 *
+				 * // setup widgets
+				 * setup_widgets_desktop();
+				 *
+				 * // run form elements
+				 * runAllForms();
+				 *
+				 ********************************
+				 *
+				 * pageSetUp() is needed whenever you load a page.
+				 * It initializes and checks for all basic elements of the page
+				 * and makes rendering easier.
+				 *
+				 */
+				
+				 pageSetUp();
+
+				 // PIE CHART
+
+			    var pieOptions = {
+			    	//Boolean - Whether we should show a stroke on each segment
+			        segmentShowStroke: true,
+			        //String - The colour of each segment stroke
+			        segmentStrokeColor: "#fff",
+			        //Number - The width of each segment stroke
+			        segmentStrokeWidth: 2,
+			        //Number - Amount of animation steps
+			        animationSteps: 100,
+			        //String - types of animation
+			        animationEasing: "easeOutBounce",
+			        //Boolean - Whether we animate the rotation of the Doughnut
+			        animateRotate: true,
+			        //Boolean - Whether we animate scaling the Doughnut from the centre
+			        animateScale: false,
+			        //Boolean - Re-draw chart on page resize
+			        responsive: true,
+			        //String - A legend template
+					
+			    };
+
+			    var pieData = [
+				   {
+				        value: 300,
+				        color:"rgba(220,220,220,0.9)",
+				        highlight: "rgba(220,220,220,0.8)",
+				        label: "Office 1"
+				    },
+				    {
+				        value: 50,
+				        color: "rgba(151,187,205,1)",
+				        highlight: "rgba(151,187,205,0.8)",
+				        label: "Office 2"
+				    },
+				    {
+				        value: 100,
+				        color: "rgba(169, 3, 41, 0.7)",
+				        highlight: "rgba(169, 3, 41, 0.7)",
+				        label: "Office 3"
+				    }
+			    ];
+
+			    // render chart
+			    var ctx = document.getElementById("pieChart").getContext("2d");
+			    var myNewChart = new Chart(ctx).Pie(pieData, pieOptions);
+
+			    // END PIE CHART		
+				
+			})
+		
+		</script>
 
 		<!-- Your GOOGLE ANALYTICS CODE Below -->
 		<script type="text/javascript">

@@ -178,6 +178,9 @@ def aadhaar_lookup(request):
                 return HttpResponseRedirect(reverse('obc_form_an', kwargs={"aadhaar_number":form_aadhaar_number}))
         return HttpResponseRedirect(reverse('aadhaar_lookup'))
 
+def pieCharts(request):
+    if request.method == "GET":
+        return render_to_response('bribecaster/pieCharts.html', context_instance=RequestContext(request))
 
 
 
