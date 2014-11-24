@@ -2,9 +2,10 @@ from django.shortcuts import render_to_response, render
 from django.template.context import RequestContext
 from models import Citizen, OBCFormResponse, Case, Office, OfficeVisit, SMSFeedback
 from forms import CaseForm, OBCFormForm, CitizenForm, AadhaarLookup, Form
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from random import random
+import json
 
 def index(request):
     return render_to_response('bribecaster/index.html', context_instance=RequestContext(request))
@@ -184,24 +185,44 @@ def aadhaar_lookup(request):
                 return HttpResponseRedirect(reverse('obc_form_an', kwargs={"aadhaar_number":form_aadhaar_number}))
         return HttpResponseRedirect(reverse('aadhaar_lookup'))
 
-def chart(request, office=None):
+def office_chart(request, office_id=None):
     if request.method == "GET":
-        if office == None:
+        if office_id == None:
             all_information = {}
             all_information['office_name'] = "All"
             total_sms = 0
-            sentiment = {1:0, 2:0, 3:0, 4:0, 5:0}
-            offices = Office.objects.get.all()
-            for office in office: 
-                for i in range(1,6):
-                    all_information['sentiment'][i] = office.sms_feedback.filter(sms_sentiment = i).count()
-            total_sms = 0
-            for sentiment_count in all_information['sentiment']:
-                total_sms += sentiment_count
+            sentiments = {1:0, 2:0, 3:0, 4:0, 5:0}
+            offices = Office.objects.all()
+            for office in offices:
+                for case in office.case_set.all():
+                    sentiment = case.smsfeedback_set.first().sms_sentiment
+                    sentiments[sentiment] += 1
+                    total_sms += 1
+            all_information['sentiment'] = sentiments
             all_information['total_sms'] = total_sms
+            return HttpResponse(json.dumps(all_information), content_type="application/json") 
 
         else:
-            pass
+
+            try:
+                office = Office.objects.get(pk=office_id)
+            except Exception as e:
+                not_found = {'status': 404, 'message':"Office not found " + str(office_id)}
+                return HttpResponse(json.dumps(not_found), content_type="application/json") 
+
+            office_information = {}
+            office_information['office_name'] = office.office_name
+
+            total_sms = 0
+            sentiments = {1:0, 2:0, 3:0, 4:0, 5:0}
+            
+            for case in office.case_set.all():
+                sentiment = case.smsfeedback_set.first().sms_sentiment
+                sentiments[sentiment] += 1
+                total_sms += 1
+            office_information['sentiment'] = sentiments
+            office_information['total_sms'] = total_sms
+            return HttpResponse(json.dumps(office_information), content_type="application/json") 
             #if an office is specified return json for for that particular office
 
         #json should be of the form {"office": office_name, "sentiments" {1: count, 2:count, 3:count, 4:count, 5:count}, "total_sms": 40}
