@@ -187,11 +187,24 @@ def aadhaar_lookup(request):
 def chart(request, office=None):
     if request.method == "GET":
         if office == None:
-            # default behavior is to send back data on all offices
+            all_information = {}
+            all_information['office_name'] = "All"
+            total_sms = 0
+            sentiment = {1:0, 2:0, 3:0, 4:0, 5:0}
+            offices = Office.objects.get.all()
+            for office in office: 
+                for i in range(1,6):
+                    all_information['sentiment'][i] = office.sms_feedback.filter(sms_sentiment = i).count()
+            total_sms = 0
+            for sentiment_count in all_information['sentiment']:
+                total_sms += sentiment_count
+            all_information['total_sms'] = total_sms
+
         else:
+            pass
             #if an office is specified return json for for that particular office
 
-        #json should be of the form {"office": office_name, "sentiments" {1: count, 2:count, 3:count, 4:count, 5:count}}
+        #json should be of the form {"office": office_name, "sentiments" {1: count, 2:count, 3:count, 4:count, 5:count}, "total_sms": 40}
 
 
 
