@@ -178,8 +178,17 @@ def aadhaar_lookup(request):
                 return HttpResponseRedirect(reverse('obc_form_an', kwargs={"aadhaar_number":form_aadhaar_number}))
         return HttpResponseRedirect(reverse('aadhaar_lookup'))
 
-
-
+def office_num_cases(request):
+    if request.method == "GET":
+        offices = {}
+        cases = Case.objects.all()
+        for case in cases:
+            if case.office in offices:
+                offices[case.office] += 1
+            else:
+                offices[case.office] = 1
+        context = {'offices': offices.items()}
+        return render(request, 'bribecaster/casesperoffice.html', context)
 
 
 
