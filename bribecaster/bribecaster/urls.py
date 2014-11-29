@@ -3,17 +3,13 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
-from dajaxice.core import dajaxice_autodiscover, dajaxice_config
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-
-dajaxice_autodiscover()
 
 urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'bribecaster.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
-    url(dajaxice_config.dajaxice_url, include('dajaxice.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^form-showcase.html/', views.form, name='form'),
     url(r'^index.html/', views.index, name='index'),
