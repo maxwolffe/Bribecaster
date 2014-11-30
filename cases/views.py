@@ -227,8 +227,17 @@ def office_chart(request, office_id=None):
 
         #json should be of the form {"office": office_name, "sentiments" {1: count, 2:count, 3:count, 4:count, 5:count}, "total_sms": 40}
 
-
-
+def office_num_cases(request):
+    if request.method == "GET":
+        offices = {}
+        cases = Case.objects.all()
+        for case in cases:
+            if case.office in offices:
+                offices[case.office] += 1
+            else:
+                offices[case.office] = 1
+        context = {'offices': offices.items()}
+        return render(request, 'bribecaster/casesperoffice.html', context)
 
 
 
