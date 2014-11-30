@@ -4,7 +4,12 @@ from models import Citizen, OBCFormResponse, Case, Office, OfficeVisit
 from forms import CaseForm, OBCFormForm, CitizenForm, AadhaarLookup, Form
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
+<<<<<<< HEAD:bribecaster/cases/views.py
 from datetime import date
+=======
+import random
+import json
+>>>>>>> origin/anand/officetable:cases/views.py
 
 def index(request):
     return render_to_response('bribecaster/index.html', context_instance=RequestContext(request))
@@ -169,9 +174,69 @@ def aadhaar_lookup(request):
 
 def pieCharts(request):
     if request.method == "GET":
+<<<<<<< HEAD:bribecaster/cases/views.py
         return render_to_response('bribecaster/pieCharts.html', context_instance=RequestContext(request))
 
 
+=======
+        if office_id == None:
+            all_information = {}
+            all_information['office_name'] = "All"
+            total_sms = 0
+            sentiments = {1:0, 2:0, 3:0, 4:0, 5:0}
+            offices = Office.objects.all()
+            for office in offices:
+                for case in office.case_set.all():
+                    sentiment = case.smsfeedback_set.first().sms_sentiment
+                    sentiments[sentiment] += 1
+                    total_sms += 1
+            all_information['sentiment'] = sentiments
+            all_information['total_sms'] = total_sms
+            return HttpResponse(json.dumps(all_information), content_type="application/json") 
+
+        else:
+
+            try:
+                office = Office.objects.get(pk=office_id)
+            except Exception as e:
+                not_found = {'status': 404, 'message':"Office not found " + str(office_id)}
+                return HttpResponse(json.dumps(not_found), content_type="application/json") 
+
+            office_information = {}
+            office_information['office_name'] = office.office_name
+
+            total_sms = 0
+            sentiments = {1:0, 2:0, 3:0, 4:0, 5:0}
+            
+            for case in office.case_set.all():
+                sentiment = case.smsfeedback_set.first().sms_sentiment
+                sentiments[sentiment] += 1
+                total_sms += 1
+            office_information['sentiment'] = sentiments
+            office_information['total_sms'] = total_sms
+            return HttpResponse(json.dumps(office_information), content_type="application/json") 
+            #if an office is specified return json for for that particular office
+
+        #json should be of the form {"office": office_name, "sentiments" {1: count, 2:count, 3:count, 4:count, 5:count}, "total_sms": 40}
+
+def office_num_cases(request):
+    if request.method == "GET":
+        offices = {}
+        cases = Case.objects.all()
+        for case in cases:
+            if case.office in offices:
+                offices[case.office][0] += 1
+            else:
+                offices[case.office] = [1, 0]
+        diff = []
+        for office in offices:
+            offices[office][0] *= 10 + random.randint(0, 200)
+            offices[office][1] = offices[office][0] + random.randint(-offices[office][0], offices[office][0]/2)
+            diff.append((office, offices[office][0], offices[office][1], offices[office][0] - offices[office][1]))
+        diff.sort(key=lambda x: x[3])
+        context = {'offices': list(enumerate(diff, start=1))}
+        return render(request, 'bribecaster/casesperoffice.html', context)
+>>>>>>> origin/anand/officetable:cases/views.py
 
 
 

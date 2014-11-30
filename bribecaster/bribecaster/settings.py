@@ -79,6 +79,15 @@ USE_L10N = True
 
 USE_TZ = True
 
+<<<<<<< HEAD:bribecaster/bribecaster/settings.py
+=======
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+>>>>>>> origin/anand/officetable:bribecaster/settings.py
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
