@@ -4,7 +4,7 @@ from models import Citizen, OBCFormResponse, Case, Office, OfficeVisit, SMSFeedb
 from forms import CaseForm, OBCFormForm, CitizenForm, AadhaarLookup, Form
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
-from random import random
+import random
 import json
 
 def index(request):
@@ -233,10 +233,16 @@ def office_num_cases(request):
         cases = Case.objects.all()
         for case in cases:
             if case.office in offices:
-                offices[case.office] += 1
+                offices[case.office][0] += 1
             else:
-                offices[case.office] = 1
-        context = {'offices': offices.items()}
+                offices[case.office] = [1, 0]
+        diff = []
+        for office in offices:
+            offices[office][0] *= 10 + random.randint(0, 200)
+            offices[office][1] = offices[office][0] + random.randint(-offices[office][0], offices[office][0]/2)
+            diff.append((office, offices[office][0], offices[office][1], offices[office][0] - offices[office][1]))
+        diff.sort(key=lambda x: x[3])
+        context = {'offices': list(enumerate(diff, start=1))}
         return render(request, 'bribecaster/casesperoffice.html', context)
 
 
