@@ -4,29 +4,21 @@ from models import Citizen, OBCFormResponse, Case, Office, OfficeVisit, SMSFeedb
 from forms import CaseForm, OBCFormForm, CitizenForm, AadhaarLookup, Form
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
+<<<<<<< HEAD:bribecaster/cases/views.py
+from datetime import date
+=======
 from random import random
 import json
+>>>>>>> herokusync:cases/views.py
 
 def index(request):
     return render_to_response('bribecaster/index.html', context_instance=RequestContext(request))
 
-def form(request):
-    if request.method == 'POST':
-        pass
-        # create a form instance and populate it with data from the request:
-        form = Form(request.POST)
-        # check whether it's valid:
-        if form.is_valid():
-            form.save()
-            # process the data in form.cleaned_data as required
-            # ...
-            # redirect to a new URL:
-            return HttpResponseRedirect('bribecaster/form-showcase.html')
 
-    # if a GET (or any other method) we'll create a blank form
-    else:
-        form = Form()
-    return render(request, 'bribecaster/form-showcase.html', {'form': form})
+def casesView(request):
+    current_month = date.today().month;
+    context = {'month': current_month};
+    return render(request, 'bribecaster/casesView.html', context); 
 
 def detail(request, case_id):
     if request.method == "GET":
@@ -185,6 +177,11 @@ def aadhaar_lookup(request):
                 return HttpResponseRedirect(reverse('obc_form_an', kwargs={"aadhaar_number":form_aadhaar_number}))
         return HttpResponseRedirect(reverse('aadhaar_lookup'))
 
+<<<<<<< HEAD:bribecaster/cases/views.py
+def pieCharts(request):
+    if request.method == "GET":
+        return render_to_response('bribecaster/pieCharts.html', context_instance=RequestContext(request))
+=======
 def office_chart(request, office_id=None):
     if request.method == "GET":
         if office_id == None:
@@ -227,6 +224,7 @@ def office_chart(request, office_id=None):
 
         #json should be of the form {"office": office_name, "sentiments" {1: count, 2:count, 3:count, 4:count, 5:count}, "total_sms": 40}
 
+>>>>>>> herokusync:cases/views.py
 
 
 

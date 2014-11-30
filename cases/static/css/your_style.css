@@ -35,3 +35,11 @@
    margin-left: -175px;
    margin-top: -20px;
 }
+
+.spacer { 
+    margin-top: 20px;
+}
+
+.width90 { 
+  width: 90%;
+}
