@@ -272,12 +272,20 @@
 						<a href="http://localhost:8000/" title="Dashboard"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Dashboard</span></a>
 					</li>
 					<li>
-						<a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">Data Charts</span></a>
+						<a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">Views</span></a>
 						<ul>
 							<li class="active">
-								<a href="http://localhost:8000/charts/pieCharts.html">Pie Charts</a>
+								<a href="http://localhost:8000/casesView.html">Cases</a>
 							</li>
 						</ul>
+					</li>
+					<li>
+						<a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">Data Charts</span></a>
+						<ul>
+							<li>
+								<a href="http://localhost:8000/charts/pieCharts.html">Pie Charts</a>
+							</li>
+						</ul> 
 					</li>
 					<li>
 						<a href="#"><i class="fa fa-lg fa-fw fa-table"></i> <span class="menu-item-parent">Tables</span></a>
@@ -288,6 +296,11 @@
 							<li>
 								<a href="#">Regional Normal Tables</a>
 							</li>
+						</ul>
+					</li>
+					<li> 
+						<a href="#"><i class="fa fa-lg fa-fw fa-table"></i> <span class="menu-item-parent">Offices</span></a>
+						<ul>
 						</ul>
 					</li>
 					<li>
@@ -321,7 +334,7 @@
 
 				<!-- breadcrumb -->
 				<ol class="breadcrumb">
-					<li>Home</li><li>Data Charts</li><li>Pie Charts</li>
+					<li>Home</li><li>Views</li><li>Cases</li>
 				</ol>
 				<!-- end breadcrumb -->
 
@@ -340,91 +353,75 @@
 			<!-- END RIBBON -->
 
 			<div id="content">
-
+				<!-- widget grid -->
+				
 				<div class="row">
-					<div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
-						<h1 class="page-title txt-color-blueDark">
-							
-							<!-- PAGE HEADER -->
-							<i class="fa-fw fa fa-pencil-square-o"></i> 
-								Data Charts
-							<span>>  
-								Pie Charts
-							</span>
-						</h1>
+					<section id="widget-grid" class="">
+					<!-- For the page header -->
+						<div class="col-lg-12">
+							<h1 class="page-title txt-color-blueDark">
+								
+								<!-- PAGE HEADER -->
+								<i class="fa-fw fa fa-pencil-square-o"></i> 
+									View
+								<span>>  
+									Cases
+								</span>
+							</h1>
+							<!-- Widget ID (each widget will need unique ID)-->
+							<div class="jarviswidget" id="wid-id-0" data-widget-colorbutton="false" data-widget-fullscreenbutton="false" data-widget-editbutton="false" data-widget-sortable="false">
+								<!-- widget options:
+									usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+									
+									data-widget-colorbutton="false"	
+									data-widget-editbutton="false"
+									data-widget-togglebutton="false"
+									data-widget-deletebutton="false"
+									data-widget-fullscreenbutton="false"
+									data-widget-custombutton="false"
+									data-widget-collapsed="true" 
+									data-widget-sortable="false"
+									
+								-->
+								<header>
+									
+									<h2>Cases By Month</h2>				
+									
+								</header>
+
+								<!-- widget div-->
+								<div>
+									
+									<!-- widget edit box -->
+									<div class="jarviswidget-editbox">
+										<!-- This area used as dropdown edit box -->
+										<input class="form-control" type="text">	
+									</div>
+									<!-- end widget edit box -->
+									
+									<!-- widget content -->
+									<div class="widget-body">
+										
+										<!-- this is what the user will see -->
+										<canvas id="lineChart" height="120"></canvas>
+										<a id="addLine" class='btn btn-primary btn-sm'></a>
+
+									</div>
+									<!-- end widget content -->
+									
+								</div>
+								<!-- end widget div -->
+								
+							</div>
+							<!-- end widget -->
+						</section>
 					</div>
 				
 				</div>
 		        
+				<!-- Office stuff goes here!!!! -->
+
 		        
-		       <!-- Widget ID (each widget will need unique ID)-->
-				<div class="jarviswidget" id="wid-id-6" data-widget-colorbutton="false" data-widget-fullscreenbutton="false" data-widget-editbutton="false" data-widget-sortable="false">
-					<!-- widget options:
-						usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
-						
-						data-widget-colorbutton="false"	
-						data-widget-editbutton="false"
-						data-widget-togglebutton="false"
-						data-widget-deletebutton="false"
-						data-widget-fullscreenbutton="false"
-						data-widget-custombutton="false"
-						data-widget-collapsed="true" 
-						data-widget-sortable="false"
-						
-					-->
-					<header>
-
-						<h2>SMS Pie Chart</h2>				
-						
-					</header>
-
-					<!-- widget div-->
-					<div>
-						
-						<!-- widget edit box -->
-						<div class="jarviswidget-editbox">
-							<!-- This area used as dropdown edit box -->
-						</div>
-						<!-- end widget edit box -->
-						
-						<!-- widget content -->
-						<div class="widget-body">
-							<form id="smart-form-register" action="." method="post" class="smart-form form-inline">
-								<section class="col col-6">
-									<label class="select">Select View:
-										<select id="viewSelect">
-											<option>All Offices</option>
-											<option>Individual Offices</option>
-										</select>
-									<i class='down'></i>   
-									</label>
-								</section>
-								<section class="col col-6">
-									<label class="select">Select Office: 
-										<select id="officeSelect">
-											<option value="0">Office 1</option>
-											<option value="1">Office 2</option>
-											<option value="2">Office 3</option>
-											<option value="3">Office 4</option>
-										</select>
-									<i class='down'></i>   
-									</label>
-								</section>
-							</form>
-							<!-- this is what the user will see -->
-							<canvas class="spacer" id="pieChart" height="120"></canvas>
-							<div class="text-center" id="sparkline"></div>
-	
-						</div>
-						<!-- end widget content -->
-						
-					</div>
-					<!-- end widget div -->
-					
-				</div>
-				<!-- end widget -->
-						
-
 			</div>
 		<!-- END MAIN PANEL -->
 
@@ -537,109 +534,30 @@
 
 		<!-- PAGE RELATED PLUGIN(S) -->
 		<script src="{% static 'js/plugin/chartjs/chart.min.js' %}"></script>
-		<script src="{% static 'js/sparkine.js' %}"></script>
 
 		<script type="text/javascript">
-			var totalData = [
-				   {
-				        value: 300,
-				        color:"rgba(220,220,220,0.9)",
-				        highlight: "rgba(220,220,220,0.8)",
-				        label: "Office 1"
-				    },
-				    {
-				        value: 50,
-				        color: "rgba(151,187,205,1)",
-				        highlight: "rgba(151,187,205,0.8)",
-				        label: "Office 2"
-				    },
-				    {
-				        value: 100,
-				        color: "rgba(169, 3, 41, 0.7)",
-				        highlight: "rgba(169, 3, 41, 0.7)",
-				        label: "Office 3"
-				    }
-			    ];
 
-			var officeData = [
-					[{
-				        value: 1000,
-				        color:"rgba(220,220,220,0.9)",
-				        highlight: "rgba(220,220,220,0.8)",
-				        label: "Positive Sentiment"
-				    },
-				    {
-				        value: 1000,
-				        color: "rgba(151,187,205,1)",
-				        highlight: "rgba(151,187,205,0.8)",
-				        label: "Negative Sentiment"
-				    },
-				    {
-				        value: 1000,
-				        color: "rgba(169, 3, 41, 0.7)",
-				        highlight: "rgba(169, 3, 41, 0.7)",
-				        label: "Neutral Sentiment"
-				    }], 
-				    [{
-				        value: 300,
-				        color:"rgba(220,220,220,0.9)",
-				        highlight: "rgba(220,220,220,0.8)",
-				        label: "Positive Sentiment"
-				    },
-				    {
-				        value: 100,
-				        color: "rgba(151,187,205,1)",
-				        highlight: "rgba(151,187,205,0.8)",
-				        label: "Negative Sentiment"
-				    },
-				    {
-				        value: 200,
-				        color: "rgba(169, 3, 41, 0.7)",
-				        highlight: "rgba(169, 3, 41, 0.7)",
-				        label: "Neutral Sentiment"
-				    }], 
-				    [{
-				        value: 250,
-				        color:"rgba(220,220,220,0.9)",
-				        highlight: "rgba(220,220,220,0.8)",
-				        label: "Positive Sentiment"
-				    },
-				    {
-				        value: 124,
-				        color: "rgba(151,187,205,1)",
-				        highlight: "rgba(151,187,205,0.8)",
-				        label: "Negative Sentiment"
-				    },
-				    {
-				        value: 450,
-				        color: "rgba(169, 3, 41, 0.7)",
-				        highlight: "rgba(169, 3, 41, 0.7)",
-				        label: "Neutral Sentiment"
-				    }], 
-				    [{
-				        value: 784,
-				        color:"rgba(220,220,220,0.9)",
-				        highlight: "rgba(220,220,220,0.8)",
-				        label: "Positive Sentiment"
-				    },
-				    {
-				        value: 445,
-				        color: "rgba(151,187,205,1)",
-				        highlight: "rgba(151,187,205,0.8)",
-				        label: "Negative Sentiment"
-				    },
-				    {
-				        value: 124,
-				        color: "rgba(169, 3, 41, 0.7)",
-				        highlight: "rgba(169, 3, 41, 0.7)",
-				        label: "Neutral Sentiment"
-				    }], 
-				];
+			var months = ["January", "February", "March", "April", "May", "June", 
+				"June", "July", "August", "September", "October", "November", "December"];
 
-			var pieOptions;
-			var pieChart;
+			function getMonths(index) { 
+				var monthsSelected = []
+				var counter = -5; 
+				while (counter <= 0) { 
+					var monthIndex = index + counter;
+					if (monthIndex < 0) { 
+						monthIndex = 12 - Math.abs(monthIndex);
+					}
+					monthsSelected.push(months[monthIndex]);
+					counter++; 
+				}
+				return monthsSelected;
+			}
+
 			var context;
-			var pieData;
+			var lineChart;
+			var lineOptions;
+			var lineData;
 
 			$(document).ready(function() {
 			 	
@@ -674,57 +592,116 @@
 				 */
 				
 				 pageSetUp();
+				 
+				/*
+				 * ALL PAGE RELATED SCRIPTS CAN GO BELOW HERE
+				 * eg alert("my home function");
+				 * 
+				 * var pagefunction = function() {
+				 *   ...
+				 * }
+				 * loadScript("js/plugin/_PLUGIN_NAME_.js", pagefunction);
+				 * 
+				 * TO LOAD A SCRIPT:
+				 * var pagefunction = function (){ 
+				 *  loadScript(".../plugin.js", run_after_loaded);	
+				 * }
+				 * 
+				 * OR
+				 * 
+				 * loadScript(".../plugin.js", run_after_loaded);
+				 */
 
-				 // PIE CHART
+				 // reference: http://www.chartjs.org/docs/
 
-			    pieOptions = {
-			    	//Boolean - Whether we should show a stroke on each segment
-			        segmentShowStroke: true,
-			        //String - The colour of each segment stroke
-			        segmentStrokeColor: "#fff",
-			        //Number - The width of each segment stroke
-			        segmentStrokeWidth: 2,
-			        //Number - Amount of animation steps
-			        animationSteps: 100,
-			        //String - types of animation
-			        animationEasing: "easeOutQuart",
-			        //Boolean - Whether we animate the rotation of the Doughnut
-			        animateRotate: true,
-			        //Boolean - Whether we animate scaling the Doughnut from the centre
-			        animateScale: false,
-			        //Boolean - Re-draw chart on page resize
+				// LINE CHART
+				// ref: http://www.chartjs.org/docs/#line-chart-introduction
+			    lineOptions = {
+				    ///Boolean - Whether grid lines are shown across the chart
+				    scaleShowGridLines : true,
+				    //String - Colour of the grid lines
+				    scaleGridLineColor : "rgba(0,0,0,.05)",
+				    //Number - Width of the grid lines
+				    scaleGridLineWidth : 1,
+				    //Boolean - Whether the line is curved between points
+				    bezierCurve : true,
+				    //Number - Tension of the bezier curve between points
+				    bezierCurveTension : 0.4,
+				    //Boolean - Whether to show a dot for each point
+				    pointDot : true,
+				    //Number - Radius of each point dot in pixels
+				    pointDotRadius : 4,
+				    //Number - Pixel width of point dot stroke
+				    pointDotStrokeWidth : 1,
+				    //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+				    pointHitDetectionRadius : 20,
+				    //Boolean - Whether to show a stroke for datasets
+				    datasetStroke : true,
+				    //Number - Pixel width of dataset stroke
+				    datasetStrokeWidth : 2,
+				    //Boolean - Whether to fill the dataset with a colour
+				    datasetFill : true,
+				    //Boolean - Re-draw chart on page resize
 			        responsive: true,
-			        //String - A legend template
-					
+				    //String - A legend template
+				   
 			    };
 
-			    pieData = totalData
+			    var month = {{ month }}
+			    var data = getMonths(month);
+			
+			    lineData = { labels: data,
+			        datasets: [
+				        {
+				            label: "My First dataset",
+				            fillColor: "rgba(220,220,220,0.2)",
+				            strokeColor: "rgba(220,220,220,1)",
+				            pointColor: "rgba(220,220,220,1)",
+				            pointStrokeColor: "#fff",
+				            pointHighlightFill: "#fff",
+				            pointHighlightStroke: "rgba(220,220,220,1)",
+				            data: [65, 59, 80, 81, 56, 55, 40]
+				        },
+				        {
+				            label: "My Second dataset",
+				            fillColor: "rgba(151,187,205,0.2)",
+				            strokeColor: "rgba(151,187,205,1)",
+				            pointColor: "rgba(151,187,205,1)",
+				            pointStrokeColor: "#fff",
+				            pointHighlightFill: "#fff",
+				            pointHighlightStroke: "rgba(151,187,205,1)",
+				            data: [28, 48, 40, 19, 86, 27, 90]
+				        }
+				    ]
+			    };
 
 			    // render chart
-			    context = document.getElementById("pieChart").getContext("2d");
-			    pieChart = new Chart(context).Pie(pieData, pieOptions);
+			    context = document.getElementById("lineChart").getContext("2d");
+			    lineChart = new Chart(context).Line(lineData, lineOptions);
 
-			    // END PIE CHART		
-				
+			    // END LINE CHART
 			})
+		
+			function updateLine() { 
+				lineChart.destroy();
+				lineData.datasets.push({
+				            label: "My Third dataset",
+				            fillColor: "rgba(151,187,205,0.2)",
+				            strokeColor: "rgba(151,187,205,1)",
+				            pointColor: "rgba(151,187,205,1)",
+				            pointStrokeColor: "#fff",
+				            pointHighlightFill: "#fff",
+				            pointHighlightStroke: "rgba(151,187,205,1)",
+				            data: [18, 28, 30, 49, 86, 27, 90]
+				        })
+				
+				lineChart = new Chart(context).Line(lineData, lineOptions);
+			}
 
-			function render() { 
-				pieChart.destroy()
-				if (viewSelect.value == "All Offices") { 
-					pieData = totalData;
-					pieChart = new Chart(context).Pie(pieData, pieOptions);
-				} else { 
-					var index = officeSelect.value;
-					pieData = officeData[index];
-					pieChart = new Chart(context).Doughnut(pieData, pieOptions);
-				}
-			};
-
-			var viewSelect = document.getElementById("viewSelect")
-			viewSelect.addEventListener("change", render);
-			var officeSelect = document.getElementById("officeSelect")
-			officeSelect.addEventListener("change", render);
+			var addLine = document.getElementById("addLine");
+			addLine.addEventListener("click", updateLine);
 			
+
 		</script>
 		<!-- Your GOOGLE ANALYTICS CODE Below -->
 		<script type="text/javascript">
