@@ -240,7 +240,9 @@ def office_num_cases(request):
         for office in offices:
             offices[office][0] *= 10 + random.randint(0, 200)
             offices[office][1] = offices[office][0] + random.randint(-offices[office][0], offices[office][0]/2)
-            diff.append((office, offices[office][0], offices[office][1], offices[office][0] - offices[office][1]))
+            higher = max(offices[office][0], offices[office][1])
+            lower = min(offices[office][0], offices[office][1])
+            diff.append((office, offices[office][0], offices[office][1], offices[office][0] - offices[office][1], random.randint(lower, higher), random.randint(lower, higher), random.randint(lower, higher), random.randint(lower, higher), random.randint(lower, higher)))
         diff.sort(key=lambda x: x[3])
         context = {'offices': list(enumerate(diff, start=1))}
         return render(request, 'bribecaster/casesperoffice.html', context)
