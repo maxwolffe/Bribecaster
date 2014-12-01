@@ -19,6 +19,9 @@ def toPercent(float):
     string += "%"
     return string 
 
+def half_as_good(some_int):
+    return some_int / 2 + random.randint(1, some_int / 2)
+
 def casesView(request):
     if request.method == "GET":
         offices = {}
@@ -39,8 +42,8 @@ def casesView(request):
         diff.sort(key=lambda x: x[3])
         current_month = date.today().month
         high_charts_data = [{'name': office.office_name, 'marker':{'symbol':'circle'}, 'data':[1,2,3,4,5]} for office in Office.objects.all()]
-        min_data = [1,2,3,4,5]
-        max_data = [6,7,8,9,10]
+        min_data = [2403, 2781, 3002, 2995, 3200, 1500, 2000]
+        max_data = [6592, 6281, 7501, 7329, 6341, 7972, 6792]
         context = {'offices': list(enumerate(diff, start=1)), 'month': current_month, 'high_charts_data': json.dumps(high_charts_data), 'min_data': json.dumps(min_data), 'max_data': json.dumps(max_data)}
         return render(request, 'bribecaster/casesView.html', context); 
 
