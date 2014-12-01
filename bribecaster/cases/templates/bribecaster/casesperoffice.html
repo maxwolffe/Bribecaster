@@ -367,17 +367,23 @@
 
 				        <thead>
 				            <tr>
+				            	<th> Rank </th>
 			                    <th> Office </th>
 			                    <th> Cases </th>
+			                    <th> Last Month </th>
+			                    <th> Trend </th>
 				            </tr>
 				        </thead>
 
 				        <tbody>
-				        {% for office, num in offices %}
-                        <tr> 
-                            <td>{{ office }}</td> 
-                            <td>{{ num }}</td> 
-                        </tr>
+				        {% for rank, data in offices %}
+                        <a><tr> 
+                        	<td>{{ rank }}</td>
+                            <td>{{ data.1 }}</td> 
+                            <td>{{ data.2 }}</td> 
+                            <td>{{ data.3 }}</td>
+                            <td>T</td>
+                        </tr></a>
                         {% endfor %}
 				        </tbody>
 				

@@ -4,21 +4,32 @@ from models import Citizen, OBCFormResponse, Case, Office, OfficeVisit
 from forms import CaseForm, OBCFormForm, CitizenForm, AadhaarLookup, Form
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
-<<<<<<< HEAD:bribecaster/cases/views.py
 from datetime import date
-=======
 import random
 import json
->>>>>>> origin/anand/officetable:cases/views.py
 
 def index(request):
     return render_to_response('bribecaster/index.html', context_instance=RequestContext(request))
 
 
 def casesView(request):
-    current_month = date.today().month;
-    context = {'month': current_month};
-    return render(request, 'bribecaster/casesView.html', context); 
+    if request.method == "GET":
+        offices = {}
+        cases = Case.objects.all()
+        for case in cases:
+            if case.office in offices:
+                offices[case.office][0] += 1
+            else:
+                offices[case.office] = [1, 0]
+        diff = []
+        for office in offices:
+            offices[office][0] *= 10 + random.randint(0, 200)
+            offices[office][1] = offices[office][0] + random.randint(-offices[office][0], offices[office][0]/2)
+            diff.append((office, offices[office][0], offices[office][1], offices[office][0] - offices[office][1]))
+        diff.sort(key=lambda x: x[3])
+        current_month = date.today().month;
+        context = {'offices': list(enumerate(diff, start=1)), 'month': current_month}
+        return render(request, 'bribecaster/casesView.html', context); 
 
 def detail(request, case_id):
     if request.method == "GET":
@@ -174,11 +185,10 @@ def aadhaar_lookup(request):
 
 def pieCharts(request):
     if request.method == "GET":
-<<<<<<< HEAD:bribecaster/cases/views.py
         return render_to_response('bribecaster/pieCharts.html', context_instance=RequestContext(request))
 
-
-=======
+def office_chart(request, office_id=None):
+    if request.method == "GET":
         if office_id == None:
             all_information = {}
             all_information['office_name'] = "All"
@@ -235,8 +245,7 @@ def office_num_cases(request):
             diff.append((office, offices[office][0], offices[office][1], offices[office][0] - offices[office][1]))
         diff.sort(key=lambda x: x[3])
         context = {'offices': list(enumerate(diff, start=1))}
-        return render(request, 'bribecaster/casesperoffice.html', context)
->>>>>>> origin/anand/officetable:cases/views.py
+        return render(request, 'bribecaster/casesView.html', context)
 
 
 
