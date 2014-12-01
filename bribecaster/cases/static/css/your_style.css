@@ -43,3 +43,9 @@
 .width90 { 
   width: 90%;
 }
+
+#caseRow1:hover { 
+  color:blue;
+  opacity: .5;
+  background-color: silver;
+}
