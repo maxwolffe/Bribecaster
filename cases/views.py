@@ -34,11 +34,14 @@ def casesView(request):
             offices[office][1] = offices[office][0] + random.randint(-offices[office][0], offices[office][0]/2)
             higher = max(offices[office][0], offices[office][1])
             lower = min(offices[office][0], offices[office][1])
-            percent = toPercent((float(offices[office][0]) - float(offices[office][1]))/float(offices[office][1]))
+            percent = toPercent((float(offices[office][0]) - float(offices[office][1])) / float(offices[office][1]))
             diff.append((office, offices[office][0], offices[office][1], percent, random.randint(lower, higher), random.randint(lower, higher), random.randint(lower, higher), random.randint(lower, higher), random.randint(lower, higher)))
         diff.sort(key=lambda x: x[3])
         current_month = date.today().month
-        context = {'offices': list(enumerate(diff, start=1)), 'month': current_month}
+        high_charts_data = [{'name': office.office_name, 'marker':{'symbol':'circle'}, 'data':[1,2,3,4,5]} for office in Office.objects.all()]
+        min_data = [1,2,3,4,5]
+        max_data = [6,7,8,9,10]
+        context = {'offices': list(enumerate(diff, start=1)), 'month': current_month, 'high_charts_data': json.dumps(high_charts_data), 'min_data': json.dumps(min_data), 'max_data': json.dumps(max_data)}
         return render(request, 'bribecaster/casesView.html', context); 
 
 def detail(request, case_id):
