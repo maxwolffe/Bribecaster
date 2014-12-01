@@ -12,6 +12,13 @@ def index(request):
     return render_to_response('bribecaster/index.html', context_instance=RequestContext(request))
 
 
+def toPercent(float):
+    num = round(float, 2)
+    num *= 100 
+    string = str(num)
+    string += "%"
+    return string 
+
 def casesView(request):
     if request.method == "GET":
         offices = {}
@@ -23,11 +30,14 @@ def casesView(request):
                 offices[case.office] = [1, 0]
         diff = []
         for office in offices:
-            offices[office][0] *= 10 + random.randint(0, 200)
+            offices[office][0] *= 10 + random.randint(300, 400)
             offices[office][1] = offices[office][0] + random.randint(-offices[office][0], offices[office][0]/2)
-            diff.append((office, offices[office][0], offices[office][1], offices[office][0] - offices[office][1]))
+            higher = max(offices[office][0], offices[office][1])
+            lower = min(offices[office][0], offices[office][1])
+            percent = toPercent((float(offices[office][0]) - float(offices[office][1]))/float(offices[office][1]))
+            diff.append((office, offices[office][0], offices[office][1], percent, random.randint(lower, higher), random.randint(lower, higher), random.randint(lower, higher), random.randint(lower, higher), random.randint(lower, higher)))
         diff.sort(key=lambda x: x[3])
-        current_month = date.today().month;
+        current_month = date.today().month
         context = {'offices': list(enumerate(diff, start=1)), 'month': current_month}
         return render(request, 'bribecaster/casesView.html', context); 
 
@@ -242,7 +252,9 @@ def office_num_cases(request):
         for office in offices:
             offices[office][0] *= 10 + random.randint(0, 200)
             offices[office][1] = offices[office][0] + random.randint(-offices[office][0], offices[office][0]/2)
-            diff.append((office, offices[office][0], offices[office][1], offices[office][0] - offices[office][1]))
+            higher = max(offices[office][0], offices[office][1])
+            lower = min(offices[office][0], offices[office][1])
+            diff.append((office, offices[office][0], offices[office][1], offices[office][0] - offices[office][1], random.randint(lower, higher), random.randint(lower, higher), random.randint(lower, higher), random.randint(lower, higher), random.randint(lower, higher)))
         diff.sort(key=lambda x: x[3])
         context = {'offices': list(enumerate(diff, start=1))}
         return render(request, 'bribecaster/casesView.html', context)

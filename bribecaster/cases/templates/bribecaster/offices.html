@@ -361,7 +361,36 @@
 					</div>
 				
 				</div>
-		        
+
+		        <div class="widget-body no-padding">
+				
+					<table id="datatable_fixed_column" class="table table-striped table-bordered" width="100%">
+
+				        <thead>
+				            <tr>
+				            	<th> Rank </th>
+			                    <th> Office </th>
+			                    <th> Cases </th>
+			                    <th> Last Month </th>
+			                    <th> Trend </th>
+				            </tr>
+				        </thead>
+
+				        <tbody>
+				        {% for rank, data in offices %}
+                        <tr> 
+                        	<td>{{ rank }}</td>
+                            <td>{{ data.0 }}</td> 
+                            <td>{{ data.1 }}</td> 
+                            <td>{{ data.2 }}</td>
+                            <td class="inlinesparkline">{{data.2}}, {{ data.4 }}, {{ data.5 }}, {{ data.6 }}, {{ data.7 }}, {{ data.8 }}, {{ data.1 }}</td>
+                        </tr>
+                        {% endfor %}
+				        </tbody>
+				
+					</table>
+
+				</div>
 				<!-- Office stuff goes here!!!! -->
 
 		        
@@ -475,8 +504,6 @@
 		<script src="{% static 'js/smart-chat-ui/smart.chat.ui.min.js' %}"></script>
 		<script src="{% static 'js/smart-chat-ui/smart.chat.manager.min.js' %}"></script>
 
-		<!-- PAGE RELATED PLUGIN(S) -->
-
 		<!-- Your GOOGLE ANALYTICS CODE Below -->
 		<script type="text/javascript">
 			var _gaq = _gaq || [];
@@ -492,6 +519,16 @@
 			s.parentNode.insertBefore(ga, s);
 			})();
 		</script>
+
+		<script type="text/javascript">
+   			$(function() {
+		        /** This code runs when everything has been loaded on the page */
+		        /* Inline sparklines take their values from the contents of the tag */
+		        $('.inlinesparkline').sparkline('html', {
+		        	width: '100'
+		        });
+	   		});
+	   	</script>
 
 	</body>
 
