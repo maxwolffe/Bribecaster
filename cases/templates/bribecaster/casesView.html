@@ -108,6 +108,7 @@
 
 			</div>
 
+
 			<!-- pulled right: nav area -->
 			<div class="pull-right">
 				
@@ -197,7 +198,6 @@
 					<span> <a href="javascript:void(0);" data-action="launchFullscreen" title="Full Screen"><i class="fa fa-arrows-alt"></i></a> </span>
 				</div>
 				<!-- end fullscreen button -->
-				
 
 				<!-- multiple lang dropdown : find all flags in the flags page -->
 				<ul class="header-dropdown-list hidden-xs">
@@ -274,7 +274,7 @@
 					<li>
 						<a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">Views</span></a>
 						<ul>
-							<li>
+							<li class="active">
 								<a href="/casesView.html">Cases</a>
 							</li>
 						</ul>
@@ -285,14 +285,22 @@
 							<li>
 								<a href="/charts/pieCharts.html">Pie Charts</a>
 							</li>
-						</ul>
+						</ul> 
 					</li>
-					<li class="active">
+					<li>
 						<a href="#"><i class="fa fa-lg fa-fw fa-table"></i> <span class="menu-item-parent">Tables</span></a>
 						<ul>
-							<li class="active">
+							<li>
 								<a href="/datatables.html">Complete Data Table</a>
 							</li>
+							<li>
+								<a href="#">Regional Normal Tables</a>
+							</li>
+						</ul>
+					</li>
+					<li> 
+						<a href="#"><i class="fa fa-lg fa-fw fa-table"></i> <span class="menu-item-parent">Offices</span></a>
+						<ul>
 						</ul>
 					</li>
 					<li>
@@ -326,7 +334,7 @@
 
 				<!-- breadcrumb -->
 				<ol class="breadcrumb">
-					<li>Home</li><li>Tables</li><li>Complete Data Table</li>
+					<li>Home</li><li>Views</li><li>Cases</li>
 				</ol>
 				<!-- end breadcrumb -->
 
@@ -344,253 +352,182 @@
 			</div>
 			<!-- END RIBBON -->
 
-			<!-- MAIN CONTENT -->
 			<div id="content">
-
+				<!-- widget grid -->
+				
 				<div class="row">
-					<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
-							<h1 class="page-title txt-color-blueDark">
-							<i class="fa fa-table fa-fw "></i> 
-								Table 
-							<span>> 
-								Complete Data Table
+					<!-- For the page header -->
+					<div class="col-lg-12">
+						<h1 class="page-title txt-color-blueDark">
+							
+							<!-- PAGE HEADER -->
+							<i class="fa-fw fa fa-pencil-square-o"></i> 
+								View
+							<span>>  
+								Cases
 							</span>
 						</h1>
 					</div>
-					<div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
-						<ul id="sparks" class="">
-							<li class="sparks-info">
-								<h5> SMS Responses <span class="txt-color-blue">47,171</span></h5>
-								<div class="sparkline txt-color-blue hidden-mobile hidden-md hidden-sm">
-									1300, 1877, 2500, 2577, 2000, 2100, 3000, 2700, 3631, 2471, 2700, 3631, 2471
-								</div>
-							</li>
-							<li class="sparks-info">
-								<h5> Robocall Responses <span class="txt-color-purple">1,002</span></h5>
-								<div class="sparkline txt-color-purple hidden-mobile hidden-md hidden-sm">
-									110,150,300,130,400,240,220,310,220,300, 270, 210
-								</div>
-							</li>
-							<li class="sparks-info">
-								<h5> Followup Responses <span class="txt-color-greenDark">501</span></h5>
-								<div class="sparkline txt-color-greenDark hidden-mobile hidden-md hidden-sm">
-									110,150,300,130,400,240,220,310,220,300, 270, 210
-								</div>
-							</li>
-						</ul>
-					</div>
 				</div>
-				
-				<!-- widget grid -->
-				<section id="widget-grid" class="">
-				
-					<!-- row -->
-					<div class="row">
-				
-						<!-- NEW WIDGET START -->
-						<article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				
-							<!-- Widget ID (each widget will need unique ID)-->
-							<div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-1" data-widget-editbutton="false">
-								<!-- widget options:
+					<section id="widget-grid" class="">
+						<div class="widget-body ">
+							<form id="smart-form-register" action="." method="post" class="smart-form form-inline">
+								<section class="col col-4">
+									<label class="select">Select Month:
+										<select id="viewSelect">
+											<option>January</option>
+											<option>February</option>
+											<option>March</option>
+											<option>April</option>
+											<option>May</option>
+											<option>June</option>
+											<option>July</option>
+											<option>August</option>
+											<option>September</option>
+											<option>October</option>
+											<option>November</option>
+											<option selected>December</option>
+										</select>
+									<i class='down'></i>   
+									</label>
+								</section>
+								<section class="col col-4">
+									<label class="select">Select Year:
+										<select id="viewSelect">
+											<option>2014</option>
+											<option>2015</option>
+										</select>
+									<i class='down'></i>   
+									</label>
+								</section>
+								<section class="col col-4">
+									<label class="select">Select District: 
+										<select id="officeSelect">
+											<option value="0">District 1</option>
+											<option value="1">District 2</option>
+											<option value="2">District 3</option>
+											<option value="3">District 4</option>
+										</select>
+									<i class='down'></i>   
+									</label>
+								</section>
+							</form>
+							<table id="datatable_fixed_column" class="table table-striped table-bordered has-tickbox table-hover" width="100%">
+						        <thead>
+						            <tr>
+						            	<th>
+											<label class="checkbox">
+												
+											</label>
+										</th>
+						            	<th class='text-center' width="5%"> Rank </th>
+					                    <th class='text-center' width="20%"> Office </th>
+					                    <th class='text-center' width="15%"> Cases This Month</th>
+					                    <th class='text-center' width="15%"> Cases Last Month </th>
+					                    <th class='text-center' width="10%"> Monthly Improvement </th>
+					                    <th class='text-center'> Trend </th>
+					                    <th class='text-center'> Detail </th>
+						            </tr>
+						        </thead>
+
+						        <tbody>
+						        {% for rank, data in offices %}
+		                        <tr> 
+		                        	<td><input id="{{rank}}" href="url://" type="checkbox" name="checkbox-inline"><i></i></td>
+		                        	<td>{{ rank }}</td>
+		                            <td>{{ data.0 }}</td> 
+		                            <td>{{ data.1 }}</td> 
+		                            <td>{{ data.2 }}</td>
+		                            <td class="text-center">
+										{% if data.1 > data.2 %}
+											<span class="label bg-color-greenLight">
+		                            		<i class="fa fa-caret-up"></i>
+										{% elif data.1 < data.2 %} 
+											<span class="label bg-color-red">
+		                            		<i class="fa fa-caret-down"></i>
+		                            	{% endif %}
+		                            	{{ data.3 }}</span></td>
+		                            <td class='text-center'><a class="inlinesparkline "> {{data.2}}, {{ data.4 }}, {{ data.5 }}, {{ data.6 }}, {{ data.7 }}, {{ data.8 }}, {{ data.1 }}</a></td>
+		                            <td class='text-center'><a class='btn btn-primary btn-sm'></a></td>
+		                        </tr>
+		                        {% endfor %}
+						        </tbody>
+						        <!-- <tbody>
+								<tr> 
+		                        	<td>1</td>
+		                            <td>Office 1</td> 
+		                            <td>2000</td> 
+		                            <td>1500</td>
+		                            <td>+500</td>
+		                        </tr>
+		                        <a><tr> 
+		                        	<td>2</td>
+		                            <td>Office 2</td> 
+		                            <td>6792</td> 
+		                            <td>7982</td>
+		                            <td>-1190</td>
+		                        </tr></a>
+		                        <tr id="caseRow1" href='url://'> 
+		                        	<td>3</td>
+		                            <td>Office 3</td> 
+		                            <td>3913</td> 
+		                            <td>3910</td>
+		                            <td>+3</td>
+		                        </tr>
+						        </tbody> -->
+						
+							</table>
+
+						</div>
+						<!-- Widget ID (each widget will need unique ID)-->
+						<div class="jarviswidget spacer" id="wid-id-0" data-widget-colorbutton="false" data-widget-fullscreenbutton="false" data-widget-editbutton="false" data-widget-sortable="false">
+							<!-- widget options:
 								usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
-				
-								data-widget-colorbutton="false"
+								
+								data-widget-colorbutton="false"	
 								data-widget-editbutton="false"
 								data-widget-togglebutton="false"
 								data-widget-deletebutton="false"
 								data-widget-fullscreenbutton="false"
 								data-widget-custombutton="false"
-								data-widget-collapsed="true"
+								data-widget-collapsed="true" 
 								data-widget-sortable="false"
-				
-								-->
-								<header>
-									<span class="widget-icon"> <i class="fa fa-table"></i> </span>
-
-								</header>
-				
-								<!-- widget div-->
-								<div>
-				
-									<!-- widget edit box -->
-									<div class="jarviswidget-editbox">
-										<!-- This area used as dropdown edit box -->
-				
-									</div>
-									<!-- end widget edit box -->
-				
-									<!-- widget content -->
-									<div class="widget-body no-padding">
-				
-										<table id="datatable_fixed_column" class="table table-striped table-bordered" width="100%">
-					
-									        <thead>
-												<tr>
-													<th class="hasinput" style="width:15%">
-														<input type="text" class="form-control" placeholder="Filter First Name" />
-													</th>
-													<th class="hasinput" style="width:15%">
-														<input type="text" class="form-control" placeholder="Filter Last Name" />		
-													</th>
-													<th class="hasinput" style="width:12%">
-														<input type="text" class="form-control" placeholder="Filter Case ID" />
-													</th>
-													<th class="hasinput" style="width:15%">
-														<input type="text" class="form-control" placeholder="Filter Office" />
-													</th>
-													<th class="hasinput" style="width:13%">
-														<input type="text" class="form-control" placeholder="Filter SMS" />
-													</th>
-													<th class="hasinput" style="width:13%">
-														<input type="text" class="form-control" placeholder="Filter RoboCall" />
-													</th>
-													<th class="hasinput" style="width:16%">
-														<input type="text" class="form-control" placeholder="Filter Followup" />
-													</th>
-													<th class="hasinput" style="width:16%">
-														
-													</th>
-												</tr>
-									            <tr>
-								                    <th data-class="expand">First Name</th>
-								                    <th data-class="expand">Last Name</th>
-								                    <th>Case ID</th>
-								                    <th data-hide="phone">Office</th>
-								                    <th data-hide="phone">SMS</th>
-								                    <th data-hide="phone,tablet">Robocall</th>
-								                    <th data-hide="phone,tablet">Followup</th>
-								                    <th data-hide="phone,tablet">Detail View</th>
-									            </tr>
-									        </thead>
-				
-									        <tbody>
-									        {% for firstname,lastname,caseID,office,sms,robocall,followup,detail in cases %}
-					                        <tr> 
-					                            <td>{{firstname}}</td> 
-					                            <td>{{lastname}}</td> 
-					                            <td>{{caseID}}</td> 
-					                            <td>{{office}}</td> 
-					                            <!-- <td>Date</td>  -->
-					                            <td><div class='text-center'>{% autoescape off %}{{sms}}{% endautoescape %}</td></div> 
-					                            <td><div class='text-center'>{% autoescape off %}{{robocall}}{% endautoescape %}</td></div> 
-					                            <td><div class='text-center'>{% autoescape off %}{{followup}}{% endautoescape %}</td></div> 
-					                            <td><div class='text-center'>{% autoescape off %}{{detail}}{% endautoescape %}</td></div>
-					                        </tr>
-					                        {% endfor %}
-									        </tbody>
-									
-										</table>
-				
-									</div>
-									<!-- end widget content -->
-				
-								</div>
-								<!-- end widget div -->
-				
-							</div>
-							<!-- end widget -->
-				
-						</article>
-						<!-- WIDGET END -->
-				
-					</div>
-				
-					<!-- end row -->
-				
-					<!-- end row -->
-				
-				</section>
-				<!-- end widget grid -->
-				{% for firstname,lastname,caseID,office,sms,robocall,followup,detail,citizen,office,visit,smsfeed,robofeed in cases %}
-				<div class="modal fade" id="{{caseID}}" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
-					<div class="modal-dialog" style="width: 80%;">
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-									×
-								</button>
-								<h4 class="modal-title">
-									Detail View for Case {{caseID}}
-								</h4>
-							</div>
-							<div class="modal-body ">
 								
-						    	<h3 class='text-center'> Citizen Information </h3>
-						        <table class="table table-striped table-bordered">
-							        <tr> 
-							            <td>First Name</td> 
-							            <td>Last Name</td>
-										<td> Phone Number </td>
-										<td> Gender </td>
-										<td> Age </td>
-										<td> Address </td>
-										<td> City </td>
-										<td> Aadhaar Number </td>
-							        <tr>
-							            <td> {{ citizen.first_name }} </td> 
-							            <td> {{ citizen.last_name }} </td>
-							            <td> {{ citizen.phone_number }} </td> 
-							            <td> {{ citizen.gender }} </td> 
-							            <td> {{ citizen.age }} </td> 
-							            <td> {{ citizen.address }} </td> 
-							            <td> {{ citizen.city }} </td> 
-							            <td> {{ citizen.aadhaar_number }} </td> 
-							        </tr>
-						        </table>
-						        <h3 class='text-center'> Office Information </h3>
-						        <table class="table table-striped table-bordered">
-							        <tr> 
-							            <td> Office Name </td>
-										<td> Address </td>
-										<td> Phone Number </td>
-										<td> Office Head </td>
-										<td> Latitude </td>
-										<td> Longitude </td>
-										<td> Speed Rating </td>
-										<td> Cost Rating </td>
-										<td> Quality Rating </td>
-										<td> Region </td>
-							        <tr>
-										<td> {{ office.office_name }} </td>
-										<td> {{ office.address }} </td>
-										<td> {{ office.phone_number }} </td>
-										<td> {{ office.office_head }} </td>
-										<td> {{ office.lat }} </td>
-										<td> {{ office.lon }} </td>
-										<td> {{ office.speed_rating }} </td>
-										<td> {{ office.cost_rating }} </td>
-										<td> {{ office.quality_rating }} </td>
-										<td> {{ office.region }} </td>
-							        </tr>
-						        </table class="table table-striped table-bordered">
-						        <h3 class='text-center'> Office Visit </h3>
-						        <table class="table table-striped table-bordered">
-							        <tr> 
-										<td> Service Used </td>
-										<td> Time of Visit </td>
-							        <tr>
-										<td> {{ visit.service_used }} </td>
-										<td> {{ visit.time_of_visit }} </td>
-							        </tr>
-						        </table>
-						        <h3> SMS </h3>
-						        {% if smsfeed %}
-						        <table class="table table-striped table-bordered">	     
-						        	{{ smsfeed }}
-						        </table>
-						        {% else %}
-						        SMS not selected
-						        {% endif %}
-							</div>
-						</div><!-- /.modal-content -->
-					</div><!-- /.modal-dialog -->
-				</div>
-				{% endfor %}
-			</div>
-			<!-- END MAIN CONTENT -->
+							-->
+							<header>
+								
+											
+								
+							</header>
 
-		</div>
+							<!-- widget div-->
+							<div>
+								
+								<!-- widget edit box -->
+								<div class="jarviswidget-editbox">
+									<!-- This area used as dropdown edit box -->
+									<input class="form-control" type="text">	
+								</div>
+								<!-- end widget edit box -->
+								
+								<!-- widget content -->
+								<div class="widget-body">
+									
+									<!-- this is what the user will see -->
+									<div id="lineChart" style="min-width: 310px; height: 600px; margin: 0 auto"></div>
+
+								</div>
+								<!-- end widget content -->
+								
+							</div>
+							<!-- end widget div -->
+							
+						</div>
+						<!-- end widget -->
+					</section>
+				</div>
+		        
+			</div>
 		<!-- END MAIN PANEL -->
 
 		<!-- PAGE FOOTER -->
@@ -701,178 +638,246 @@
 		<script src="{% static 'js/smart-chat-ui/smart.chat.manager.min.js' %}"></script>
 
 		<!-- PAGE RELATED PLUGIN(S) -->
-		<script src="{% static 'js/plugin/datatables/jquery.dataTables.min.js' %}"></script>
-		<script src="{% static 'js/plugin/datatables/dataTables.colVis.min.js' %}"></script>
-		<script src="{% static 'js/plugin/datatables/dataTables.tableTools.min.js' %}"></script>
-		<script src="{% static 'js/plugin/datatables/dataTables.bootstrap.min.js' %}"></script>
-		<script src="{% static 'js/plugin/datatable-responsive/datatables.responsive.min.js' %}"></script>
-		<script src="{% static 'js/bribecaster/getResponse.js' %}"></script>
+		<script src="{% static 'js/plugin/chartjs/chart.min.js' %}"></script>
+		<script src="{% static 'js/highcharts.js' %}"></script>
 
 		<script type="text/javascript">
-		
-		// DO NOT REMOVE : GLOBAL FUNCTIONS!
-		
-		$(document).ready(function() {
-			
-			pageSetUp();
-			
-			/* // DOM Position key index //
-		
-			l - Length changing (dropdown)
-			f - Filtering input (search)
-			t - The Table! (datatable)
-			i - Information (records)
-			p - Pagination (paging)
-			r - pRocessing 
-			< and > - div elements
-			<"#id" and > - div with an id
-			<"class" and > - div with a class
-			<"#id.class" and > - div with an id and class
-			
-			Also see: http://legacy.datatables.net/usage/features
-			*/	
-	
-			/* BASIC ;*/
-				var responsiveHelper_dt_basic = undefined;
-				var responsiveHelper_datatable_fixed_column = undefined;
-				var responsiveHelper_datatable_col_reorder = undefined;
-				var responsiveHelper_datatable_tabletools = undefined;
-				
-				var breakpointDefinition = {
-					tablet : 1024,
-					phone : 480
-				};
-	
-				$('#dt_basic').dataTable({
-					"sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>"+
-						"t"+
-						"<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
-					"autoWidth" : true,
-					"preDrawCallback" : function() {
-						// Initialize the responsive datatables helper once.
-						if (!responsiveHelper_dt_basic) {
-							responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_basic'), breakpointDefinition);
-						}
-					},
-					"rowCallback" : function(nRow) {
-						responsiveHelper_dt_basic.createExpandIcon(nRow);
-					},
-					"drawCallback" : function(oSettings) {
-						responsiveHelper_dt_basic.respond();
+
+			var checkBoxes = [];
+			var dummy = [{
+				            name: "Office 1",
+				            marker: {
+				                symbol: 'circle'
+				            },
+				            data: [3788, 4798, 4523, 4303, 3450, 3910, 3913]
+				        },
+				        {
+				            name: "Office 2",
+				            marker: {
+				                symbol: 'circle'
+				            },
+				            data: [3788, 5439, 3212, 4953, 4345, 3456, 6573]
+				        },
+				        {
+				            name: "Office 3",
+				            marker: {
+				                symbol: 'circle'
+				            },
+				            data: [2342, 5553, 5632, 6553, 3453, 3563, 2462]
+				        },
+				        {
+				           name: "Office 4",
+				            marker: {
+				                symbol: 'circle'
+				            },
+				            data: [5322, 3822, 3235, 5143, 3333, 2231, 2352]
+				        },
+				        {
+				            name: "Office 5",
+				            marker: {
+				                symbol: 'circle'
+				            },
+				            data: [3953, 3235, 3642, 5865, 6327, 4563, 5683]
+				        },
+				        {
+				            name: "Office 6",
+				            marker: {
+				                symbol: 'circle'
+				            },
+				            data: [4444, 3241, 5543, 5426, 5666, 3151, 4435]
+				        },
+				        {
+				            name: "Office 7",
+				            marker: {
+				                symbol: 'circle'
+				            },
+				            data: [5436, 6173, 3341, 5432, 4352, 3333, 5555]
+				        },
+				        {
+				            name: "Office 8",
+				            marker: {
+				                symbol: 'circle'
+				            },
+				            data: [3728, 2798, 5223, 4233, 3351, 2910, 4913]
+				        }];
+
+			var months = ["January", "February", "March", "April", "May",
+				"June", "July", "August", "September", "October", "November", "December"];
+
+			function getMonths(index) { 
+				var monthsSelected = []
+				var counter = -6; 
+				while (counter <= 0) { 
+					var monthIndex = index + counter;
+					if (monthIndex < 0) { 
+						monthIndex = 12 - Math.abs(monthIndex);
 					}
-				});
-	
-			/* END BASIC */
-			
-			/* COLUMN FILTER  */
-		    var otable = $('#datatable_fixed_column').DataTable({
-		    	//"bFilter": false,
-		    	//"bInfo": false,
-		    	//"bLengthChange": false
-		    	//"bAutoWidth": false,
-		    	//"bPaginate": false,
-		    	//"bStateSave": true // saves sort state using localStorage
-				"sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6 hidden-xs'f><'col-sm-6 col-xs-12 hidden-xs'<'toolbar'>>r>"+
-						"t"+
-						"<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
-				"autoWidth" : true,
-				"preDrawCallback" : function() {
-					// Initialize the responsive datatables helper once.
-					if (!responsiveHelper_datatable_fixed_column) {
-						responsiveHelper_datatable_fixed_column = new ResponsiveDatatablesHelper($('#datatable_fixed_column'), breakpointDefinition);
-					}
-				},
-				"rowCallback" : function(nRow) {
-					responsiveHelper_datatable_fixed_column.createExpandIcon(nRow);
-				},
-				"drawCallback" : function(oSettings) {
-					responsiveHelper_datatable_fixed_column.respond();
-				}		
-			
-		    });
-		    
-		    // custom toolbar
-		    $("div.toolbar").html("<div class='text-right'><img src='{% static 'img/logo.png' %}'' alt='SmartAdmin' style='width: 111px; margin-top: 3px; margin-right: 10px;'></div>");
-		    	   
-		    // Apply the filter
-		    $("#datatable_fixed_column thead th input[type=text]").on( 'keyup change', function () {
-		    	
-		        otable
-		            .column( $(this).parent().index()+':visible' )
-		            .search( this.value )
-		            .draw();
-		            
-		    } );
-		    /* END COLUMN FILTER */   
-	    
-			/* COLUMN SHOW - HIDE */
-			$('#datatable_col_reorder').dataTable({
-				"sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'C>r>"+
-						"t"+
-						"<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
-				"autoWidth" : true,
-				"preDrawCallback" : function() {
-					// Initialize the responsive datatables helper once.
-					if (!responsiveHelper_datatable_col_reorder) {
-						responsiveHelper_datatable_col_reorder = new ResponsiveDatatablesHelper($('#datatable_col_reorder'), breakpointDefinition);
-					}
-				},
-				"rowCallback" : function(nRow) {
-					responsiveHelper_datatable_col_reorder.createExpandIcon(nRow);
-				},
-				"drawCallback" : function(oSettings) {
-					responsiveHelper_datatable_col_reorder.respond();
-				}			
-			});
-			
-			/* END COLUMN SHOW - HIDE */
-	
-			/* TABLETOOLS */
-			$('#datatable_tabletools').dataTable({
-				
-				// Tabletools options: 
-				//   https://datatables.net/extensions/tabletools/button_options
-				"sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'T>r>"+
-						"t"+
-						"<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
-		        "oTableTools": {
-		        	 "aButtons": [
-		             "copy",
-		             "csv",
-		             "xls",
-		                {
-		                    "sExtends": "pdf",
-		                    "sTitle": "SmartAdmin_PDF",
-		                    "sPdfMessage": "SmartAdmin PDF Export",
-		                    "sPdfSize": "letter"
-		                },
-		             	{
-	                    	"sExtends": "print",
-	                    	"sMessage": "Generated by SmartAdmin <i>(press Esc to close)</i>"
-	                	}
-		             ],
-		            "sSwfPath": "js/plugin/datatables/swf/copy_csv_xls_pdf.swf"
-		        },
-				"autoWidth" : true,
-				"preDrawCallback" : function() {
-					// Initialize the responsive datatables helper once.
-					if (!responsiveHelper_datatable_tabletools) {
-						responsiveHelper_datatable_tabletools = new ResponsiveDatatablesHelper($('#datatable_tabletools'), breakpointDefinition);
-					}
-				},
-				"rowCallback" : function(nRow) {
-					responsiveHelper_datatable_tabletools.createExpandIcon(nRow);
-				},
-				"drawCallback" : function(oSettings) {
-					responsiveHelper_datatable_tabletools.respond();
+					monthsSelected.push(months[monthIndex]);
+					counter++; 
 				}
+				return monthsSelected;
+			}
+
+			$(function () {
+				pageSetUp();
+			    $('#lineChart').highcharts({
+			        chart: {
+			            type: 'spline'
+			        },
+			        title: {
+			            text: 'Cases by Month'
+			        },
+			        xAxis: {
+			            categories: getMonths({{month}})
+			        },
+			        yAxis: {
+			            title: {
+			                text: 'Number of Cases'
+			            }
+			        },
+			        tooltip: {
+			        	
+            			pointFormat: '{series.name}: {point.y} Cases<br>',
+			            crosshairs: true,
+			            shared: true
+			        },
+			        plotOptions: {
+			            spline: {
+			                marker: {
+			                    radius: 4,
+			                    lineColor: '#666666',
+			                    lineWidth: 1
+			                }
+			            }
+			        },
+			        series: [{
+			            name: 'Max # of Cases',
+			            marker: {
+			                symbol: 'square'
+			            },
+			            data: [6592, 6281, 7501, 7329, 6341, 7972, 6792]
+			        }, {
+			            name: 'Min # of Cases',
+			            marker: {
+			                symbol: 'diamond'
+			            },
+			            data: [2403, 2781, 3002, 2995, 3200, 1500, 2000]
+			        }]
+			    });
 			});
-			
-			/* END TABLETOOLS */
-		
-		})
+				
+			Highcharts.createElement('link', {
+			   href: 'http://fonts.googleapis.com/css?family=Dosis:400,600',
+			   rel: 'stylesheet',
+			   type: 'text/css'
+			}, null, document.getElementsByTagName('head')[0]);
+
+			Highcharts.theme = {
+			   colors: ["#7cb5ec", "#f7a35c", "#90ee7e", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee",
+			      "#55BF3B", "#DF5353", "#7798BF", "#aaeeee"],
+			   chart: {
+			      backgroundColor: null,
+			      style: {
+			         fontFamily: "Dosis, sans-serif"
+			      }
+			   },
+			   title: {
+			      style: {
+			         fontSize: '16px',
+			         fontWeight: 'bold',
+			         textTransform: 'uppercase'
+			      }
+			   },
+			   tooltip: {
+			      borderWidth: 0,
+			      backgroundColor: 'rgba(219,219,216,0.8)',
+			      shadow: false
+			   },
+			   legend: {
+			      itemStyle: {
+			         fontWeight: 'bold',
+			         fontSize: '13px'
+			      }
+			   },
+			   xAxis: {
+			      gridLineWidth: 1,
+			      labels: {
+			         style: {
+			            fontSize: '12px'
+			         }
+			      }
+			   },
+			   yAxis: {
+			      minorTickInterval: 'auto',
+			      title: {
+			         style: {
+			            textTransform: 'uppercase'
+			         }
+			      },
+			      labels: {
+			         style: {
+			            fontSize: '12px'
+			         }
+			      }
+			   },
+			   plotOptions: {
+			      candlestick: {
+			         lineColor: '#404048'
+			      }
+			   },
+
+
+			   // General
+			   background2: '#F0F0EA'
+			   
+			};
+
+			// Apply the theme
+			Highcharts.setOptions(Highcharts.theme);
+
+			function updateLine(id) { 
+				// addLine.style.backgroundColor = "silver";
+				lineChart = $('#lineChart').highcharts();
+				if ($('#' + id).is(':checked')) { 
+					console.log(id);
+					lineChart.addSeries(dummy[id-1], false);
+				} else { 
+					var seriesLength = lineChart.series.length;
+	                for (var i = seriesLength - 1; i > -1; i--) {
+	                    if (lineChart.series[i].name == ("Office " + id)) {
+	                        lineChart.series[i].remove();
+	                    }
+	                }
+				}
+				lineChart.redraw();
+			}
+ 			
+ 			{% for rank, data in offices %}
+				var office{{rank}} = document.getElementById("{{rank}}");
+				office{{rank}}.addEventListener("change", function(){updateLine({{rank}})});
+				checkBoxes.push({{rank}} + 1);
+			{% endfor %}
 
 		</script>
+
+		<script type="text/javascript">
+   			$(function() {
+		        /** This code runs when everything has been loaded on the page */
+		        /* Inline sparklines take their values from the contents of the tag */
+		        $('.inlinesparkline').sparkline('html', {
+		        	width: '90',
+		        	height: '25',
+				    type: 'line',
+				    lineColor: '#191919',
+				    fillColor: '#005fbf',
+				    spotColor: '#000000',
+				    minSpotColor: '#191919',
+				    maxSpotColor: '#000000',
+				    highlightSpotColor: '#000000',
+				    highlightLineColor: '#000000'
+		        });
+	   		});
+	   	</script>
 
 		<!-- Your GOOGLE ANALYTICS CODE Below -->
 		<script type="text/javascript">
@@ -889,21 +894,6 @@
 			s.parentNode.insertBefore(ga, s);
 			})();
 		</script>
-
-		<script type="text/javascript">
-	        var length = {{length}}
-	        for (var i = 0; i < length; i++) {
-	            (function assignListeners () { 
-	                var counter = i;
-	                if (document.getElementById('sms' + counter) != null) { 
-	                    document.getElementById('sms' + counter).addEventListener("click", function() {return replyText('sms' + counter)});
-	                    document.getElementById('robo' + counter).addEventListener("click", function() {return replyRobo('robo' + counter)});
-	                    document.getElementById('followup' + counter).addEventListener("click", function() {return replyFollowup('followup' + counter)});
-	                }
-	            }())
-	        }  
-    	</script>
-
 
 	</body>
 

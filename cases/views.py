@@ -1,21 +1,45 @@
 from django.shortcuts import render_to_response, render
 from django.template.context import RequestContext
-from models import Citizen, OBCFormResponse, Case, Office, OfficeVisit, SMSFeedback
+from models import Citizen, OBCFormResponse, Case, Office, OfficeVisit
 from forms import CaseForm, OBCFormForm, CitizenForm, AadhaarLookup, Form
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from datetime import date
-from random import random
+import random
 import json
 
 def index(request):
     return render_to_response('bribecaster/index.html', context_instance=RequestContext(request))
 
 
+def toPercent(float):
+    num = round(float, 2)
+    num *= 100 
+    string = str(num)
+    string += "%"
+    return string 
+
 def casesView(request):
-    current_month = date.today().month;
-    context = {'month': current_month};
-    return render(request, 'bribecaster/casesView.html', context); 
+    if request.method == "GET":
+        offices = {}
+        cases = Case.objects.all()
+        for case in cases:
+            if case.office in offices:
+                offices[case.office][0] += 1
+            else:
+                offices[case.office] = [1, 0]
+        diff = []
+        for office in offices:
+            offices[office][0] *= 10 + random.randint(300, 400)
+            offices[office][1] = offices[office][0] + random.randint(-offices[office][0], offices[office][0]/2)
+            higher = max(offices[office][0], offices[office][1])
+            lower = min(offices[office][0], offices[office][1])
+            percent = toPercent((float(offices[office][0]) - float(offices[office][1]))/float(offices[office][1]))
+            diff.append((office, offices[office][0], offices[office][1], percent, random.randint(lower, higher), random.randint(lower, higher), random.randint(lower, higher), random.randint(lower, higher), random.randint(lower, higher)))
+        diff.sort(key=lambda x: x[3])
+        current_month = date.today().month
+        context = {'offices': list(enumerate(diff, start=1)), 'month': current_month}
+        return render(request, 'bribecaster/casesView.html', context); 
 
 def detail(request, case_id):
     if request.method == "GET":
@@ -99,14 +123,13 @@ def obc_form(request, citizen_id=None, aadhaar_number=None):
     if request.method == "POST":
         obc_form_response = OBCFormResponse()
         obc_form = OBCFormForm(request.POST, instance=obc_form_response)
+        
         if obc_form.is_valid():
             case = Case()
             case.office = Office.first()
-            case.sms_selected = True
+            case.sms_selected = False
             case.robo_call_selected = False
             case.follow_up_selected = False
-
-            sms_feedback = SMSFeedback().create("I am well satisfied")
             
             office_visit = OfficeVisit()
 
@@ -130,9 +153,6 @@ def obc_form(request, citizen_id=None, aadhaar_number=None):
                     office_visit.case = case
 
                     office_visit.save()
-
-            sms_feedback.case = case
-            sms_feedback.save()
 
             obc_form = obc_form.save(commit=False)
             obc_form.citizen = citizen
@@ -220,8 +240,25 @@ def office_chart(request, office_id=None):
 
         #json should be of the form {"office": office_name, "sentiments" {1: count, 2:count, 3:count, 4:count, 5:count}, "total_sms": 40}
 
-
-
+def office_num_cases(request):
+    if request.method == "GET":
+        offices = {}
+        cases = Case.objects.all()
+        for case in cases:
+            if case.office in offices:
+                offices[case.office][0] += 1
+            else:
+                offices[case.office] = [1, 0]
+        diff = []
+        for office in offices:
+            offices[office][0] *= 10 + random.randint(0, 200)
+            offices[office][1] = offices[office][0] + random.randint(-offices[office][0], offices[office][0]/2)
+            higher = max(offices[office][0], offices[office][1])
+            lower = min(offices[office][0], offices[office][1])
+            diff.append((office, offices[office][0], offices[office][1], offices[office][0] - offices[office][1], random.randint(lower, higher), random.randint(lower, higher), random.randint(lower, higher), random.randint(lower, higher), random.randint(lower, higher)))
+        diff.sort(key=lambda x: x[3])
+        context = {'offices': list(enumerate(diff, start=1))}
+        return render(request, 'bribecaster/casesView.html', context)
 
 
 
