@@ -13,4 +13,5 @@ lib64
 
 *.pyc
 
+*settings.py
 *.sqlite3
