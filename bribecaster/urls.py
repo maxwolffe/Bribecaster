@@ -26,7 +26,8 @@ urlpatterns = patterns('',
     url(r'^cases/obc_form/$', views.obc_form, name='obc_form'),
     url(r'^cases/office-charts/$', views.office_chart, name='office-charts'),
     url(r'^cases/office-charts/(?P<office_id>\d+)$', views.office_chart, name='office-charts'),
-    url(r'^cases/per_office$', views.office_num_cases, name='test')
+    url(r'^cases/per_office$', views.office_num_cases, name='test'),
+    url(r'^cases/sms-report$', views.office_sms_report, name='sms_report'),
 )
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
