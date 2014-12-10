@@ -269,7 +269,7 @@
 			<nav>
 				<ul>
 					<li>
-						<a href="http://localhost:8000/" title="Dashboard"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Dashboard</span></a>
+						<a href="" title="Dashboard"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Dashboard</span></a>
 					</li>
 					<li>
 						<a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">Reports</span></a>
@@ -277,7 +277,7 @@
 							<li>
 								<a href="/casesView">Cases Report</a>
 							</li>
-							<li>
+							<li class="active">
 								<a href="/cases/sms-report">SMS Report</a>
 							</li>
 						</ul>
@@ -286,22 +286,22 @@
 						<a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">Data Charts</span></a>
 						<ul>
 							<li>
-								<a href="http://localhost:8000/charts/pieCharts.html">Pie Charts</a>
+								<a href="/charts/pieCharts">Pie Charts</a>
 							</li>
-						</ul>
+						</ul> 
 					</li>
 					<li>
 						<a href="#"><i class="fa fa-lg fa-fw fa-table"></i> <span class="menu-item-parent">Tables</span></a>
 						<ul>
 							<li>
-								<a href="http://localhost:8000/datatables.html">Complete Data Table</a>
+								<a href="/datatables">Complete Data Table</a>
 							</li>
 							<li>
 								<a href="#">Regional Normal Tables</a>
 							</li>
 						</ul>
 					</li>
-					<li class="active"> 
+					<li> 
 						<a href="#"><i class="fa fa-lg fa-fw fa-table"></i> <span class="menu-item-parent">Offices</span></a>
 						<ul>
 						</ul>
@@ -309,8 +309,8 @@
 					<li>
 						<a href="#"><i class="fa fa-lg fa-fw fa-pencil-square-o"></i> <span class="menu-item-parent">Forms</span></a>
 						<ul>
-							<li class="active">
-								<a href="http://localhost:8000/cases/new_form/aadhaar_lookup/">OBC Form</a>
+							<li>
+								<a href="/cases/new_form/aadhaar_lookup/">OBC Form</a>
 							</li>
 						</ul>
 					</li>
@@ -337,7 +337,7 @@
 
 				<!-- breadcrumb -->
 				<ol class="breadcrumb">
-					<li>Home</li><li>Offices</li>
+					<li>Home</li><li>Views</li><li>Cases</li>
 				</ol>
 				<!-- end breadcrumb -->
 
@@ -356,54 +356,179 @@
 			<!-- END RIBBON -->
 
 			<div id="content">
+				<!-- widget grid -->
 				
-				<!-- For the page header -->
 				<div class="row">
-					<div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+					<!-- For the page header -->
+					<div class="col-lg-12">
 						<h1 class="page-title txt-color-blueDark">
 							
 							<!-- PAGE HEADER -->
 							<i class="fa-fw fa fa-pencil-square-o"></i> 
-								Offices
+								View
 							<span>>  
-								<!-- Which Office -->
+								Cases
 							</span>
 						</h1>
 					</div>
-				
 				</div>
+					<section id="widget-grid" class="">
+						<div class="widget-body ">
+							<form id="smart-form-register" action="." method="post" class="smart-form form-inline">
+								<section class="col col-4">
+									<label class="select">Select Month:
+										<select id="viewSelect">
+											<option>January</option>
+											<option>February</option>
+											<option>March</option>
+											<option>April</option>
+											<option>May</option>
+											<option>June</option>
+											<option>July</option>
+											<option>August</option>
+											<option>September</option>
+											<option>October</option>
+											<option>November</option>
+											<option selected>December</option>
+										</select>
+									<i class='down'></i>   
+									</label>
+								</section>
+								<section class="col col-4">
+									<label class="select">Select Year:
+										<select id="viewSelect">
+											<option>2014</option>
+											<option>2015</option>
+										</select>
+									<i class='down'></i>   
+									</label>
+								</section>
+								<section class="col col-4">
+									<label class="select">Select District: 
+										<select id="officeSelect">
+											<option value="0">District 1</option>
+											<option value="1">District 2</option>
+											<option value="2">District 3</option>
+											<option value="3">District 4</option>
+										</select>
+									<i class='down'></i>   
+									</label>
+								</section>
+							</form>
+							<table id="datatable_fixed_column" class="table table-striped table-bordered has-tickbox table-hover" width="100%">
+						        <thead>
+						            <tr>
+						            	<th>
+											<label class="checkbox">
+												
+											</label>
+										</th>
+						            	<th class='text-center' width="5%"> Rank </th>
+					                    <th class='text-center' width="20%"> Office </th>
+					                    <th class='text-center' width="15%"> Avg Sentiment This Month</th>
+					                    <th class='text-center' width="15%"> Avg Sentiment Last Month </th>
+					                    <th class='text-center' width="10%"> Monthly Improvement </th>
+					                    <th class='text-center'> Trend </th>
+					                    <th class='text-center'> Detail </th>
+						            </tr>
+						        </thead>
 
-		        <div class="widget-body no-padding">
-				
-					<table id="datatable_fixed_column" class="table table-striped table-bordered" width="100%">
+						        <tbody>
+						        {% for rank, data in offices %}
+		                        <tr> 
+		                        	<td><input id="{{rank}}" href="url://" type="checkbox" name="checkbox-inline"><i></i></td>
+		                        	<td>{{ rank }}</td>
+		                            <td>{{ data.0 }}</td> 
+		                            <td>{{ data.1 }}</td> 
+		                            <td>{{ data.2 }}</td>
+		                            <td class="text-center">
+										{% if data.1 > data.2 %}
+											<span class="label bg-color-greenLight">
+		                            		<i class="fa fa-caret-up"></i>
+										{% elif data.1 < data.2 %} 
+											<span class="label bg-color-red">
+		                            		<i class="fa fa-caret-down"></i>
+		                            	{% endif %}
+		                            	{{ data.3 }}</span></td>
+		                            <td class='text-center'><a class="inlinesparkline "> {{data.2}}, {{ data.4 }}, {{ data.5 }}, {{ data.6 }}, {{ data.7 }}, {{ data.8 }}, {{ data.1 }}</a></td>
+		                            <td class='text-center'><a class='btn btn-primary btn-sm'></a></td>
+		                        </tr>
+		                        {% endfor %}
+						        </tbody>
+						        <!-- <tbody>
+								<tr> 
+		                        	<td>1</td>
+		                            <td>Office 1</td> 
+		                            <td>2000</td> 
+		                            <td>1500</td>
+		                            <td>+500</td>
+		                        </tr>
+		                        <a><tr> 
+		                        	<td>2</td>
+		                            <td>Office 2</td> 
+		                            <td>6792</td> 
+		                            <td>7982</td>
+		                            <td>-1190</td>
+		                        </tr></a>
+		                        <tr id="caseRow1" href='url://'> 
+		                        	<td>3</td>
+		                            <td>Office 3</td> 
+		                            <td>3913</td> 
+		                            <td>3910</td>
+		                            <td>+3</td>
+		                        </tr>
+						        </tbody> -->
+						
+							</table>
 
-				        <thead>
-				            <tr>
-				            	<th> Rank </th>
-			                    <th> Office </th>
-			                    <th> Cases </th>
-			                    <th> Last Month </th>
-			                    <th> Trend </th>
-				            </tr>
-				        </thead>
+						</div>
+						<!-- Widget ID (each widget will need unique ID)-->
+						<div class="jarviswidget spacer" id="wid-id-0" data-widget-colorbutton="false" data-widget-fullscreenbutton="false" data-widget-editbutton="false" data-widget-sortable="false">
+							<!-- widget options:
+								usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+								
+								data-widget-colorbutton="false"	
+								data-widget-editbutton="false"
+								data-widget-togglebutton="false"
+								data-widget-deletebutton="false"
+								data-widget-fullscreenbutton="false"
+								data-widget-custombutton="false"
+								data-widget-collapsed="true" 
+								data-widget-sortable="false"
+								
+							-->
+							<header>
+								
+											
+								
+							</header>
 
-				        <tbody>
-				        {% for rank, data in offices %}
-                        <tr> 
-                        	<td>{{ rank }}</td>
-                            <td>{{ data.0 }}</td> 
-                            <td>{{ data.1 }}</td> 
-                            <td>{{ data.2 }}</td>
-                            <td class="inlinesparkline">{{data.2}}, {{ data.4 }}, {{ data.5 }}, {{ data.6 }}, {{ data.7 }}, {{ data.8 }}, {{ data.1 }}</td>
-                        </tr>
-                        {% endfor %}
-				        </tbody>
-				
-					</table>
+							<!-- widget div-->
+							<div>
+								
+								<!-- widget edit box -->
+								<div class="jarviswidget-editbox">
+									<!-- This area used as dropdown edit box -->
+									<input class="form-control" type="text">	
+								</div>
+								<!-- end widget edit box -->
+								
+								<!-- widget content -->
+								<div class="widget-body">
+									
+									<!-- this is what the user will see -->
+									<div id="lineChart" style="min-width: 310px; height: 600px; margin: 0 auto"></div>
 
+								</div>
+								<!-- end widget content -->
+								
+							</div>
+							<!-- end widget div -->
+							
+						</div>
+						<!-- end widget -->
+					</section>
 				</div>
-				<!-- Office stuff goes here!!!! -->
-
 		        
 			</div>
 		<!-- END MAIN PANEL -->
@@ -515,6 +640,248 @@
 		<script src="{% static 'js/smart-chat-ui/smart.chat.ui.min.js' %}"></script>
 		<script src="{% static 'js/smart-chat-ui/smart.chat.manager.min.js' %}"></script>
 
+		<!-- PAGE RELATED PLUGIN(S) -->
+		<script src="{% static 'js/plugin/chartjs/chart.min.js' %}"></script>
+		<script src="{% static 'js/highcharts.js' %}"></script>
+
+		<script type="text/javascript">
+
+			var checkBoxes = [];
+			var dummy = [{
+				            name: "Office 1",
+				            marker: {
+				                symbol: 'circle'
+				            },
+				            data: [1.1,2.3, 3.4, 3.2, 3.3, 2.0, 2.1]
+				        },
+				        {
+				            name: "Office 2",
+				            marker: {
+				                symbol: 'circle'
+				            },
+				            data: [1.0 ,2.5, 3.3, 2.7, 3.2, 2.05, 2.7]
+				        },
+				        {
+				            name: "Office 3",
+				            marker: {
+				                symbol: 'circle'
+				            },
+				            data: [1.02 ,2.54, 3.35, 2.75, 3.2, 2.05, 3.0]
+				        },
+				        {
+				           name: "Office 4",
+				            marker: {
+				                symbol: 'circle'
+				            },
+				            data: [1.30 ,2.45, 3.53, 2.37, 3.24, 2.55, 1.9]
+				        },
+				        {
+				            name: "Office 5",
+				            marker: {
+				                symbol: 'circle'
+				            },
+				            data: [1.0 ,2.5, 3.3, 2.7, 3.2, 2.05, 2.7]
+				        },
+				        {
+				            name: "Office 6",
+				            marker: {
+				                symbol: 'circle'
+				            },
+				            data: [1.40 ,2.25, 3.43, 2.17, 3.32, 2.85, 2.0]
+				        },
+				        {
+				            name: "Office 7",
+				            marker: {
+				                symbol: 'circle'
+				            },
+				            data: [1.0 ,2.5, 3.3, 2.7, 3.2, 2.05, 1.7]
+				        },
+				        {
+				            name: "Office 8",
+				            marker: {
+				                symbol: 'circle'
+				            },
+				            data: [1.30 ,2.45, 3.53, 2.37, 3.24, 2.55, 1.9]
+				        }];
+
+			var months = ["January", "February", "March", "April", "May",
+				"June", "July", "August", "September", "October", "November", "December"];
+
+			function getMonths(index) { 
+				var monthsSelected = []
+				var counter = -6; 
+				while (counter <= 0) { 
+					var monthIndex = index + counter;
+					if (monthIndex < 0) { 
+						monthIndex = 12 - Math.abs(monthIndex);
+					}
+					monthsSelected.push(months[monthIndex]);
+					counter++; 
+				}
+				return monthsSelected;
+			}
+
+			$(function () {
+				pageSetUp();
+			    $('#lineChart').highcharts({
+			        chart: {
+			            type: 'spline'
+			        },
+			        title: {
+			            text: 'Average Sentiment by Month'
+			        },
+			        xAxis: {
+			            categories: getMonths({{month}})
+			        },
+			        yAxis: {
+			            title: {
+			                text: 'Sentiment'
+			            }
+			        },
+			        tooltip: {
+			        	
+            			pointFormat: '{series.name}: {point.y} Cases<br>',
+			            crosshairs: true,
+			            shared: true
+			        },
+			        plotOptions: {
+			            spline: {
+			                marker: {
+			                    radius: 4,
+			                    lineColor: '#666666',
+			                    lineWidth: 1
+			                }
+			            }
+			        },
+			        series: [{
+			            name: 'Max # of Cases',
+			            marker: {
+			                symbol: 'square'
+			            },
+			            data: {{ max_data }}
+			        }, {
+			            name: 'Min # of Cases',
+			            marker: {
+			                symbol: 'diamond'
+			            },
+			            data: {{ min_data }}
+			        }]
+			    });
+			});
+				
+			Highcharts.createElement('link', {
+			   href: 'http://fonts.googleapis.com/css?family=Dosis:400,600',
+			   rel: 'stylesheet',
+			   type: 'text/css'
+			}, null, document.getElementsByTagName('head')[0]);
+
+			Highcharts.theme = {
+			   colors: ["#7cb5ec", "#f7a35c", "#90ee7e", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee",
+			      "#55BF3B", "#DF5353", "#7798BF", "#aaeeee"],
+			   chart: {
+			      backgroundColor: null,
+			      style: {
+			         fontFamily: "Dosis, sans-serif"
+			      }
+			   },
+			   title: {
+			      style: {
+			         fontSize: '16px',
+			         fontWeight: 'bold',
+			         textTransform: 'uppercase'
+			      }
+			   },
+			   tooltip: {
+			      borderWidth: 0,
+			      backgroundColor: 'rgba(219,219,216,0.8)',
+			      shadow: false
+			   },
+			   legend: {
+			      itemStyle: {
+			         fontWeight: 'bold',
+			         fontSize: '13px'
+			      }
+			   },
+			   xAxis: {
+			      gridLineWidth: 1,
+			      labels: {
+			         style: {
+			            fontSize: '12px'
+			         }
+			      }
+			   },
+			   yAxis: {
+			      minorTickInterval: 'auto',
+			      title: {
+			         style: {
+			            textTransform: 'uppercase'
+			         }
+			      },
+			      labels: {
+			         style: {
+			            fontSize: '12px'
+			         }
+			      }
+			   },
+			   plotOptions: {
+			      candlestick: {
+			         lineColor: '#404048'
+			      }
+			   },
+
+
+			   // General
+			   background2: '#F0F0EA'
+			   
+			};
+
+			// Apply the theme
+			Highcharts.setOptions(Highcharts.theme);
+
+			function updateLine(id) { 
+				// addLine.style.backgroundColor = "silver";
+				lineChart = $('#lineChart').highcharts();
+				if ($('#' + id).is(':checked')) { 
+					console.log(id);
+					lineChart.addSeries(dummy[id-1], false);
+				} else { 
+					var seriesLength = lineChart.series.length;
+	                for (var i = seriesLength - 1; i > -1; i--) {
+	                    if (lineChart.series[i].name == ("Office " + id)) {
+	                        lineChart.series[i].remove();
+	                    }
+	                }
+				}
+				lineChart.redraw();
+			}
+ 			
+ 			{% for rank, data in offices %}
+				var office{{rank}} = document.getElementById("{{rank}}");
+				office{{rank}}.addEventListener("change", function(){updateLine({{rank}})});
+				checkBoxes.push({{rank}} + 1);
+			{% endfor %}
+
+		</script>
+
+		<script type="text/javascript">
+   			$(function() {
+		        /** This code runs when everything has been loaded on the page */
+		        /* Inline sparklines take their values from the contents of the tag */
+		        $('.inlinesparkline').sparkline('html', {
+		        	width: '90',
+		        	height: '25',
+				    type: 'line',
+				    lineColor: '#191919',
+				    fillColor: '#005fbf',
+				    spotColor: '#000000',
+				    minSpotColor: '#191919',
+				    maxSpotColor: '#000000',
+				    highlightSpotColor: '#000000',
+				    highlightLineColor: '#000000'
+		        });
+	   		});
+	   	</script>
+
 		<!-- Your GOOGLE ANALYTICS CODE Below -->
 		<script type="text/javascript">
 			var _gaq = _gaq || [];
@@ -530,16 +897,6 @@
 			s.parentNode.insertBefore(ga, s);
 			})();
 		</script>
-
-		<script type="text/javascript">
-   			$(function() {
-		        /** This code runs when everything has been loaded on the page */
-		        /* Inline sparklines take their values from the contents of the tag */
-		        $('.inlinesparkline').sparkline('html', {
-		        	width: '100'
-		        });
-	   		});
-	   	</script>
 
 	</body>
 

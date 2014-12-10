@@ -1,4 +1,4 @@
-fom cases import views
+from cases import views
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.conf import settings
@@ -19,6 +19,7 @@ urlpatterns = patterns('',
     url(r'^datatables/(?P<case_id>\d+)/$', views.detail, name='detail'),
     url(r'^$', views.index, name='index'),
     url(r'^reports/$', views.casesView, name='casesView'),
+    url(r'^casesView$', views.casesView, name='casesView'),
     url(r'^charts/pieCharts.html/$', views.pieCharts, name='pieCharts'),
     url(r'^cases/new_form/aadhaar_lookup/$', views.aadhaar_lookup, name='aadhaar_lookup'),
     url(r'^cases/obc_form/ci-(?P<citizen_id>\d+)$', views.obc_form, name='obc_form_ci'),
@@ -26,7 +27,8 @@ urlpatterns = patterns('',
     url(r'^cases/obc_form/$', views.obc_form, name='obc_form'),
     url(r'^cases/office-charts/$', views.office_chart, name='office-charts'),
     url(r'^cases/office-charts/(?P<office_id>\d+)$', views.office_chart, name='office-charts'),
-    url(r'^cases/per_office$', views.office_num_cases, name='test')
+    url(r'^cases/per_office$', views.office_num_cases, name='test'),
+    url(r'^cases/sms-report$', views.office_sms_report, name='sms_report'),
 )
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

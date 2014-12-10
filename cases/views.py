@@ -41,6 +41,31 @@ def casesView(request):
         context = {'offices': list(enumerate(diff, start=1)), 'month': current_month}
         return render(request, 'bribecaster/casesView.html', context); 
 
+def office_sms_report(request):
+    if request.method == "GET":
+        offices = {}
+        cases = Case.objects.all()
+        for case in cases:
+            if case.office in offices:
+                offices[case.office][0] += 1
+            else:
+                offices[case.office] = [1, 0]
+        diff = []
+        for office in offices:
+            offices[office][0] += 2 + random.random()
+            offices[office][1] = offices[office][0] + random.randint(-offices[office][0] // 1, (offices[office][0]/2) // 1)
+            higher = max(offices[office][0], offices[office][1]) // 1
+            lower = min(offices[office][0], offices[office][1]) // 1
+            percent = toPercent((float(offices[office][0]) - float(offices[office][1])) / float(offices[office][1]))
+            diff.append((office, offices[office][0], offices[office][1], percent, random.randint(lower, higher), random.randint(lower, higher), random.randint(lower, higher), random.randint(lower, higher), random.randint(lower, higher)))
+        diff.sort(key=lambda x: x[3])
+        current_month = date.today().month
+        high_charts_data = [{'name': office.office_name, 'marker':{'symbol':'circle'}, 'data':[1,2,3,4,5]} for office in Office.objects.all()]
+        min_data = [1.1, 2.2, 3.6, 3.7, 4.0, 4.1, 3.8]
+        max_data = [2.2, 3.1, 1.8, 2.3, 2.8, 2.0, 1.7]
+        context = {'offices': list(enumerate(diff, start=1)), 'month': current_month, 'high_charts_data': json.dumps(high_charts_data), 'min_data': json.dumps(min_data), 'max_data': json.dumps(max_data)}
+        return render(request, 'bribecaster/SMSView.html', context); 
+
 def detail(request, case_id):
     if request.method == "GET":
         case = Case.objects.get(pk=case_id)
